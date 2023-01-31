@@ -1,0 +1,81 @@
+{% extends 'social-feed/_layouts' %}
+
+{% do view.registerAssetBundle('craft\\web\\assets\\admintable\\AdminTableAsset') -%}
+
+{% set crumbs = [
+    { label: craft.socialFeed.getPluginName() | t('social-feed'), url: url('social-feed') },
+    { label: 'Sources' | t('social-feed'), url: url('social-feed/sources') }
+] %}
+
+{% set title = 'Sources' | t('social-feed') %}
+{% set selectedSubnavItem = 'sources' %}
+
+{% block actionButton %}
+    <a class="btn submit add icon" href="{{ url('social-feed/sources/new') }}">{{ 'New source' | t('social-feed') }}</a>
+{% endblock %}
+
+{% block blockContent %}
+
+<div id="sources-vue-admin-table"></div>
+
+{% endblock %}
+
+{% set tableData = [] %}
+
+{% for source in sources %}
+    {% set tableData = tableData | merge([{
+        id: source.id,
+        title: source.name | t('site'),
+        url: url('social-feed/sources/' ~ source.handle),
+        handle: source.handle,
+        enabled: source.enabled,
+        connected: source.connected,
+        provider: { name: source.providerName | t('site') | e, icon: source.icon, color: source.primaryColor },
+    }]) %}
+{% endfor %}
+
+{% js %}
+    var columns = [
+        { name: '__slot:title', title: Craft.t('app', 'Name') },
+        { name: '__slot:handle', title: Craft.t('app', 'Handle') },
+        { name: 'enabled', title: Craft.t('app', 'Status'), callback: function(value) {
+            if (value) {
+                return '<span class="status on"></span>' + Craft.t('social-feed', 'Enabled');
+            } else {
+                return '<span class="status"></span>' + Craft.t('social-feed', 'Disabled');
+            }
+        } },
+        { name: 'connected', title: Craft.t('app', 'Connected'), callback: function(value) {
+            if (value) {
+                return '<span class="status on"></span>' + Craft.t('social-feed', 'Connected');
+            } else {
+                return '<span class="status"></span>' + Craft.t('social-feed', 'Disconnected');
+            }
+        } },
+        { name: 'provider', title: Craft.t('app', 'Provider'), callback: function(provider) {
+            let $icon = '';
+
+            if (!provider) {
+                return '';
+            }
+
+            if (provider.icon) {
+                $icon = '<span class="sf-provider-icon">' + provider.icon + '</span>';
+            }
+
+            return '<div class="sf-provider" style="--bg-color: ' + provider.color + '">' +
+                $icon +
+                '<span class="sf-provider-label">' + provider.name + '</span>' +
+            '</div>';
+        } },
+    ];
+
+    new Craft.VueAdminTable({
+        columns: columns,
+        container: '#sources-vue-admin-table',
+        reorderAction: 'social-feed/sources/reorder',
+        deleteAction: 'social-feed/sources/delete',
+        emptyMessage: Craft.t('social-feed', 'No sources exist yet.'),
+        tableData: {{ tableData | json_encode | raw }},
+    });
+{% endjs %}

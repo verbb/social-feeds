@@ -1,0 +1,174 @@
+{% extends 'social-feed/_layouts' %}
+{% import '_includes/forms' as forms %}
+{% import 'verbb-base/_macros' as macros %}
+
+{% do view.registerAssetBundle('verbb\\socialfeed\\assetbundles\\FeedAsset') %}
+
+{% set crumbs = [
+    { label: craft.socialFeed.getPluginName() | t('social-feed'), url: url('social-feed') },
+    { label: 'Feeds' | t('social-feed'), url: url('social-feed/feeds') }
+] %}
+
+{% set fullPageForm = true %}
+{% set selectedSubnavItem = 'feeds' %}
+
+{% set saveShortcutRedirect = 'social-feed/feeds/{handle}' %}
+
+{% block actionButton %}
+
+<div class="btngroup">
+    <input type="submit" class="btn submit" value="{{ 'Save' | t('app') }}">
+
+    <div class="btn submit menubtn"></div>
+    <div class="menu">
+        <ul>
+            <li>
+                <a class="formsubmit" data-redirect="{{ saveShortcutRedirect | hash }}">
+                    {{ forms.optionShortcutLabel('S') }}
+                    {{ 'Save and continue editing' | t('app') }}
+                </a>
+            </li>
+        </ul>
+
+        <hr>
+        <ul>
+            <li><a class="formsubmit error" data-action="social-feed/feeds/delete" data-confirm="{{ 'Are you sure you want to delete this feed?' | t('social-feed') }}" data-redirect="{{ 'social-feed/feeds#' | hash }}">{{ 'Delete' | t('app') }}</a></li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
+
+{% set tabs = {
+    feed: { label: 'Feed' | t('social-feed'), url: '#feed' },
+    preview: { label: 'Preview' | t('social-feed'), url: '#preview' },
+} %}
+
+{% block content %}
+
+<input type="hidden" name="action" value="social-feed/feeds/save">
+{% if feed.id %}<input type="hidden" name="feedId" value="{{ feed.id }}">{% endif %}
+{{ redirectInput('social-feed/feeds') }}
+
+<div id="feed">
+    {{ forms.textField({
+        first: true,
+        label: 'Name' | t('app'),
+        instructions: 'What this feed will be called in the control panel.' | t('social-feed'),
+        id: 'name',
+        name: 'name',
+        value: (feed is defined ? feed.name : null),
+        errors: (feed is defined ? feed.getErrors('name') : null),
+        autofocus: true,
+        required: true,
+    }) }}
+
+    {{ forms.textField({
+        label: 'Handle' | t('app'),
+        instructions: 'How you’ll refer to this feed in your templates.' | t('social-feed'),
+        id: 'handle',
+        name: 'handle',
+        class: 'code',
+        value: (feed is defined ? feed.handle : null),
+        errors: (feed is defined ? feed.getErrors('handle') : null),
+        required: true,
+    }) }}
+
+    <hr>
+
+    {% set sources = craft.socialFeed.getAllEnabledSources() %}
+
+    {% set inputs %}
+        {{ hiddenInput('sources') }}
+
+        {% for source in sources %}
+            {% if source.isConnected() %}
+                <div class="sf-switch-group round">
+                    <div class="sf-provider" style="--bg-color: {{ source.primaryColor }}">
+                        {{ (source.icon ? '<span class="sf-provider-icon">' ~  source.icon ~ '</span>') | raw }}
+                        <span class="sf-provider-label">{{ source.name }}</span>
+                    </div>
+
+                    <div class="sf-switch">
+                        {{ forms.lightswitch({
+                            id: 'sources',
+                            name: 'sources[]',
+                            value: source.id,
+                            on: source.id in feed.sources,
+                            small: true,
+                        }) }}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endset %}
+
+    {{ forms.field({
+        label: 'Sources' | t('social-feed'),
+        instructions: 'Select which [Sources]({url}) are available for this feed.' | t('social-feed', { url: cpUrl('social-feed/sources') }),
+        warning: not sources ? 'Create a [Source]({url}) for your feed.' | t('social-feed', { url: cpUrl('social-feed/sources') }),
+    }, inputs) }}
+</div>
+
+<div id="preview" class="hidden">
+    <div class="field sf-field-preview">
+        <div class="heading">
+            <label>{{ 'Feed Preview' | t('social-feed') }}</label>
+
+            <div class="instructions">
+                <p>{{ 'See what your posts look like for your feed.' | t('social-feed') }}</p>
+            </div>
+        </div>
+
+        <div style="margin-left: auto;">
+            <button type="button" class="btn sf-refresh-btn submit">{{ 'Load Posts' | t('social-feed') }}</button>
+        </div>
+    </div>
+
+    <div class="sf-feed-preview"></div>
+</div>
+
+{% endblock %}
+
+{% block details %}
+
+<div class="meta">
+    {{ forms.lightswitchField({
+        label: 'Enabled' | t('social-feed'),
+        name: 'enabled',
+        on: feed.enabled,
+    }) }}
+</div>
+
+<hr>
+
+{% if feed.id %}
+    <div class="meta read-only">
+        {% if feed.id %}
+            <div class="data">
+                <h5 class="heading">{{ 'ID' | t('social-feed') }}</h5>
+                <div class="value">{{ feed.id }}</div>
+            </div>
+        {% endif %}
+
+        <div class="data">
+            <h5 class="heading">{{ 'Date Created' | t('social-feed') }}</h5>
+            <div class="value">{{ feed.dateCreated | date('short') }} {{ feed.dateCreated | time('short') }}</div>
+        </div>
+
+        <div class="data">
+            <h5 class="heading">{{ 'Date Updated' | t('social-feed') }}</h5>
+            <div class="value">{{ feed.dateUpdated | date('short') }} {{ feed.dateUpdated | time('short') }}</div>
+        </div>
+    </div>
+{% endif %}
+
+{% endblock %}
+
+{% js %}
+
+{% if feed is not defined or not feed.handle %}
+    new Craft.HandleGenerator("#{{ 'name' | namespaceInputId }}", "#{{ 'handle' | namespaceInputId }}");
+{% endif %}
+
+{% endjs %}

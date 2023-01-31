@@ -1,0 +1,56 @@
+{% extends 'social-feed/_layouts' %}
+
+{% do view.registerAssetBundle('craft\\web\\assets\\admintable\\AdminTableAsset') -%}
+
+{% set crumbs = [
+    { label: craft.socialFeed.getPluginName() | t('social-feed'), url: url('social-feed') },
+    { label: 'Feeds' | t('social-feed'), url: url('social-feed/feeds') }
+] %}
+
+{% set title = 'Feeds' | t('social-feed') %}
+{% set selectedSubnavItem = 'feeds' %}
+
+{% block actionButton %}
+    <a class="btn submit add icon" href="{{ url('social-feed/feeds/new') }}">{{ 'New feed' | t('social-feed') }}</a>
+{% endblock %}
+
+{% block blockContent %}
+
+<div id="feeds-vue-admin-table"></div>
+
+{% endblock %}
+
+{% set tableData = [] %}
+
+{% for feed in feeds %}
+    {% set tableData = tableData | merge([{
+        id: feed.id,
+        title: feed.name | t('site'),
+        url: url('social-feed/feeds/' ~ feed.handle),
+        handle: feed.handle,
+        enabled: feed.enabled,
+    }]) %}
+{% endfor %}
+
+{% js %}
+    var columns = [
+        { name: '__slot:title', title: Craft.t('app', 'Name') },
+        { name: '__slot:handle', title: Craft.t('app', 'Handle') },
+        { name: 'enabled', title: Craft.t('app', 'Status'), callback: function(value) {
+            if (value) {
+                return '<span class="status on"></span>' + Craft.t('social-feed', 'Enabled');
+            } else {
+                return '<span class="status"></span>' + Craft.t('social-feed', 'Disabled');
+            }
+        } },
+    ];
+
+    new Craft.VueAdminTable({
+        columns: columns,
+        container: '#feeds-vue-admin-table',
+        reorderAction: 'social-feed/feeds/reorder',
+        deleteAction: 'social-feed/feeds/delete',
+        emptyMessage: Craft.t('social-feed', 'No feeds exist yet.'),
+        tableData: {{ tableData | json_encode | raw }},
+    });
+{% endjs %}

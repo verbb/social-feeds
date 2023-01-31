@@ -1,0 +1,16 @@
+{% do view.registerAssetBundle('verbb\\socialfeed\\assetbundles\\FeedAsset') %}
+
+{% set layout = renderOptions.layout ?? null %}
+{% set masonry = layout == 'masonry' %}
+
+{% if masonry %}
+    {% do view.registerAssetBundle('verbb\\socialfeed\\assetbundles\\FeedMasonryAsset') %}
+{% endif %}
+
+<div class="sfui-posts" data-social-feed>
+    {% for post in posts %}
+        <div class="sfui-post-col">
+            {% include 'social-feed/_posts/post' %}
+        </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,41 @@
+// ==========================================================================
+
+// Social Feed for Craft CMS
+// Author: Verbb - https://verbb.io/
+
+// ==========================================================================
+
+@use "sass:math";
+
+.sfui-masonry {
+    display: flex;
+    flex-flow: column wrap;
+    align-content: space-between;
+}
+
+.sfui-masonry-item { width: 100%; }
+
+@for $i from 2 to 9 {
+    .sfui-masonry-cols-#{$i} .sfui-masonry-item  {
+        width: math.div(100%, $i);
+    }
+}
+
+@for $i from 2 to 9 {
+    @for $j from 1 to $i {
+        .sfui-masonry-cols-#{$i} .sfui-masonry-item:nth-child(#{$i}n+#{$j}) { order: $j; }
+    }
+
+    .sfui-masonry-cols-#{$i} .sfui-masonry-item:nth-child(#{$i}n) { order: $i; }
+}
+
+.sfui-masonry-break {
+    content: "";
+    flex-basis: 100%;
+    width: 0 !important;
+    margin: 0;
+}
+
+@for $i from 1 to 7 {
+    .sfui-masonry-break-#{$i} { order: $i; }
+}

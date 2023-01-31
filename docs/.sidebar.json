@@ -1,0 +1,52 @@
+[
+    {
+        "title": "Get Started",
+        "collapsable": false,
+        "children": [
+            "get-started/installation-setup",
+            "get-started/requirements",
+            "get-started/configuration"
+        ]
+    },
+    {
+        "title": "Feature Tour",
+        "collapsable": false,
+        "children": [
+            "feature-tour/feeds",
+            "feature-tour/sources",
+            "feature-tour/posts",
+            "feature-tour/cache"
+        ]
+    },
+    {
+        "title": "Providers",
+        "collapsable": false,
+        "children": [
+            "providers/facebook",
+            "providers/instagram"
+            "providers/twitter",
+            "providers/youtube"
+        ]
+    },
+    {
+        "title": "Template Guides",
+        "collapsable": false,
+        "children": [
+            "template-guides/available-variables",
+            "template-guides/rendering-posts"
+        ]
+    },
+    {
+        "title": "Developers",
+        "collapsable": false,
+        "children": [
+            "developers/feed",
+            "developers/source",
+            "developers/source-provider",
+            "developers/post",
+            "developers/events",
+            "developers/graphql",
+            "developers/console-commands"
+        ]
+    }
+]

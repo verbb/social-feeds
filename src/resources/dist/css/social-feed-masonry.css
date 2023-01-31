@@ -1,0 +1,208 @@
+.sfui-masonry {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: space-between;
+}
+
+.sfui-masonry-item {
+  width: 100%;
+}
+
+.sfui-masonry-cols-2 .sfui-masonry-item {
+  width: 50%;
+}
+
+.sfui-masonry-cols-3 .sfui-masonry-item {
+  width: 33.3333333333%;
+}
+
+.sfui-masonry-cols-4 .sfui-masonry-item {
+  width: 25%;
+}
+
+.sfui-masonry-cols-5 .sfui-masonry-item {
+  width: 20%;
+}
+
+.sfui-masonry-cols-6 .sfui-masonry-item {
+  width: 16.6666666667%;
+}
+
+.sfui-masonry-cols-7 .sfui-masonry-item {
+  width: 14.2857142857%;
+}
+
+.sfui-masonry-cols-8 .sfui-masonry-item {
+  width: 12.5%;
+}
+
+.sfui-masonry-cols-2 .sfui-masonry-item:nth-child(2n+1) {
+  order: 1;
+}
+
+.sfui-masonry-cols-2 .sfui-masonry-item:nth-child(2n) {
+  order: 2;
+}
+
+.sfui-masonry-cols-3 .sfui-masonry-item:nth-child(3n+1) {
+  order: 1;
+}
+
+.sfui-masonry-cols-3 .sfui-masonry-item:nth-child(3n+2) {
+  order: 2;
+}
+
+.sfui-masonry-cols-3 .sfui-masonry-item:nth-child(3n) {
+  order: 3;
+}
+
+.sfui-masonry-cols-4 .sfui-masonry-item:nth-child(4n+1) {
+  order: 1;
+}
+
+.sfui-masonry-cols-4 .sfui-masonry-item:nth-child(4n+2) {
+  order: 2;
+}
+
+.sfui-masonry-cols-4 .sfui-masonry-item:nth-child(4n+3) {
+  order: 3;
+}
+
+.sfui-masonry-cols-4 .sfui-masonry-item:nth-child(4n) {
+  order: 4;
+}
+
+.sfui-masonry-cols-5 .sfui-masonry-item:nth-child(5n+1) {
+  order: 1;
+}
+
+.sfui-masonry-cols-5 .sfui-masonry-item:nth-child(5n+2) {
+  order: 2;
+}
+
+.sfui-masonry-cols-5 .sfui-masonry-item:nth-child(5n+3) {
+  order: 3;
+}
+
+.sfui-masonry-cols-5 .sfui-masonry-item:nth-child(5n+4) {
+  order: 4;
+}
+
+.sfui-masonry-cols-5 .sfui-masonry-item:nth-child(5n) {
+  order: 5;
+}
+
+.sfui-masonry-cols-6 .sfui-masonry-item:nth-child(6n+1) {
+  order: 1;
+}
+
+.sfui-masonry-cols-6 .sfui-masonry-item:nth-child(6n+2) {
+  order: 2;
+}
+
+.sfui-masonry-cols-6 .sfui-masonry-item:nth-child(6n+3) {
+  order: 3;
+}
+
+.sfui-masonry-cols-6 .sfui-masonry-item:nth-child(6n+4) {
+  order: 4;
+}
+
+.sfui-masonry-cols-6 .sfui-masonry-item:nth-child(6n+5) {
+  order: 5;
+}
+
+.sfui-masonry-cols-6 .sfui-masonry-item:nth-child(6n) {
+  order: 6;
+}
+
+.sfui-masonry-cols-7 .sfui-masonry-item:nth-child(7n+1) {
+  order: 1;
+}
+
+.sfui-masonry-cols-7 .sfui-masonry-item:nth-child(7n+2) {
+  order: 2;
+}
+
+.sfui-masonry-cols-7 .sfui-masonry-item:nth-child(7n+3) {
+  order: 3;
+}
+
+.sfui-masonry-cols-7 .sfui-masonry-item:nth-child(7n+4) {
+  order: 4;
+}
+
+.sfui-masonry-cols-7 .sfui-masonry-item:nth-child(7n+5) {
+  order: 5;
+}
+
+.sfui-masonry-cols-7 .sfui-masonry-item:nth-child(7n+6) {
+  order: 6;
+}
+
+.sfui-masonry-cols-7 .sfui-masonry-item:nth-child(7n) {
+  order: 7;
+}
+
+.sfui-masonry-cols-8 .sfui-masonry-item:nth-child(8n+1) {
+  order: 1;
+}
+
+.sfui-masonry-cols-8 .sfui-masonry-item:nth-child(8n+2) {
+  order: 2;
+}
+
+.sfui-masonry-cols-8 .sfui-masonry-item:nth-child(8n+3) {
+  order: 3;
+}
+
+.sfui-masonry-cols-8 .sfui-masonry-item:nth-child(8n+4) {
+  order: 4;
+}
+
+.sfui-masonry-cols-8 .sfui-masonry-item:nth-child(8n+5) {
+  order: 5;
+}
+
+.sfui-masonry-cols-8 .sfui-masonry-item:nth-child(8n+6) {
+  order: 6;
+}
+
+.sfui-masonry-cols-8 .sfui-masonry-item:nth-child(8n+7) {
+  order: 7;
+}
+
+.sfui-masonry-cols-8 .sfui-masonry-item:nth-child(8n) {
+  order: 8;
+}
+
+.sfui-masonry-break {
+  content: "";
+  flex-basis: 100%;
+  width: 0 !important;
+  margin: 0;
+}
+
+.sfui-masonry-break-1 {
+  order: 1;
+}
+
+.sfui-masonry-break-2 {
+  order: 2;
+}
+
+.sfui-masonry-break-3 {
+  order: 3;
+}
+
+.sfui-masonry-break-4 {
+  order: 4;
+}
+
+.sfui-masonry-break-5 {
+  order: 5;
+}
+
+.sfui-masonry-break-6 {
+  order: 6;
+}

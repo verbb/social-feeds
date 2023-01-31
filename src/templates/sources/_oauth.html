@@ -1,0 +1,42 @@
+{% import '_includes/forms' as forms %}
+{% import 'verbb-base/_macros' as macros %}
+
+{% set name = source.providerName %}
+{% set handle = source.providerHandle | lower %}
+
+{% set instructions %}
+To connect to {name}, follow our <a href="https://verbb.io/craft-plugins/social-feed/docs/providers/{handle}" target="_blank" rel="noopener">{name} provider guide</a>.
+{% endset %}
+
+<div class="sf-settings-block">
+    {{ instructions | t('social-feed', { name: name, handle: handle }) | md }}
+</div>
+
+{{ forms.textField({
+    readonly: true,
+    label: 'Redirect URI' | t('social-feed'),
+    instructions: 'Use this URI when setting up your {name} app.' | t('social-feed', { name: name }),
+    value: source.getRedirectUri(),
+}) }}
+
+{{ forms.autosuggestField({
+    label: 'Client ID' | t('social-feed'),
+    instructions: 'Enter your {name} Client ID key here.' | t('social-feed', { name: name }),
+    name: 'clientId',
+    required: true,
+    suggestEnvVars: true,
+    value: source.clientId ?? '',
+    warning: macros.configWarning("sources.#{source.handle}.clientId", 'social-feed'),
+    errors: source.getErrors('clientId'),
+}) }}
+
+{{ forms.autosuggestField({
+    label: 'Client Secret' | t('social-feed'),
+    instructions: 'Enter your {name} Client Secret here.' | t('social-feed', { name: name }),
+    name: 'clientSecret',
+    required: true,
+    suggestEnvVars: true,
+    value: source.clientSecret ?? '',
+    warning: macros.configWarning("sources.#{source.handle}.clientSecret", 'social-feed'),
+    errors: source.getErrors('clientSecret'),
+}) }}

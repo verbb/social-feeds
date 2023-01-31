@@ -1,0 +1,45 @@
+<div class="sfui-post" data-id="{{ post.id }}" data-source="{{ post.sourceType }}">
+    {% if post.author %}
+        <div class="sfui-header">
+            <a href="{{ post.author.url }}" target="_blank" rel="noreferrer">
+                {% set image = post.getAuthorImage() %}
+
+                {% if image %}
+                    <img class="sfui-header-img" alt="{{ image.alt }}" data-poster-id="{{ post.author.id }}" src="{{ image.url }}">
+                {% endif %}
+
+                <h3 class="sfui-header-title">{{ post.author.name }}</h3>
+                <time class="sfui-header-date" datetime="{{ post.dateCreated | date('c') }}">{{ post.friendlyDate(post.dateCreated) }}</time>
+            </a>
+        </div>
+    {% endif %}
+
+    {% set image = post.getImage() %}
+    {% set video = post.getVideo() %}
+
+    {% if video %}
+        <div class="sfui-iframe-wrap">
+            <iframe class="sfui-iframe" src="{{ video.url }}"></iframe>
+        </div>
+    {% elseif image %}
+        <a class="sfui-image" data-external-id="{{ post.id }}" href="{{ post.url }}" target="_blank" rel="noreferrer">
+            <img alt="{{ image.alt }}" class="sfui-content-image" src="{{ image.url }}">
+        </a>
+    {% endif %}
+    
+    <div class="sfui-content {{ post.hasMedia() ? 'has-media' : 'no-media' }}">
+        <div class="sfui-content-text">
+            <p>{{ post.getContent() }}</p>
+        </div>
+
+        <div class="sfui-meta">
+            {% set icon = post.providerIcon %}
+
+            {% if icon %}
+                <a class="sfui-provider-icon" href="{{ post.url }}" target="_blank" rel="noreferrer" style="--color: {{ post.providerColor }};">
+                    {{ icon | raw }}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>

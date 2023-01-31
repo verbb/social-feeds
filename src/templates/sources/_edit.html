@@ -1,0 +1,203 @@
+{% extends 'social-feed/_layouts' %}
+{% import '_includes/forms' as forms %}
+{% import 'verbb-base/_macros' as macros %}
+
+{% set crumbs = [
+    { label: craft.socialFeed.getPluginName() | t('social-feed'), url: url('social-feed') },
+    { label: 'Sources' | t('social-feed'), url: url('social-feed/sources') }
+] %}
+
+{% set fullPageForm = true %}
+{% set selectedSubnavItem = 'sources' %}
+
+{% set saveShortcutRedirect = 'social-feed/sources/{handle}' %}
+
+{% block actionButton %}
+
+<div class="btngroup">
+    <input type="submit" class="btn submit" value="{{ 'Save' | t('app') }}">
+
+    <div class="btn submit menubtn"></div>
+    <div class="menu">
+        <ul>
+            <li>
+                <a class="formsubmit" data-redirect="{{ saveShortcutRedirect | hash }}">
+                    {{ forms.optionShortcutLabel('S') }}
+                    {{ 'Save and continue editing' | t('app') }}
+                </a>
+            </li>
+        </ul>
+
+        <hr>
+        <ul>
+            <li><a class="formsubmit error" data-action="social-feed/sources/delete" data-confirm="{{ 'Are you sure you want to delete this source?' | t('social-feed') }}" data-redirect="{{ 'social-feed/sources#' | hash }}">{{ 'Delete' | t('app') }}</a></li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
+
+{% set tabs = {
+    source: { label: 'Source' | t('social-feed'), url: '#source' },
+    provider: { label: 'Provider' | t('social-feed'), url: '#provider' },
+} %}
+
+{% block content %}
+
+{# Show an error when connecting to OAuth, instead of just in logs #}
+{% set message = craft.app.session.getFlash('social-feed:callback-error') %}
+
+{% if message %}
+    <div class="sf-pane sf-pane-error code error" style="margin-bottom: 24px;">{{ message }}</div>
+{% endif %}
+
+<input type="hidden" name="action" value="social-feed/sources/save">
+{% if source.id %}<input type="hidden" name="sourceId" value="{{ source.id }}">{% endif %}
+{{ redirectInput('social-feed/sources') }}
+
+<div id="source">
+    {{ forms.textField({
+        first: true,
+        label: 'Name' | t('app'),
+        instructions: 'What this source will be called in the control panel.' | t('social-feed'),
+        id: 'name',
+        name: 'name',
+        value: (source is defined ? source.name : null),
+        errors: (source is defined ? source.getErrors('name') : null),
+        autofocus: true,
+        required: true,
+    }) }}
+
+    {{ forms.textField({
+        label: 'Handle' | t('app'),
+        instructions: 'How you’ll refer to this source in your templates.' | t('social-feed'),
+        id: 'handle',
+        name: 'handle',
+        class: 'code',
+        value: (source is defined ? source.handle : null),
+        errors: (source is defined ? source.getErrors('handle') : null),
+        required: true,
+    }) }}
+</div>
+
+<div id="provider" class="hidden">
+    {% for sourceType in sourceTypes %}
+        {% set isCurrent = (sourceType == className(source)) %}
+
+        <div class="source-settings-{{ sourceType | id }} {% if not isCurrent %}hidden{% endif %}">
+            {% namespace 'types[' ~ sourceType ~ ']' %}
+                {% if isCurrent %}
+                    {{ source.getSettingsHtml() | raw }}
+                {% else %}
+                    {{ sourceInstances[sourceType].getSettingsHtml() | raw }}
+                {% endif %}
+            {% endnamespace %}
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block details %}
+
+<div class="meta">
+    {% if sourceOptions | length %}
+        {{ forms.selectField({
+            label: 'Provider' | t('social-feed'),
+            name: 'type',
+            options: sourceOptions,
+            value: className(source),
+            toggle: true,
+            targetPrefix: '.source-settings-',
+            required: true,
+        }) }}
+    {% endif %}
+
+    {{ forms.lightswitchField({
+        label: 'Enabled' | t('social-feed'),
+        name: 'enabled',
+        on: source.enabled,
+    }) }}
+
+    <div class="field lightswitch-field">
+        {% if source.isConfigured %}
+            <div class="heading">
+                <span class="status on"></span>{{ 'Provider Configured' | t('social-feed') }}
+            </div>
+        {% else %}
+            <div class="heading">
+                <span class="status"></span><span class="light">{{ 'Provider not configured' | t('social-feed') }}</span>
+            </div>
+        {% endif %}
+    </div>
+
+    {% if source.isConnected %}
+        <div class="field lightswitch-field sf-connect">
+            <div class="heading">
+                <span class="status on"></span>{{ 'Connected' | t('social-feed') }}
+            </div>
+
+            <div class="input ltr">
+                <a class="btn small formsubmit" data-action="social-feed/auth/disconnect" data-param="source" data-value="{{ source.handle }}" data-redirect="{{ saveShortcutRedirect | hash }}">{{ 'Disconnect' | t('social-feed') }}</a>
+            </div>
+        </div>
+    {% else %}
+        <div class="field lightswitch-field sf-connect">
+            <div class="heading">
+                <span class="status"></span><span class="light">{{ 'Not Connected' | t('social-feed') }}</span>
+            </div>
+
+            <div class="input ltr">
+                <a class="btn small formsubmit" data-action="social-feed/auth/connect" data-param="source" data-value="{{ source.handle }}" data-redirect="{{ 'social-feed/sources/' ~ source.handle | hash }}">{{ 'Connect' | t('social-feed') }}</a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<hr>
+
+{% if source.id %}
+    <div class="meta read-only">
+        {% if source.id %}
+            <div class="data">
+                <h5 class="heading">{{ 'ID' | t('social-feed') }}</h5>
+                <div class="value">{{ source.id }}</div>
+            </div>
+        {% endif %}
+
+        <div class="data">
+            <h5 class="heading">{{ 'Date Created' | t('social-feed') }}</h5>
+            <div class="value">{{ source.dateCreated | date('short') }} {{ source.dateCreated | time('short') }}</div>
+        </div>
+
+        <div class="data">
+            <h5 class="heading">{{ 'Date Updated' | t('social-feed') }}</h5>
+            <div class="value">{{ source.dateUpdated | date('short') }} {{ source.dateUpdated | time('short') }}</div>
+        </div>
+    </div>
+{% endif %}
+
+{% endblock %}
+
+{% js %}
+
+// Add event listeners to all form inputs, to detect a change. Show a message to save when changed.
+$(document).ready(function() {
+    var html = '<div class="heading"><span class="warning with-icon">{{ 'Save this source to connect.' | t('social-feed') }}</span></div>';
+    
+    $('#main-form').find('input, select, textarea').on('input', function() {
+        $('.sf-connect').html(html);
+    });
+
+    $('#main-form').find('.lightswitch').on('change', function() {
+        $('.sf-connect').html(html);
+    });
+});
+
+{% if source is not defined or not source.handle %}
+    new Craft.HandleGenerator("#{{ 'name' | namespaceInputId }}", "#{{ 'handle' | namespaceInputId }}");
+
+    $('#main-form input').trigger('input');
+{% endif %}
+
+{% endjs %}
