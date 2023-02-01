@@ -1,5 +1,5 @@
 <?php
-namespace verbb\socialfeed\gql\resolvers;
+namespace verbb\socialfeeds\gql\resolvers;
 
 use craft\gql\base\Resolver;
 

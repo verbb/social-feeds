@@ -1,9 +1,9 @@
 {% extends parentLayout ?? '_layouts/cp' %}
 
-{% do view.registerAssetBundle('verbb\\socialfeed\\assetbundles\\SocialFeedAsset') %}
+{% do view.registerAssetBundle('verbb\\socialfeeds\\assetbundles\\SocialFeedsAsset') %}
 
 {% if title is not defined %}
-    {% set title = craft.socialFeed.getPluginName() | t('social-feed') %}
+    {% set title = craft.socialFeeds.getPluginName() | t('social-feeds') %}
 {% endif %}
 
 {% block content %}

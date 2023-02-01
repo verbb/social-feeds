@@ -1,24 +1,24 @@
 {% import '_includes/forms' as forms %}
 {% import 'verbb-base/_macros' as macros %}
-{% import 'social-feed/_macros' as customForms %}
+{% import 'social-feeds/_macros' as customForms %}
 
-{% include 'social-feed/sources/_oauth' %}
+{% include 'social-feeds/sources/_oauth' %}
 
 <hr>
 
 {% set endpoint = source.endpoint ?? 'page' %}
 
 {{ forms.selectField({
-    label: 'Page or Group' | t('social-feed', { name: source.providerName }),
-    instructions: 'Select whether to source content from a {name} Page or {name} Group.' | t('social-feed', { name: source.providerName }),
+    label: 'Page or Group' | t('social-feeds', { name: source.providerName }),
+    instructions: 'Select whether to source content from a {name} Page or {name} Group.' | t('social-feeds', { name: source.providerName }),
     name: 'endpoint',
     options: [
-        { label: 'Group' | t('social-feed'), value: 'group' },
-        { label: 'Page' | t('social-feed'), value: 'page' },
+        { label: 'Group' | t('social-feeds'), value: 'group' },
+        { label: 'Page' | t('social-feeds'), value: 'page' },
     ],
     required: true,
     value: endpoint,
-    warning: macros.configWarning("sources.#{source.handle}.endpoint", 'social-feed'),
+    warning: macros.configWarning("sources.#{source.handle}.endpoint", 'social-feeds'),
     errors: source.getErrors('endpoint'),
     toggle: true,
     targetPrefix: '.endpoint-',
@@ -26,8 +26,8 @@
 
 <div class="endpoint-group {% if endpoint != 'group' %}hidden{% endif %}">
     {{ customForms.providerSettingsField(source, {
-        label: '{name} Group' | t('social-feed', { name: source.providerName }),
-        instructions: 'The {name} Group to pull content from.' | t('social-feed', { name: source.providerName }),
+        label: '{name} Group' | t('social-feeds', { name: source.providerName }),
+        instructions: 'The {name} Group to pull content from.' | t('social-feeds', { name: source.providerName }),
         name: 'groupId',
         required: true,
     }) }}
@@ -35,8 +35,8 @@
 
 <div class="endpoint-page {% if endpoint != 'page' %}hidden{% endif %}">
     {{ customForms.providerSettingsField(source, {
-        label: '{name} Page' | t('social-feed', { name: source.providerName }),
-        instructions: 'The {name} Page to pull content from.' | t('social-feed', { name: source.providerName }),
+        label: '{name} Page' | t('social-feeds', { name: source.providerName }),
+        instructions: 'The {name} Page to pull content from.' | t('social-feeds', { name: source.providerName }),
         name: 'pageId',
         required: true,
     }) }}
@@ -47,8 +47,8 @@
 
 <div class="sf-switch-group" data-toggle-group="{{ "source-type-#{inputKey}" }} ">
     <div>
-        <div class="sf-switch-label">{{ 'Feed' | t('social-feed') }}</div>
-        <div class="sf-switch-text">{{ 'Posts from your Facebook page.' | t('social-feed') }}</div>
+        <div class="sf-switch-label">{{ 'Feed' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Posts from your Facebook page.' | t('social-feeds') }}</div>
     </div>
 
     <div class="sf-switch">
@@ -62,8 +62,8 @@
 
 <div class="sf-switch-group" data-toggle-group="{{ "source-type-#{inputKey}" }} ">
     <div>
-        <div class="sf-switch-label">{{ 'Photos' | t('social-feed') }}</div>
-        <div class="sf-switch-text">{{ 'Photos from your Facebook Photos page.' | t('social-feed') }}</div>
+        <div class="sf-switch-label">{{ 'Photos' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Photos from your Facebook Photos page.' | t('social-feeds') }}</div>
     </div>
 
     <div class="sf-switch">
@@ -77,8 +77,8 @@
 
 <div class="sf-switch-group" data-toggle-group="{{ "source-type-#{inputKey}" }} ">
     <div>
-        <div class="sf-switch-label">{{ 'Videos' | t('social-feed') }}</div>
-        <div class="sf-switch-text">{{ 'Videos from your Facebook Videos page.' | t('social-feed') }}</div>
+        <div class="sf-switch-label">{{ 'Videos' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Videos from your Facebook Videos page.' | t('social-feeds') }}</div>
     </div>
 
     <div class="sf-switch">
@@ -92,8 +92,8 @@
 
 <div class="sf-switch-group" data-toggle-group="{{ "source-type-#{inputKey}" }} ">
     <div>
-        <div class="sf-switch-label">{{ 'Events' | t('social-feed') }}</div>
-        <div class="sf-switch-text">{{ 'Events from your Facebook Events page.' | t('social-feed') }}</div>
+        <div class="sf-switch-label">{{ 'Events' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Events from your Facebook Events page.' | t('social-feeds') }}</div>
     </div>
 
     <div class="sf-switch">
@@ -108,6 +108,6 @@
 {% endset %}
 
 {{ forms.field({
-    label: 'Source Type' | t('social-feed'),
-    instructions: 'Select what types of content this source should provide.' | t('social-feed'),
+    label: 'Source Type' | t('social-feeds'),
+    instructions: 'Select what types of content this source should provide.' | t('social-feeds'),
 }, inputs) }}

@@ -1,8 +1,8 @@
 <?php
-namespace verbb\socialfeed\gql\types\generators;
+namespace verbb\socialfeeds\gql\types\generators;
 
-use verbb\socialfeed\gql\interfaces\FeedInterface;
-use verbb\socialfeed\gql\types\FeedType;
+use verbb\socialfeeds\gql\interfaces\FeedInterface;
+use verbb\socialfeeds\gql\types\FeedType;
 
 use craft\gql\base\GeneratorInterface;
 use craft\gql\GqlEntityRegistry;

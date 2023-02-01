@@ -1,17 +1,17 @@
-{% extends 'social-feed/_layouts' %}
+{% extends 'social-feeds/_layouts' %}
 
 {% do view.registerAssetBundle('craft\\web\\assets\\admintable\\AdminTableAsset') -%}
 
 {% set crumbs = [
-    { label: craft.socialFeed.getPluginName() | t('social-feed'), url: url('social-feed') },
-    { label: 'Sources' | t('social-feed'), url: url('social-feed/sources') }
+    { label: craft.socialFeeds.getPluginName() | t('social-feeds'), url: url('social-feeds') },
+    { label: 'Sources' | t('social-feeds'), url: url('social-feeds/sources') }
 ] %}
 
-{% set title = 'Sources' | t('social-feed') %}
+{% set title = 'Sources' | t('social-feeds') %}
 {% set selectedSubnavItem = 'sources' %}
 
 {% block actionButton %}
-    <a class="btn submit add icon" href="{{ url('social-feed/sources/new') }}">{{ 'New source' | t('social-feed') }}</a>
+    <a class="btn submit add icon" href="{{ url('social-feeds/sources/new') }}">{{ 'New source' | t('social-feeds') }}</a>
 {% endblock %}
 
 {% block blockContent %}
@@ -26,7 +26,7 @@
     {% set tableData = tableData | merge([{
         id: source.id,
         title: source.name | t('site'),
-        url: url('social-feed/sources/' ~ source.handle),
+        url: url('social-feeds/sources/' ~ source.handle),
         handle: source.handle,
         enabled: source.enabled,
         connected: source.connected,
@@ -40,16 +40,16 @@
         { name: '__slot:handle', title: Craft.t('app', 'Handle') },
         { name: 'enabled', title: Craft.t('app', 'Status'), callback: function(value) {
             if (value) {
-                return '<span class="status on"></span>' + Craft.t('social-feed', 'Enabled');
+                return '<span class="status on"></span>' + Craft.t('social-feeds', 'Enabled');
             } else {
-                return '<span class="status"></span>' + Craft.t('social-feed', 'Disabled');
+                return '<span class="status"></span>' + Craft.t('social-feeds', 'Disabled');
             }
         } },
         { name: 'connected', title: Craft.t('app', 'Connected'), callback: function(value) {
             if (value) {
-                return '<span class="status on"></span>' + Craft.t('social-feed', 'Connected');
+                return '<span class="status on"></span>' + Craft.t('social-feeds', 'Connected');
             } else {
-                return '<span class="status"></span>' + Craft.t('social-feed', 'Disconnected');
+                return '<span class="status"></span>' + Craft.t('social-feeds', 'Disconnected');
             }
         } },
         { name: 'provider', title: Craft.t('app', 'Provider'), callback: function(provider) {
@@ -73,9 +73,9 @@
     new Craft.VueAdminTable({
         columns: columns,
         container: '#sources-vue-admin-table',
-        reorderAction: 'social-feed/sources/reorder',
-        deleteAction: 'social-feed/sources/delete',
-        emptyMessage: Craft.t('social-feed', 'No sources exist yet.'),
+        reorderAction: 'social-feeds/sources/reorder',
+        deleteAction: 'social-feeds/sources/delete',
+        emptyMessage: Craft.t('social-feeds', 'No sources exist yet.'),
         tableData: {{ tableData | json_encode | raw }},
     });
 {% endjs %}

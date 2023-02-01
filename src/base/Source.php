@@ -1,8 +1,8 @@
 <?php
-namespace verbb\socialfeed\base;
+namespace verbb\socialfeeds\base;
 
-use verbb\socialfeed\SocialFeed;
-use verbb\socialfeed\models\Post;
+use verbb\socialfeeds\SocialFeeds;
+use verbb\socialfeeds\models\Post;
 
 use Craft;
 use craft\base\SavableComponent;
@@ -31,13 +31,13 @@ abstract class Source extends SavableComponent implements SourceInterface
             $messageText = (string)$exception->getResponse()->getBody();
         }
 
-        $message = Craft::t('social-feed', 'API error: “{message}” {file}:{line}', [
+        $message = Craft::t('social-feeds', 'API error: “{message}” {file}:{line}', [
             'message' => $messageText,
             'file' => $exception->getFile(),
             'line' => $exception->getLine(),
         ]);
 
-        SocialFeed::error($source->name . ': ' . $message);
+        SocialFeeds::error($source->name . ': ' . $message);
 
         if ($throwError) {
             throw new Exception($message);
@@ -148,14 +148,14 @@ abstract class Source extends SavableComponent implements SourceInterface
 
     public function getPosts(array $options = []): ?array
     {
-        return SocialFeed::$plugin->getPosts()->getPostsForSource($this, $options);
+        return SocialFeeds::$plugin->getPosts()->getPostsForSource($this, $options);
     }
 
     public function getSettingsHtml(): ?string
     {
         $handle = StringHelper::toKebabCase(static::$providerHandle);
 
-        return Craft::$app->getView()->renderTemplate('social-feed/sources/_types/' . $handle . '/settings', [
+        return Craft::$app->getView()->renderTemplate('social-feeds/sources/_types/' . $handle . '/settings', [
             'source' => $this,
         ]);
     }
@@ -183,7 +183,7 @@ abstract class Source extends SavableComponent implements SourceInterface
 
         // Direct DB update to keep it out of PC, plus speed
         Craft::$app->getDb()->createCommand()
-            ->update('{{%socialfeed_sources}}', ['cache' => $data], ['id' => $this->id])
+            ->update('{{%socialfeeds_sources}}', ['cache' => $data], ['id' => $this->id])
             ->execute();
     }
 

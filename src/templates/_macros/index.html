@@ -17,7 +17,7 @@
         {{ forms.field({
             label: config.label,
             instructions: config.instructions,
-            warning: macros.configWarning("sources.#{source.handle}.#{config.name}", 'social-feed'),
+            warning: macros.configWarning("sources.#{source.handle}.#{config.name}", 'social-feeds'),
             errors: source.getErrors(config.name),
             required: config.required ?? false,
         }, input) }}
@@ -25,7 +25,7 @@
         {{ forms.field({
             label: config.label,
             instructions: config.instructions,
-            warning: 'Please connect to the provider to be able to configure “{setting}”.' | t('social-feed', { setting: config.label }),
+            warning: 'Please connect to the provider to be able to configure “{setting}”.' | t('social-feeds', { setting: config.label }),
         }) }}
     {% endif %}
 {% endmacro %}

@@ -1,5 +1,5 @@
 # Events
-Social Feed provides a collection of events for extending its functionality. Modules and plugins can register event listeners, typically in their `init()` methods, to modify Social Feed’s behavior.
+Social Feeds provides a collection of events for extending its functionality. Modules and plugins can register event listeners, typically in their `init()` methods, to modify Social Feeds’s behavior.
 
 ## Feed Events
 
@@ -7,8 +7,8 @@ Social Feed provides a collection of events for extending its functionality. Mod
 The event that is triggered before a feed is saved.
 
 ```php
-use verbb\socialfeed\events\FeedEvent;
-use verbb\socialfeed\services\Feeds;
+use verbb\socialfeeds\events\FeedEvent;
+use verbb\socialfeeds\services\Feeds;
 use yii\base\Event;
 
 Event::on(Feeds::class, Feeds::EVENT_BEFORE_SAVE_FEED, function(FeedEvent $event) {
@@ -22,8 +22,8 @@ Event::on(Feeds::class, Feeds::EVENT_BEFORE_SAVE_FEED, function(FeedEvent $event
 The event that is triggered after a feed is saved.
 
 ```php
-use verbb\socialfeed\events\FeedEvent;
-use verbb\socialfeed\services\Feeds;
+use verbb\socialfeeds\events\FeedEvent;
+use verbb\socialfeeds\services\Feeds;
 use yii\base\Event;
 
 Event::on(Feeds::class, Feeds::EVENT_AFTER_SAVE_FEED, function(FeedEvent $event) {
@@ -37,8 +37,8 @@ Event::on(Feeds::class, Feeds::EVENT_AFTER_SAVE_FEED, function(FeedEvent $event)
 The event that is triggered before a feed is deleted.
 
 ```php
-use verbb\socialfeed\events\FeedEvent;
-use verbb\socialfeed\services\Feeds;
+use verbb\socialfeeds\events\FeedEvent;
+use verbb\socialfeeds\services\Feeds;
 use yii\base\Event;
 
 Event::on(Feeds::class, Feeds::EVENT_BEFORE_DELETE_FEED, function(FeedEvent $event) {
@@ -51,8 +51,8 @@ Event::on(Feeds::class, Feeds::EVENT_BEFORE_DELETE_FEED, function(FeedEvent $eve
 The event that is triggered after a feed is deleted.
 
 ```php
-use verbb\socialfeed\events\FeedEvent;
-use verbb\socialfeed\services\Feeds;
+use verbb\socialfeeds\events\FeedEvent;
+use verbb\socialfeeds\services\Feeds;
 use yii\base\Event;
 
 Event::on(Feeds::class, Feeds::EVENT_AFTER_DELETE_FEED, function(FeedEvent $event) {
@@ -67,8 +67,8 @@ Event::on(Feeds::class, Feeds::EVENT_AFTER_DELETE_FEED, function(FeedEvent $even
 The event that is triggered before a source is saved.
 
 ```php
-use verbb\socialfeed\events\SourceEvent;
-use verbb\socialfeed\services\Sources;
+use verbb\socialfeeds\events\SourceEvent;
+use verbb\socialfeeds\services\Sources;
 use yii\base\Event;
 
 Event::on(Sources::class, Sources::EVENT_BEFORE_SAVE_SOURCE, function(SourceEvent $event) {
@@ -82,8 +82,8 @@ Event::on(Sources::class, Sources::EVENT_BEFORE_SAVE_SOURCE, function(SourceEven
 The event that is triggered after a source is saved.
 
 ```php
-use verbb\socialfeed\events\SourceEvent;
-use verbb\socialfeed\services\Sources;
+use verbb\socialfeeds\events\SourceEvent;
+use verbb\socialfeeds\services\Sources;
 use yii\base\Event;
 
 Event::on(Sources::class, Sources::EVENT_AFTER_SAVE_SOURCE, function(SourceEvent $event) {
@@ -97,8 +97,8 @@ Event::on(Sources::class, Sources::EVENT_AFTER_SAVE_SOURCE, function(SourceEvent
 The event that is triggered before a source is deleted.
 
 ```php
-use verbb\socialfeed\events\SourceEvent;
-use verbb\socialfeed\services\Sources;
+use verbb\socialfeeds\events\SourceEvent;
+use verbb\socialfeeds\services\Sources;
 use yii\base\Event;
 
 Event::on(Sources::class, Sources::EVENT_BEFORE_DELETE_SOURCE, function(SourceEvent $event) {
@@ -111,8 +111,8 @@ Event::on(Sources::class, Sources::EVENT_BEFORE_DELETE_SOURCE, function(SourceEv
 The event that is triggered after a source is deleted.
 
 ```php
-use verbb\socialfeed\events\SourceEvent;
-use verbb\socialfeed\services\Sources;
+use verbb\socialfeeds\events\SourceEvent;
+use verbb\socialfeeds\services\Sources;
 use yii\base\Event;
 
 Event::on(Sources::class, Sources::EVENT_AFTER_DELETE_SOURCE, function(SourceEvent $event) {

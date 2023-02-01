@@ -1,16 +1,16 @@
-{% do view.registerAssetBundle('verbb\\socialfeed\\assetbundles\\FeedAsset') %}
+{% do view.registerAssetBundle('verbb\\socialfeeds\\assetbundles\\FeedAsset') %}
 
 {% set layout = renderOptions.layout ?? null %}
 {% set masonry = layout == 'masonry' %}
 
 {% if masonry %}
-    {% do view.registerAssetBundle('verbb\\socialfeed\\assetbundles\\FeedMasonryAsset') %}
+    {% do view.registerAssetBundle('verbb\\socialfeeds\\assetbundles\\FeedMasonryAsset') %}
 {% endif %}
 
-<div class="sfui-posts" data-social-feed>
+<div class="sfui-posts" data-social-feeds>
     {% for post in posts %}
         <div class="sfui-post-col">
-            {% include 'social-feed/_posts/post' %}
+            {% include 'social-feeds/_posts/post' %}
         </div>
     {% endfor %}
 </div>

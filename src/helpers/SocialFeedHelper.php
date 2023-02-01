@@ -1,9 +1,9 @@
 <?php
-namespace verbb\socialfeed\helpers;
+namespace verbb\socialfeeds\helpers;
 
 use craft\helpers\StringHelper;
 
-class SocialFeedHelper
+class SocialFeedsHelper
 {
     // Static Methods
     // =========================================================================

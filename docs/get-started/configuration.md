@@ -1,14 +1,14 @@
 # Configuration
-Create a `social-feed.php` file under your `/config` directory with the following options available to you. You can also use multi-environment options to change these per environment.
+Create a `social-feeds.php` file under your `/config` directory with the following options available to you. You can also use multi-environment options to change these per environment.
 
-The below shows the defaults already used by Social Feed, so you don't need to add these options unless you want to modify the values.
+The below shows the defaults already used by Social Feeds, so you don't need to add these options unless you want to modify the values.
 
 ```php
 <?php
 
 return [
     '*' => [
-        'pluginName' => 'Social Feed',
+        'pluginName' => 'Social Feeds',
         'hasCpSection' => true,
         'enableCache' => true,
         'cacheDuration' => 'PT6H',
@@ -45,4 +45,4 @@ return [
 ```
 
 ## Control Panel
-You can also manage configuration settings through the Control Panel by visiting Settings → Social Feed.
+You can also manage configuration settings through the Control Panel by visiting Settings → Social Feeds.

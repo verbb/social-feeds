@@ -1,8 +1,8 @@
 <?php
-namespace verbb\socialfeed\gql\types\generators;
+namespace verbb\socialfeeds\gql\types\generators;
 
-use verbb\socialfeed\gql\interfaces\PostLinkInterface;
-use verbb\socialfeed\gql\types\PostLinkType;
+use verbb\socialfeeds\gql\interfaces\PostLinkInterface;
+use verbb\socialfeeds\gql\types\PostLinkType;
 
 use craft\gql\base\GeneratorInterface;
 use craft\gql\GqlEntityRegistry;

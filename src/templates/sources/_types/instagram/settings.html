@@ -1,14 +1,14 @@
 {% import '_includes/forms' as forms %}
 {% import 'verbb-base/_macros' as macros %}
-{% import 'social-feed/_macros' as customForms %}
+{% import 'social-feeds/_macros' as customForms %}
 
-{% include 'social-feed/sources/_oauth' %}
+{% include 'social-feeds/sources/_oauth' %}
 
 <hr>
 
 {{ customForms.providerSettingsField(source, {
-    label: '{name} Business Account' | t('social-feed', { name: source.providerName }),
-    instructions: 'The {name} Business Account to pull content from.' | t('social-feed', { name: source.providerName }),
+    label: '{name} Business Account' | t('social-feeds', { name: source.providerName }),
+    instructions: 'The {name} Business Account to pull content from.' | t('social-feeds', { name: source.providerName }),
     name: 'accountId',
     required: true,
 }) }}
@@ -18,8 +18,8 @@
 
 <div class="sf-switch-group">
     <div>
-        <div class="sf-switch-label">{{ 'Profile Posts' | t('social-feed') }}</div>
-        <div class="sf-switch-text">{{ 'Posts from your Instagram profile.' | t('social-feed') }}</div>
+        <div class="sf-switch-label">{{ 'Profile Posts' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Posts from your Instagram profile.' | t('social-feeds') }}</div>
     </div>
 
     <div class="sf-switch">
@@ -33,8 +33,8 @@
 
 <div class="sf-switch-group">
     <div>
-        <div class="sf-switch-label">{{ 'Hashtag' | t('social-feed') }}</div>
-        <div class="sf-switch-text">{{ 'Posts containing hashtags.' | t('social-feed') }}</div>
+        <div class="sf-switch-label">{{ 'Hashtag' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Posts containing hashtags.' | t('social-feeds') }}</div>
     </div>
 
     <div class="sf-switch">
@@ -50,27 +50,27 @@
 <div class="{{ "source-type-#{inputKey}-hashtag" }} {{ not source.enableHashtags ? 'hidden' }}">
     <div class="sf-nested-settings">
         {{ forms.textField({
-            label: 'Hashtags' | t('social-feed'),
-            instructions: 'Enter one or more hashtags to fetch posts for. Separate multiple hashtags by commas.' | t('social-feed'),
+            label: 'Hashtags' | t('social-feeds'),
+            instructions: 'Enter one or more hashtags to fetch posts for. Separate multiple hashtags by commas.' | t('social-feeds'),
             name: 'hashtags',
             required: true,
             placeholder: 'e.g. #craftcms, #verbb_io',
             value: source.hashtags ?? '',
-            warning: macros.configWarning("sources.#{source.handle}.hashtags", 'social-feed'),
+            warning: macros.configWarning("sources.#{source.handle}.hashtags", 'social-feeds'),
             errors: source.getErrors('hashtags'),
         }) }}
 
         {{ forms.selectField({
-            label: 'Order By' | t('social-feed'),
-            instructions: 'How to query results by.' | t('social-feed'),
+            label: 'Order By' | t('social-feeds'),
+            instructions: 'How to query results by.' | t('social-feeds'),
             name: 'hashtagsOrderBy',
             required: true,
             value: source.hashtagsOrderBy ?? '',
-            warning: macros.configWarning("sources.#{source.handle}.hashtagsOrderBy", 'social-feed'),
+            warning: macros.configWarning("sources.#{source.handle}.hashtagsOrderBy", 'social-feeds'),
             errors: source.getErrors('hashtagsOrderBy'),
             options: [
-                { label: 'Most Recent' | t('social-feed'), value: 'recent' },
-                { label: 'Top Rated' | t('social-feed'), value: 'rated' },
+                { label: 'Most Recent' | t('social-feeds'), value: 'recent' },
+                { label: 'Top Rated' | t('social-feeds'), value: 'rated' },
             ],
         }) }}
     </div>
@@ -78,8 +78,8 @@
 
 <div class="sf-switch-group">
     <div>
-        <div class="sf-switch-label">{{ 'Tagged Posts' | t('social-feed') }}</div>
-        <div class="sf-switch-text">{{ 'Posts you have been tagged in.' | t('social-feed') }}</div>
+        <div class="sf-switch-label">{{ 'Tagged Posts' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Posts you have been tagged in.' | t('social-feeds') }}</div>
     </div>
 
     <div class="sf-switch">
@@ -94,6 +94,6 @@
 {% endset %}
 
 {{ forms.field({
-    label: 'Source Type' | t('social-feed'),
-    instructions: 'Select what types of content this source should provide.' | t('social-feed'),
+    label: 'Source Type' | t('social-feeds'),
+    instructions: 'Select what types of content this source should provide.' | t('social-feeds'),
 }, inputs) }}

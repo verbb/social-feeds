@@ -1,7 +1,7 @@
 <?php
-namespace verbb\socialfeed\events;
+namespace verbb\socialfeeds\events;
 
-use verbb\socialfeed\models\Post;
+use verbb\socialfeeds\models\Post;
 
 use yii\base\Event;
 

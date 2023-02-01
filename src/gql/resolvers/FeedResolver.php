@@ -1,7 +1,7 @@
 <?php
-namespace verbb\socialfeed\gql\resolvers;
+namespace verbb\socialfeeds\gql\resolvers;
 
-use verbb\socialfeed\SocialFeed;
+use verbb\socialfeeds\SocialFeeds;
 
 use craft\gql\base\Resolver;
 
@@ -16,7 +16,7 @@ class FeedResolver extends Resolver
 
     public static function resolve($source, array $arguments, $context, ResolveInfo $resolveInfo): mixed
     {
-        return SocialFeed::$plugin->getFeeds()->getAllFeedsByParams($arguments);
+        return SocialFeeds::$plugin->getFeeds()->getAllFeedsByParams($arguments);
     }
 
     public static function resolveOne($source, array $arguments, $context, ResolveInfo $resolveInfo): mixed
@@ -25,6 +25,6 @@ class FeedResolver extends Resolver
             throw new Exception('You must provide at least one identifier (`id`, `handle`, `uid`) argument to query a `feed`.');
         }
 
-        return SocialFeed::$plugin->getFeeds()->getFeedByParams($arguments);
+        return SocialFeeds::$plugin->getFeeds()->getFeedByParams($arguments);
     }
 }

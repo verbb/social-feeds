@@ -1,5 +1,5 @@
 <?php
-namespace verbb\socialfeed\records;
+namespace verbb\socialfeeds\records;
 
 use craft\db\ActiveRecord;
 
@@ -10,6 +10,6 @@ class Feed extends ActiveRecord
 
     public static function tableName(): string
     {
-        return '{{%socialfeed_feeds}}';
+        return '{{%socialfeeds_feeds}}';
     }
 }

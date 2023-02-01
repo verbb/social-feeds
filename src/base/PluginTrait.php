@@ -1,11 +1,11 @@
 <?php
-namespace verbb\socialfeed\base;
+namespace verbb\socialfeeds\base;
 
-use verbb\socialfeed\SocialFeed;
-use verbb\socialfeed\services\Feeds;
-use verbb\socialfeed\services\Posts;
-use verbb\socialfeed\services\Service;
-use verbb\socialfeed\services\Sources;
+use verbb\socialfeeds\SocialFeeds;
+use verbb\socialfeeds\services\Feeds;
+use verbb\socialfeeds\services\Posts;
+use verbb\socialfeeds\services\Service;
+use verbb\socialfeeds\services\Sources;
 
 use Craft;
 
@@ -19,7 +19,7 @@ trait PluginTrait
     // Properties
     // =========================================================================
 
-    public static SocialFeed $plugin;
+    public static SocialFeeds $plugin;
 
 
     // Static Methods
@@ -27,16 +27,16 @@ trait PluginTrait
 
     public static function log(string $message, array $params = []): void
     {
-        $message = Craft::t('social-feed', $message, $params);
+        $message = Craft::t('social-feeds', $message, $params);
 
-        Craft::getLogger()->log($message, Logger::LEVEL_INFO, 'social-feed');
+        Craft::getLogger()->log($message, Logger::LEVEL_INFO, 'social-feeds');
     }
 
     public static function error(string $message, array $params = []): void
     {
-        $message = Craft::t('social-feed', $message, $params);
+        $message = Craft::t('social-feeds', $message, $params);
 
-        Craft::getLogger()->log($message, Logger::LEVEL_ERROR, 'social-feed');
+        Craft::getLogger()->log($message, Logger::LEVEL_ERROR, 'social-feeds');
     }
 
 
@@ -82,7 +82,7 @@ trait PluginTrait
 
     private function _registerLogTarget(): void
     {
-        BaseHelper::setFileLogging('social-feed');
+        BaseHelper::setFileLogging('social-feeds');
     }
 
 }

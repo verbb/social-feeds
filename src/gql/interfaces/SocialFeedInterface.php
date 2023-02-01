@@ -1,13 +1,13 @@
 <?php
-namespace verbb\socialfeed\gql\interfaces;
+namespace verbb\socialfeeds\gql\interfaces;
 
-use verbb\socialfeed\gql\arguments\FeedArguments;
-use verbb\socialfeed\gql\arguments\PostArguments;
-use verbb\socialfeed\gql\arguments\SourceArguments;
-use verbb\socialfeed\gql\resolvers\FeedResolver;
-use verbb\socialfeed\gql\resolvers\PostResolver;
-use verbb\socialfeed\gql\resolvers\SourceResolver;
-use verbb\socialfeed\gql\types\generators\SocialFeedGenerator;
+use verbb\socialfeeds\gql\arguments\FeedArguments;
+use verbb\socialfeeds\gql\arguments\PostArguments;
+use verbb\socialfeeds\gql\arguments\SourceArguments;
+use verbb\socialfeeds\gql\resolvers\FeedResolver;
+use verbb\socialfeeds\gql\resolvers\PostResolver;
+use verbb\socialfeeds\gql\resolvers\SourceResolver;
+use verbb\socialfeeds\gql\types\generators\SocialFeedsGenerator;
 
 use craft\gql\base\InterfaceType as BaseInterfaceType;
 use craft\gql\GqlEntityRegistry;
@@ -15,14 +15,14 @@ use craft\gql\GqlEntityRegistry;
 use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\Type;
 
-class SocialFeedInterface extends BaseInterfaceType
+class SocialFeedsInterface extends BaseInterfaceType
 {
     // Static Methods
     // =========================================================================
 
     public static function getTypeGenerator(): string
     {
-        return SocialFeedGenerator::class;
+        return SocialFeedsGenerator::class;
     }
 
     public static function getType($fields = null): Type
@@ -34,20 +34,20 @@ class SocialFeedInterface extends BaseInterfaceType
         $type = GqlEntityRegistry::createEntity(self::class, new InterfaceType([
             'name' => static::getName(),
             'fields' => self::class . '::getFieldDefinitions',
-            'description' => 'This is the interface implemented by Social Feed.',
+            'description' => 'This is the interface implemented by Social Feeds.',
             'resolveType' => function (array $value) {
-                return GqlEntityRegistry::getEntity(SocialFeedGenerator::getName());
+                return GqlEntityRegistry::getEntity(SocialFeedsGenerator::getName());
             },
         ]));
 
-        SocialFeedGenerator::generateTypes();
+        SocialFeedsGenerator::generateTypes();
 
         return $type;
     }
 
     public static function getName(): string
     {
-        return 'SocialFeedInterface';
+        return 'SocialFeedsInterface';
     }
 
     public static function getFieldDefinitions(): array
@@ -58,35 +58,35 @@ class SocialFeedInterface extends BaseInterfaceType
                 'args' => FeedArguments::getArguments(),
                 'type' => Type::listOf(FeedInterface::getType()),
                 'resolve' => FeedResolver::class . '::resolve',
-                'description' => 'All Social Feed feeds.',
+                'description' => 'All Social Feeds feeds.',
             ],
             'feed' => [
                 'name' => 'feed',
                 'args' => FeedArguments::getArguments(),
                 'type' => FeedInterface::getType(),
                 'resolve' => FeedResolver::class . '::resolveOne',
-                'description' => 'A single Social Feed feed.',
+                'description' => 'A single Social Feeds feed.',
             ],
             'sources' => [
                 'name' => 'sources',
                 'args' => SourceArguments::getArguments(),
                 'type' => Type::listOf(SourceInterface::getType()),
                 'resolve' => SourceResolver::class . '::resolve',
-                'description' => 'All Social Feed sources.',
+                'description' => 'All Social Feeds sources.',
             ],
             'source' => [
                 'name' => 'source',
                 'args' => SourceArguments::getArguments(),
                 'type' => SourceInterface::getType(),
                 'resolve' => SourceResolver::class . '::resolveOne',
-                'description' => 'A single Social Feed source.',
+                'description' => 'A single Social Feeds source.',
             ],
             'posts' => [
                 'name' => 'posts',
                 'args' => PostArguments::getArguments(),
                 'type' => Type::listOf(PostInterface::getType()),
                 'resolve' => PostResolver::class . '::resolve',
-                'description' => 'All Social Feed posts.',
+                'description' => 'All Social Feeds posts.',
             ],
         ];
     }

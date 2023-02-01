@@ -1,9 +1,9 @@
 <?php
-namespace verbb\socialfeed\gql\interfaces;
+namespace verbb\socialfeeds\gql\interfaces;
 
-use verbb\socialfeed\gql\arguments\PostArguments;
-use verbb\socialfeed\gql\types\generators\SourceGenerator;
-use verbb\socialfeed\gql\resolvers\PostResolver;
+use verbb\socialfeeds\gql\arguments\PostArguments;
+use verbb\socialfeeds\gql\types\generators\SourceGenerator;
+use verbb\socialfeeds\gql\resolvers\PostResolver;
 
 use Craft;
 use craft\gql\base\InterfaceType as BaseInterfaceType;

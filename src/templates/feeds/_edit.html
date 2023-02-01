@@ -1,18 +1,18 @@
-{% extends 'social-feed/_layouts' %}
+{% extends 'social-feeds/_layouts' %}
 {% import '_includes/forms' as forms %}
 {% import 'verbb-base/_macros' as macros %}
 
-{% do view.registerAssetBundle('verbb\\socialfeed\\assetbundles\\FeedAsset') %}
+{% do view.registerAssetBundle('verbb\\socialfeeds\\assetbundles\\FeedAsset') %}
 
 {% set crumbs = [
-    { label: craft.socialFeed.getPluginName() | t('social-feed'), url: url('social-feed') },
-    { label: 'Feeds' | t('social-feed'), url: url('social-feed/feeds') }
+    { label: craft.socialFeeds.getPluginName() | t('social-feeds'), url: url('social-feeds') },
+    { label: 'Feeds' | t('social-feeds'), url: url('social-feeds/feeds') }
 ] %}
 
 {% set fullPageForm = true %}
 {% set selectedSubnavItem = 'feeds' %}
 
-{% set saveShortcutRedirect = 'social-feed/feeds/{handle}' %}
+{% set saveShortcutRedirect = 'social-feeds/feeds/{handle}' %}
 
 {% block actionButton %}
 
@@ -32,7 +32,7 @@
 
         <hr>
         <ul>
-            <li><a class="formsubmit error" data-action="social-feed/feeds/delete" data-confirm="{{ 'Are you sure you want to delete this feed?' | t('social-feed') }}" data-redirect="{{ 'social-feed/feeds#' | hash }}">{{ 'Delete' | t('app') }}</a></li>
+            <li><a class="formsubmit error" data-action="social-feeds/feeds/delete" data-confirm="{{ 'Are you sure you want to delete this feed?' | t('social-feeds') }}" data-redirect="{{ 'social-feeds/feeds#' | hash }}">{{ 'Delete' | t('app') }}</a></li>
         </ul>
     </div>
 </div>
@@ -40,21 +40,21 @@
 {% endblock %}
 
 {% set tabs = {
-    feed: { label: 'Feed' | t('social-feed'), url: '#feed' },
-    preview: { label: 'Preview' | t('social-feed'), url: '#preview' },
+    feed: { label: 'Feed' | t('social-feeds'), url: '#feed' },
+    preview: { label: 'Preview' | t('social-feeds'), url: '#preview' },
 } %}
 
 {% block content %}
 
-<input type="hidden" name="action" value="social-feed/feeds/save">
+<input type="hidden" name="action" value="social-feeds/feeds/save">
 {% if feed.id %}<input type="hidden" name="feedId" value="{{ feed.id }}">{% endif %}
-{{ redirectInput('social-feed/feeds') }}
+{{ redirectInput('social-feeds/feeds') }}
 
 <div id="feed">
     {{ forms.textField({
         first: true,
         label: 'Name' | t('app'),
-        instructions: 'What this feed will be called in the control panel.' | t('social-feed'),
+        instructions: 'What this feed will be called in the control panel.' | t('social-feeds'),
         id: 'name',
         name: 'name',
         value: (feed is defined ? feed.name : null),
@@ -65,7 +65,7 @@
 
     {{ forms.textField({
         label: 'Handle' | t('app'),
-        instructions: 'How you’ll refer to this feed in your templates.' | t('social-feed'),
+        instructions: 'How you’ll refer to this feed in your templates.' | t('social-feeds'),
         id: 'handle',
         name: 'handle',
         class: 'code',
@@ -76,7 +76,7 @@
 
     <hr>
 
-    {% set sources = craft.socialFeed.getAllEnabledSources() %}
+    {% set sources = craft.socialFeeds.getAllEnabledSources() %}
 
     {% set inputs %}
         {{ hiddenInput('sources') }}
@@ -104,24 +104,24 @@
     {% endset %}
 
     {{ forms.field({
-        label: 'Sources' | t('social-feed'),
-        instructions: 'Select which [Sources]({url}) are available for this feed.' | t('social-feed', { url: cpUrl('social-feed/sources') }),
-        warning: not sources ? 'Create a [Source]({url}) for your feed.' | t('social-feed', { url: cpUrl('social-feed/sources') }),
+        label: 'Sources' | t('social-feeds'),
+        instructions: 'Select which [Sources]({url}) are available for this feed.' | t('social-feeds', { url: cpUrl('social-feeds/sources') }),
+        warning: not sources ? 'Create a [Source]({url}) for your feed.' | t('social-feeds', { url: cpUrl('social-feeds/sources') }),
     }, inputs) }}
 </div>
 
 <div id="preview" class="hidden">
     <div class="field sf-field-preview">
         <div class="heading">
-            <label>{{ 'Feed Preview' | t('social-feed') }}</label>
+            <label>{{ 'Feed Preview' | t('social-feeds') }}</label>
 
             <div class="instructions">
-                <p>{{ 'See what your posts look like for your feed.' | t('social-feed') }}</p>
+                <p>{{ 'See what your posts look like for your feed.' | t('social-feeds') }}</p>
             </div>
         </div>
 
         <div style="margin-left: auto;">
-            <button type="button" class="btn sf-refresh-btn submit">{{ 'Load Posts' | t('social-feed') }}</button>
+            <button type="button" class="btn sf-refresh-btn submit">{{ 'Load Posts' | t('social-feeds') }}</button>
         </div>
     </div>
 
@@ -134,7 +134,7 @@
 
 <div class="meta">
     {{ forms.lightswitchField({
-        label: 'Enabled' | t('social-feed'),
+        label: 'Enabled' | t('social-feeds'),
         name: 'enabled',
         on: feed.enabled,
     }) }}
@@ -146,18 +146,18 @@
     <div class="meta read-only">
         {% if feed.id %}
             <div class="data">
-                <h5 class="heading">{{ 'ID' | t('social-feed') }}</h5>
+                <h5 class="heading">{{ 'ID' | t('social-feeds') }}</h5>
                 <div class="value">{{ feed.id }}</div>
             </div>
         {% endif %}
 
         <div class="data">
-            <h5 class="heading">{{ 'Date Created' | t('social-feed') }}</h5>
+            <h5 class="heading">{{ 'Date Created' | t('social-feeds') }}</h5>
             <div class="value">{{ feed.dateCreated | date('short') }} {{ feed.dateCreated | time('short') }}</div>
         </div>
 
         <div class="data">
-            <h5 class="heading">{{ 'Date Updated' | t('social-feed') }}</h5>
+            <h5 class="heading">{{ 'Date Updated' | t('social-feeds') }}</h5>
             <div class="value">{{ feed.dateUpdated | date('short') }} {{ feed.dateUpdated | time('short') }}</div>
         </div>
     </div>

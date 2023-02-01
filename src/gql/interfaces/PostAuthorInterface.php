@@ -1,8 +1,8 @@
 <?php
-namespace verbb\socialfeed\gql\interfaces;
+namespace verbb\socialfeeds\gql\interfaces;
 
-use verbb\socialfeed\gql\types\generators\PostAuthorGenerator;
-use verbb\socialfeed\models\PostAuthor;
+use verbb\socialfeeds\gql\types\generators\PostAuthorGenerator;
+use verbb\socialfeeds\models\PostAuthor;
 
 use Craft;
 use craft\gql\base\InterfaceType as BaseInterfaceType;

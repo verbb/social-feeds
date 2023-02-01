@@ -1,11 +1,11 @@
 <?php
-namespace verbb\socialfeed\gql\types;
+namespace verbb\socialfeeds\gql\types;
 
-use verbb\socialfeed\gql\interfaces\SocialFeedInterface;
+use verbb\socialfeeds\gql\interfaces\SocialFeedsInterface;
 
 use craft\gql\base\ObjectType;
 
-class SocialFeedType extends ObjectType
+class SocialFeedsType extends ObjectType
 {
     // Public Methods
     // =========================================================================
@@ -13,7 +13,7 @@ class SocialFeedType extends ObjectType
     public function __construct(array $config)
     {
         $config['interfaces'] = [
-            SocialFeedInterface::getType(),
+            SocialFeedsInterface::getType(),
         ];
 
         parent::__construct($config);

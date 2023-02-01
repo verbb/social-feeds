@@ -1,4 +1,4 @@
-{% extends 'social-feed/_layouts' %}
+{% extends 'social-feeds/_layouts' %}
 
 {% import '_includes/forms' as forms %}
 {% import 'verbb-base/_macros' as macros %}
@@ -6,8 +6,8 @@
 {% requireAdmin %}
 
 {% set crumbs = [
-    { label: craft.socialFeed.getPluginName() | t('social-feed'), url: url('social-feed') },
-    { label: 'Settings' | t('app'), url: url('social-feed/settings') }
+    { label: craft.socialFeeds.getPluginName() | t('social-feeds'), url: url('social-feeds') },
+    { label: 'Settings' | t('app'), url: url('social-feeds/settings') }
 ] %}
 
 {% set fullPageForm = true %}
@@ -16,7 +16,7 @@
 {% block blockContent %}
 
 <input type="hidden" name="action" value="plugins/save-plugin-settings">
-<input type="hidden" name="pluginHandle" value="social-feed">
+<input type="hidden" name="pluginHandle" value="social-feeds">
 
 {% namespace 'settings' %}
 
@@ -27,43 +27,43 @@
 
 {{ forms.textField({
     label: 'Plugin Name' | t('app'),
-    instructions: 'Plugin name for the end user.' | t('social-feed'),
+    instructions: 'Plugin name for the end user.' | t('social-feeds'),
     id: 'pluginName',
     name: 'pluginName',
     value: settings.pluginName,
     first: true,
     autofocus: true,
-    warning: macros.configWarning('pluginName', 'social-feed'),
+    warning: macros.configWarning('pluginName', 'social-feeds'),
 }) }}
 
 {{ forms.lightswitchField({
-    label: 'Enable CP Section' | t('social-feed'),
-    instructions: 'Whether to enable Social Feed in the main sidebar navigation.' | t('social-feed'),
+    label: 'Enable CP Section' | t('social-feeds'),
+    instructions: 'Whether to enable Social Feeds in the main sidebar navigation.' | t('social-feeds'),
     id: 'hasCpSection',
     name: 'hasCpSection',
     on: settings.hasCpSection,
     errors: settings.getErrors('hasCpSection'),
-    warning: macros.configWarning('hasCpSection', 'social-feed'),
+    warning: macros.configWarning('hasCpSection', 'social-feeds'),
 }) }}
 
 {{ forms.lightswitchField({
-    label: 'Enable Cache' | t('social-feed'),
-    instructions: 'Whether to cache API requests.' | t('social-feed'),
+    label: 'Enable Cache' | t('social-feeds'),
+    instructions: 'Whether to cache API requests.' | t('social-feeds'),
     id: 'enableCache',
     name: 'enableCache',
     on: settings.enableCache,
-    warning: macros.configWarning('enableCache', 'social-feed'),
+    warning: macros.configWarning('enableCache', 'social-feeds'),
     toggle: '.cache-settings',
 }) }}
 
 <div class="cache-settings {{ not settings.enableCache ? 'hidden' }}">
     {{ forms.textField({
-        label: 'Cache Duration' | t('social-feed'),
-        instructions: 'Set the cache duration. Accepts a [Date Interval](https://www.php.net/manual/en/dateinterval.construct.php) or a number of seconds.' | t('social-feed'),
+        label: 'Cache Duration' | t('social-feeds'),
+        instructions: 'Set the cache duration. Accepts a [Date Interval](https://www.php.net/manual/en/dateinterval.construct.php) or a number of seconds.' | t('social-feeds'),
         id: 'cacheDuration',
         name: 'cacheDuration',
         value: settings.cacheDuration,
-        warning: macros.configWarning('cacheDuration', 'social-feed'),
+        warning: macros.configWarning('cacheDuration', 'social-feeds'),
     }) }}
 </div>
 

@@ -1,12 +1,12 @@
 <?php
-namespace verbb\socialfeed\sources;
+namespace verbb\socialfeeds\sources;
 
-use verbb\socialfeed\SocialFeed;
-use verbb\socialfeed\base\OAuthSource;
-use verbb\socialfeed\helpers\SocialFeedHelper;
-use verbb\socialfeed\models\Post;
-use verbb\socialfeed\models\PostAuthor;
-use verbb\socialfeed\models\PostMedia;
+use verbb\socialfeeds\SocialFeeds;
+use verbb\socialfeeds\base\OAuthSource;
+use verbb\socialfeeds\helpers\SocialFeedsHelper;
+use verbb\socialfeeds\models\Post;
+use verbb\socialfeeds\models\PostAuthor;
+use verbb\socialfeeds\models\PostMedia;
 
 use Throwable;
 
@@ -102,7 +102,7 @@ class Instagram extends OAuthSource
 
     public function fetchPosts(): ?array
     {
-        $settings = SocialFeed::$plugin->getSettings();
+        $settings = SocialFeeds::$plugin->getSettings();
 
         $posts = [];
 
@@ -157,7 +157,7 @@ class Instagram extends OAuthSource
             }
             
             if ($this->enableHashtags) {
-                $hashtags = SocialFeedHelper::splitString($this->hashtags);
+                $hashtags = SocialFeedsHelper::splitString($this->hashtags);
 
                 foreach ($hashtags as $hashtag) {
                     // Fetch the hashtag ID from Facebook or the cache

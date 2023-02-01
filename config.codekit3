@@ -543,12 +543,12 @@
       "oAP" : "\/src\/gql\/arguments\/PostArguments-output.php",
       "oF" : 0
     },
-    "\/src\/gql\/arguments\/SocialFeedArguments.php" : {
+    "\/src\/gql\/arguments\/SocialFeedsArguments.php" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 1,
-      "oAP" : "\/src\/gql\/arguments\/SocialFeedArguments-output.php",
+      "oAP" : "\/src\/gql\/arguments\/SocialFeedsArguments-output.php",
       "oF" : 0
     },
     "\/src\/gql\/arguments\/SourceArguments.php" : {
@@ -599,12 +599,12 @@
       "oAP" : "\/src\/gql\/interfaces\/PostMediaInterface-output.php",
       "oF" : 0
     },
-    "\/src\/gql\/interfaces\/SocialFeedInterface.php" : {
+    "\/src\/gql\/interfaces\/SocialFeedsInterface.php" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 1,
-      "oAP" : "\/src\/gql\/interfaces\/SocialFeedInterface-output.php",
+      "oAP" : "\/src\/gql\/interfaces\/SocialFeedsInterface-output.php",
       "oF" : 0
     },
     "\/src\/gql\/interfaces\/SourceInterface.php" : {
@@ -615,12 +615,12 @@
       "oAP" : "\/src\/gql\/interfaces\/SourceInterface-output.php",
       "oF" : 0
     },
-    "\/src\/gql\/queries\/SocialFeedQuery.php" : {
+    "\/src\/gql\/queries\/SocialFeedsQuery.php" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 1,
-      "oAP" : "\/src\/gql\/queries\/SocialFeedQuery-output.php",
+      "oAP" : "\/src\/gql\/queries\/SocialFeedsQuery-output.php",
       "oF" : 0
     },
     "\/src\/gql\/resolvers\/FeedResolver.php" : {
@@ -639,12 +639,12 @@
       "oAP" : "\/src\/gql\/resolvers\/PostResolver-output.php",
       "oF" : 0
     },
-    "\/src\/gql\/resolvers\/SocialFeedResolver.php" : {
+    "\/src\/gql\/resolvers\/SocialFeedsResolver.php" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 1,
-      "oAP" : "\/src\/gql\/resolvers\/SocialFeedResolver-output.php",
+      "oAP" : "\/src\/gql\/resolvers\/SocialFeedsResolver-output.php",
       "oF" : 0
     },
     "\/src\/gql\/resolvers\/SourceResolver.php" : {
@@ -703,12 +703,12 @@
       "oAP" : "\/src\/gql\/types\/generators\/PostMediaGenerator-output.php",
       "oF" : 0
     },
-    "\/src\/gql\/types\/generators\/SocialFeedGenerator.php" : {
+    "\/src\/gql\/types\/generators\/SocialFeedsGenerator.php" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 1,
-      "oAP" : "\/src\/gql\/types\/generators\/SocialFeedGenerator-output.php",
+      "oAP" : "\/src\/gql\/types\/generators\/SocialFeedsGenerator-output.php",
       "oF" : 0
     },
     "\/src\/gql\/types\/generators\/SourceGenerator.php" : {
@@ -751,12 +751,12 @@
       "oAP" : "\/src\/gql\/types\/PostType-output.php",
       "oF" : 0
     },
-    "\/src\/gql\/types\/SocialFeedType.php" : {
+    "\/src\/gql\/types\/SocialFeedsType.php" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 1,
-      "oAP" : "\/src\/gql\/types\/SocialFeedType-output.php",
+      "oAP" : "\/src\/gql\/types\/SocialFeedsType-output.php",
       "oF" : 0
     },
     "\/src\/gql\/types\/SourceType.php" : {
@@ -828,24 +828,24 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/resources\/src\/js\/social-feed-cp.js" : {
+    "\/src\/resources\/src\/js\/social-feeds-cp.js" : {
       "bF" : 0,
       "ft" : 64,
       "ma" : 1,
       "mi" : 1,
       "oA" : 0,
-      "oAP" : "\/src\/resources\/dist\/js\/social-feed-cp.js",
+      "oAP" : "\/src\/resources\/dist\/js\/social-feeds-cp.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/resources\/src\/js\/social-feed-masonry.js" : {
+    "\/src\/resources\/src\/js\/social-feeds-masonry.js" : {
       "bF" : 0,
       "ft" : 64,
       "ma" : 1,
       "mi" : 1,
       "oA" : 0,
-      "oAP" : "\/src\/resources\/dist\/js\/social-feed-masonry.js",
+      "oAP" : "\/src\/resources\/dist\/js\/social-feeds-masonry.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -865,7 +865,7 @@
       "pg" : 0,
       "sct" : 0
     },
-    "\/src\/resources\/src\/scss\/social-feed-cp.scss" : {
+    "\/src\/resources\/src\/scss\/social-feeds-cp.scss" : {
       "aP" : 1,
       "bl" : 0,
       "co" : 0,
@@ -874,13 +874,13 @@
       "ft" : 4,
       "ma" : 0,
       "oA" : 0,
-      "oAP" : "\/src\/resources\/dist\/css\/social-feed-cp.css",
+      "oAP" : "\/src\/resources\/dist\/css\/social-feeds-cp.css",
       "oF" : 0,
       "oS" : 0,
       "pg" : 0,
       "sct" : 0
     },
-    "\/src\/resources\/src\/scss\/social-feed-masonry.scss" : {
+    "\/src\/resources\/src\/scss\/social-feeds-masonry.scss" : {
       "aP" : 1,
       "bl" : 0,
       "co" : 0,
@@ -889,13 +889,13 @@
       "ft" : 4,
       "ma" : 0,
       "oA" : 0,
-      "oAP" : "\/src\/resources\/dist\/css\/social-feed-masonry.css",
+      "oAP" : "\/src\/resources\/dist\/css\/social-feeds-masonry.css",
       "oF" : 0,
       "oS" : 0,
       "pg" : 0,
       "sct" : 0
     },
-    "\/src\/resources\/src\/scss\/social-feed.scss" : {
+    "\/src\/resources\/src\/scss\/social-feeds.scss" : {
       "aP" : 1,
       "bl" : 0,
       "co" : 0,
@@ -904,7 +904,7 @@
       "ft" : 4,
       "ma" : 0,
       "oA" : 0,
-      "oAP" : "\/src\/resources\/dist\/css\/social-feed.css",
+      "oAP" : "\/src\/resources\/dist\/css\/social-feeds.css",
       "oF" : 0,
       "oS" : 0,
       "pg" : 0,
@@ -916,12 +916,12 @@
       "oAP" : "\/src\/services",
       "oF" : 0
     },
-    "\/src\/SocialFeed.php" : {
+    "\/src\/SocialFeeds.php" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 1,
-      "oAP" : "\/src\/SocialFeed-output.php",
+      "oAP" : "\/src\/SocialFeeds-output.php",
       "oF" : 0
     },
     "\/src\/sources\/Facebook.php" : {
@@ -970,12 +970,12 @@
       "oAP" : "\/src\/templates",
       "oF" : 0
     },
-    "\/src\/translations\/en\/social-feed.php" : {
+    "\/src\/translations\/en\/social-feeds.php" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 1,
-      "oAP" : "\/src\/translations\/en\/social-feed-output.php",
+      "oAP" : "\/src\/translations\/en\/social-feeds-output.php",
       "oF" : 0
     },
     "\/src\/utilities\/CacheUtility.php" : {
@@ -1001,7 +1001,7 @@
   },
   "projectAttributes" : {
     "creationDate" : 528723773,
-    "displayValue" : "social-feed",
+    "displayValue" : "social-feeds",
     "displayValueWasSetByUser" : 0,
     "iconImageName" : "brackets-koamaru",
     "iconImageWasSetByUser" : 1

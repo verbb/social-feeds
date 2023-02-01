@@ -1,7 +1,7 @@
 <?php
-namespace verbb\socialfeed\models;
+namespace verbb\socialfeeds\models;
 
-use verbb\socialfeed\SocialFeed;
+use verbb\socialfeeds\SocialFeeds;
 
 use craft\base\Model;
 
@@ -34,7 +34,7 @@ class Feed extends Model
         }
 
         $sources = [];
-        $sourcesService = SocialFeed::$plugin->getSources();
+        $sourcesService = SocialFeeds::$plugin->getSources();
 
         foreach ($this->sources as $sourceId) {
             if ($source = $sourcesService->getSourceById($sourceId, true, true)) {

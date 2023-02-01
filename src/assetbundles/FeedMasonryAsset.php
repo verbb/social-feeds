@@ -1,5 +1,5 @@
 <?php
-namespace verbb\socialfeed\assetbundles;
+namespace verbb\socialfeeds\assetbundles;
 
 use craft\web\AssetBundle;
 
@@ -10,14 +10,14 @@ class FeedMasonryAsset extends AssetBundle
 
     public function init(): void
     {
-        $this->sourcePath = "@verbb/socialfeed/resources/dist";
+        $this->sourcePath = "@verbb/socialfeeds/resources/dist";
 
         $this->css = [
-            'css/social-feed-masonry.css',
+            'css/social-feeds-masonry.css',
         ];
 
         $this->js = [
-            'js/social-feed-masonry.js',
+            'js/social-feeds-masonry.js',
         ];
 
         parent::init();

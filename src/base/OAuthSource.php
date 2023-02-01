@@ -1,5 +1,5 @@
 <?php
-namespace verbb\socialfeed\base;
+namespace verbb\socialfeeds\base;
 
 use craft\helpers\UrlHelper;
 
@@ -54,7 +54,7 @@ abstract class OAuthSource extends Source implements OAuthProviderInterface
 
     public function getRedirectUri(): ?string
     {
-        return UrlHelper::siteUrl('social-feed/auth/callback');
+        return UrlHelper::siteUrl('social-feeds/auth/callback');
     }
 
     public function getAuthorizationUrlOptions(): array
@@ -65,7 +65,7 @@ abstract class OAuthSource extends Source implements OAuthProviderInterface
     public function getToken(): ?Token
     {
         if ($this->id) {
-            return Auth::$plugin->getTokens()->getTokenByOwnerReference('social-feed', $this->id);
+            return Auth::$plugin->getTokens()->getTokenByOwnerReference('social-feeds', $this->id);
         }
 
         return null;

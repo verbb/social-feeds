@@ -1,5 +1,5 @@
 <?php
-namespace verbb\socialfeed\models;
+namespace verbb\socialfeeds\models;
 
 use craft\base\Model;
 

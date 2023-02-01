@@ -1,19 +1,19 @@
 <?php
-namespace verbb\socialfeed\assetbundles;
+namespace verbb\socialfeeds\assetbundles;
 
 use craft\web\AssetBundle;
 use craft\web\assets\cp\CpAsset;
 
 use verbb\base\assetbundles\CpAsset as VerbbCpAsset;
 
-class SocialFeedAsset extends AssetBundle
+class SocialFeedsAsset extends AssetBundle
 {
     // Public Methods
     // =========================================================================
 
     public function init(): void
     {
-        $this->sourcePath = "@verbb/socialfeed/resources/dist";
+        $this->sourcePath = "@verbb/socialfeeds/resources/dist";
 
         $this->depends = [
             VerbbCpAsset::class,
@@ -21,11 +21,11 @@ class SocialFeedAsset extends AssetBundle
         ];
 
         $this->css = [
-            'css/social-feed-cp.css',
+            'css/social-feeds-cp.css',
         ];
 
         $this->js = [
-            'js/social-feed-cp.js',
+            'js/social-feeds-cp.js',
         ];
 
         parent::init();

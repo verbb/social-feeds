@@ -1,7 +1,7 @@
 <?php
-namespace verbb\socialfeed\console\controllers;
+namespace verbb\socialfeeds\console\controllers;
 
-use verbb\socialfeed\SocialFeed;
+use verbb\socialfeeds\SocialFeeds;
 
 use yii\console\Controller;
 use yii\console\ExitCode;
@@ -46,14 +46,14 @@ class PostsController extends Controller
             return ExitCode::UNSPECIFIED_ERROR;
         }
 
-        $source = SocialFeed::$plugin->getSources()->getSourceByHandle($this->source, true, true);
+        $source = SocialFeeds::$plugin->getSources()->getSourceByHandle($this->source, true, true);
 
         if ($this->limit) {
-            SocialFeed::$plugin->getSettings()->postsLimit = $this->limit;
+            SocialFeeds::$plugin->getSettings()->postsLimit = $this->limit;
         }
 
         if ($source) {
-            SocialFeed::$plugin->getPosts()->refreshPosts($source, $this);
+            SocialFeeds::$plugin->getPosts()->refreshPosts($source, $this);
         }
 
         return ExitCode::OK;

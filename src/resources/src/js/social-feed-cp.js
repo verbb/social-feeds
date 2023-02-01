@@ -1,12 +1,12 @@
 // ==========================================================================
 
-// Social Feed Plugin for Craft CMS
+// Social Feeds Plugin for Craft CMS
 // Author: Verbb - https://verbb.io/
 
 // ==========================================================================
 
-if (typeof Craft.SocialFeed === typeof undefined) {
-    Craft.SocialFeed = {};
+if (typeof Craft.SocialFeeds === typeof undefined) {
+    Craft.SocialFeeds = {};
 }
 
 (function($) {
@@ -59,10 +59,10 @@ $(document).on('click', '[data-refresh-settings]', function(e) {
 
     setError(null);
 
-    Craft.sendActionRequest('POST', 'social-feed/sources/refresh-settings', { data })
+    Craft.sendActionRequest('POST', 'social-feeds/sources/refresh-settings', { data })
         .then((response) => {
             if (response.data.error) {
-                let errorMessage = Craft.t('social-feed', 'An error occurred.');
+                let errorMessage = Craft.t('social-feeds', 'An error occurred.');
 
                 if (response.data.error) {
                     errorMessage += `<br><code>${response.data.error}</code>`;
@@ -166,10 +166,10 @@ $(document).on('click', '.sf-refresh-btn', function(e) {
 
     setError(null);
 
-    Craft.sendActionRequest('POST', 'social-feed/feeds/preview', { data })
+    Craft.sendActionRequest('POST', 'social-feeds/feeds/preview', { data })
         .then((response) => {
             if (response.data.error) {
-                let errorMessage = Craft.t('social-feed', 'An error occurred.');
+                let errorMessage = Craft.t('social-feeds', 'An error occurred.');
 
                 if (response.data.error) {
                     errorMessage += `<br><code>${response.data.error}</code>`;

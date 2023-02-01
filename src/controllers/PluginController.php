@@ -1,7 +1,7 @@
 <?php
-namespace verbb\socialfeed\controllers;
+namespace verbb\socialfeeds\controllers;
 
-use verbb\socialfeed\SocialFeed;
+use verbb\socialfeeds\SocialFeeds;
 
 use Craft;
 use craft\helpers\Db;
@@ -16,27 +16,27 @@ class PluginController extends Controller
 
     public function actionSettings(): Response
     {
-        $settings = SocialFeed::$plugin->getSettings();
+        $settings = SocialFeeds::$plugin->getSettings();
 
-        return $this->renderTemplate('social-feed/settings', [
+        return $this->renderTemplate('social-feeds/settings', [
             'settings' => $settings,
         ]);
     }
 
     public function actionResetCache(): Response
     {
-        Db::update('{{%socialfeed_sources}}', ['dateLastFetch' => null]);
+        Db::update('{{%socialfeeds_sources}}', ['dateLastFetch' => null]);
 
-        Craft::$app->getSession()->setNotice(Craft::t('social-feed', 'Social Feed cache reset.'));
+        Craft::$app->getSession()->setNotice(Craft::t('social-feeds', 'Social Feeds cache reset.'));
 
         return $this->redirectToPostedUrl();
     }
 
     public function actionDeleteCache(): Response
     {
-        Db::delete('{{%socialfeed_posts}}');
+        Db::delete('{{%socialfeeds_posts}}');
 
-        Craft::$app->getSession()->setNotice(Craft::t('social-feed', 'Social Feed cache deleted.'));
+        Craft::$app->getSession()->setNotice(Craft::t('social-feeds', 'Social Feeds cache deleted.'));
 
         return $this->redirectToPostedUrl();
     }

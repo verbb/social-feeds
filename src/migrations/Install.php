@@ -1,5 +1,5 @@
 <?php
-namespace verbb\socialfeed\migrations;
+namespace verbb\socialfeeds\migrations;
 
 use craft\db\Migration;
 
@@ -27,15 +27,15 @@ class Install extends Migration
         $this->dropTables();
 
         // Delete all tokens for this plugin
-        Auth::$plugin->getTokens()->deleteTokensByOwner('social-feed');
+        Auth::$plugin->getTokens()->deleteTokensByOwner('social-feeds');
 
         return true;
     }
 
     public function createTables(): void
     {
-        $this->archiveTableIfExists('{{%socialfeed_sources}}');
-        $this->createTable('{{%socialfeed_sources}}', [
+        $this->archiveTableIfExists('{{%socialfeeds_sources}}');
+        $this->createTable('{{%socialfeeds_sources}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
             'handle' => $this->string()->notNull(),
@@ -50,8 +50,8 @@ class Install extends Migration
             'uid' => $this->uid(),
         ]);
 
-        $this->archiveTableIfExists('{{%socialfeed_feeds}}');
-        $this->createTable('{{%socialfeed_feeds}}', [
+        $this->archiveTableIfExists('{{%socialfeeds_feeds}}');
+        $this->createTable('{{%socialfeeds_feeds}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
             'handle' => $this->string()->notNull(),
@@ -63,8 +63,8 @@ class Install extends Migration
             'uid' => $this->uid(),
         ]);
 
-        $this->archiveTableIfExists('{{%socialfeed_posts}}');
-        $this->createTable('{{%socialfeed_posts}}', [
+        $this->archiveTableIfExists('{{%socialfeeds_posts}}');
+        $this->createTable('{{%socialfeeds_posts}}', [
             'id' => $this->primaryKey(),
             'sourceId' => $this->integer()->notNull(),
             'cacheKey' => $this->string()->notNull(),
@@ -79,26 +79,26 @@ class Install extends Migration
 
     public function createIndexes(): void
     {
-        $this->createIndex(null, '{{%socialfeed_sources}}', ['name'], true);
-        $this->createIndex(null, '{{%socialfeed_sources}}', ['handle'], true);
+        $this->createIndex(null, '{{%socialfeeds_sources}}', ['name'], true);
+        $this->createIndex(null, '{{%socialfeeds_sources}}', ['handle'], true);
 
-        $this->createIndex(null, '{{%socialfeed_feeds}}', ['name'], true);
-        $this->createIndex(null, '{{%socialfeed_feeds}}', ['handle'], true);
+        $this->createIndex(null, '{{%socialfeeds_feeds}}', ['name'], true);
+        $this->createIndex(null, '{{%socialfeeds_feeds}}', ['handle'], true);
 
-        $this->createIndex(null, '{{%socialfeed_posts}}', ['sourceId'], true);
-        $this->createIndex(null, '{{%socialfeed_posts}}', ['postId'], true);
-        $this->createIndex(null, '{{%socialfeed_posts}}', ['datePosted'], true);
+        $this->createIndex(null, '{{%socialfeeds_posts}}', ['sourceId'], true);
+        $this->createIndex(null, '{{%socialfeeds_posts}}', ['postId'], true);
+        $this->createIndex(null, '{{%socialfeeds_posts}}', ['datePosted'], true);
     }
 
     public function addForeignKeys(): void
     {
-        $this->addForeignKey(null, '{{%socialfeed_posts}}', ['sourceId'], '{{%socialfeed_sources}}', ['id'], 'CASCADE', null);
+        $this->addForeignKey(null, '{{%socialfeeds_posts}}', ['sourceId'], '{{%socialfeeds_sources}}', ['id'], 'CASCADE', null);
     }
 
     public function dropTables(): void
     {
-        $this->dropTableIfExists('{{%socialfeed_sources}}');
-        $this->dropTableIfExists('{{%socialfeed_feeds}}');
-        $this->dropTableIfExists('{{%socialfeed_cache}}');
+        $this->dropTableIfExists('{{%socialfeeds_sources}}');
+        $this->dropTableIfExists('{{%socialfeeds_feeds}}');
+        $this->dropTableIfExists('{{%socialfeeds_cache}}');
     }
 }

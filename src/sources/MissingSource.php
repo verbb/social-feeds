@@ -1,7 +1,7 @@
 <?php
-namespace verbb\socialfeed\sources;
+namespace verbb\socialfeeds\sources;
 
-use verbb\socialfeed\base\Source;
+use verbb\socialfeeds\base\Source;
 
 use Craft;
 use craft\base\MissingComponentInterface;
@@ -22,7 +22,7 @@ class MissingSource extends Source implements MissingComponentInterface
 
     public static function displayName(): string
     {
-        return Craft::t('social-feed', 'Missing Source');
+        return Craft::t('social-feeds', 'Missing Source');
     }
 
     public static function getOAuthProviderClass(): string

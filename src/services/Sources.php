@@ -1,10 +1,10 @@
 <?php
-namespace verbb\socialfeed\services;
+namespace verbb\socialfeeds\services;
 
-use verbb\socialfeed\sources as sourceTypes;
-use verbb\socialfeed\base\SourceInterface;
-use verbb\socialfeed\events\SourceEvent;
-use verbb\socialfeed\records\Source as SourceRecord;
+use verbb\socialfeeds\sources as sourceTypes;
+use verbb\socialfeeds\base\SourceInterface;
+use verbb\socialfeeds\events\SourceEvent;
+use verbb\socialfeeds\records\Source as SourceRecord;
 
 use Craft;
 use craft\base\MemoizableArray;
@@ -184,7 +184,7 @@ class Sources extends Component
 
         if ($isNewSource) {
             $maxSortOrder = (new Query())
-                ->from(['{{%socialfeed_sources}}'])
+                ->from(['{{%socialfeeds_sources}}'])
                 ->max('[[sortOrder]]');
 
             $sourceRecord->sortOrder = $maxSortOrder ? $maxSortOrder + 1 : 1;
@@ -231,7 +231,7 @@ class Sources extends Component
     public function getSourceOverrides(string $handle): array
     {
         if ($this->_overrides === null) {
-            $this->_overrides = Craft::$app->getConfig()->getConfigFromFile('social-feed');
+            $this->_overrides = Craft::$app->getConfig()->getConfigFromFile('social-feeds');
         }
 
         return $this->_overrides['sources'][$handle] ?? [];
@@ -258,7 +258,7 @@ class Sources extends Component
         }
 
         Craft::$app->getDb()->createCommand()
-            ->delete('{{%socialfeed_sources}}', ['id' => $source->id])
+            ->delete('{{%socialfeeds_sources}}', ['id' => $source->id])
             ->execute();
 
         // Fire an 'afterDeleteSource' event
@@ -310,7 +310,7 @@ class Sources extends Component
                 'dateUpdated',
                 'uid',
             ])
-            ->from(['{{%socialfeed_sources}}'])
+            ->from(['{{%socialfeeds_sources}}'])
             ->orderBy(['sortOrder' => SORT_ASC]);
     }
 
@@ -320,7 +320,7 @@ class Sources extends Component
             $sourceRecord = SourceRecord::findOne(['id' => $sourceId]);
 
             if (!$sourceRecord) {
-                throw new Exception(Craft::t('social-feed', 'No source exists with the ID “{id}”.', ['id' => $sourceId]));
+                throw new Exception(Craft::t('social-feeds', 'No source exists with the ID “{id}”.', ['id' => $sourceId]));
             }
         } else {
             $sourceRecord = new SourceRecord();

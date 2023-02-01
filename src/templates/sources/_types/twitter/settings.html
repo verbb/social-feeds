@@ -1,8 +1,8 @@
 {% import '_includes/forms' as forms %}
 {% import 'verbb-base/_macros' as macros %}
-{% import 'social-feed/_macros' as customForms %}
+{% import 'social-feeds/_macros' as customForms %}
 
-{% include 'social-feed/sources/_oauth' %}
+{% include 'social-feeds/sources/_oauth' %}
 
 <hr>
 
@@ -11,8 +11,8 @@
 
 <div class="sf-switch-group">
     <div>
-        <div class="sf-switch-label">{{ 'User Tweets' | t('social-feed') }}</div>
-        <div class="sf-switch-text">{{ 'Tweets from any Twitter user.' | t('social-feed') }}</div>
+        <div class="sf-switch-label">{{ 'User Tweets' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Tweets from any Twitter user.' | t('social-feeds') }}</div>
     </div>
 
     <div class="sf-switch">
@@ -28,13 +28,13 @@
 <div class="{{ "source-type-#{inputKey}-user-tweets" }} {{ not source.enableUserHandles ? 'hidden' }}">
     <div class="sf-nested-settings">
         {{ forms.textField({
-            label: 'User Handles' | t('social-feed'),
-            instructions: 'Enter one or more Twitter handles to fetch tweets from. Separate multiple handles by commas.' | t('social-feed'),
+            label: 'User Handles' | t('social-feeds'),
+            instructions: 'Enter one or more Twitter handles to fetch tweets from. Separate multiple handles by commas.' | t('social-feeds'),
             name: 'userHandles',
             required: true,
             placeholder: 'e.g. @craftcms, @verbb_io',
             value: source.userHandles ?? '',
-            warning: macros.configWarning("sources.#{source.handle}.userHandles", 'social-feed'),
+            warning: macros.configWarning("sources.#{source.handle}.userHandles", 'social-feeds'),
             errors: source.getErrors('userHandles'),
         }) }}
     </div>
@@ -42,8 +42,8 @@
 
 <div class="sf-switch-group">
     <div>
-        <div class="sf-switch-label">{{ 'Hashtag' | t('social-feed') }}</div>
-        <div class="sf-switch-text">{{ 'Tweets containing hashtags.' | t('social-feed') }}</div>
+        <div class="sf-switch-label">{{ 'Hashtag' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Tweets containing hashtags.' | t('social-feeds') }}</div>
     </div>
 
     <div class="sf-switch">
@@ -59,13 +59,13 @@
 <div class="{{ "source-type-#{inputKey}-hashtag" }} {{ not source.enableHashtags ? 'hidden' }}">
     <div class="sf-nested-settings">
         {{ forms.textField({
-            label: 'Hashtags' | t('social-feed'),
-            instructions: 'Enter one or more hashtags to fetch tweets for. Separate multiple hashtags by commas.' | t('social-feed'),
+            label: 'Hashtags' | t('social-feeds'),
+            instructions: 'Enter one or more hashtags to fetch tweets for. Separate multiple hashtags by commas.' | t('social-feeds'),
             name: 'hashtags',
             required: true,
             placeholder: 'e.g. #craftcms, #verbb_io',
             value: source.hashtags ?? '',
-            warning: macros.configWarning("sources.#{source.handle}.hashtags", 'social-feed'),
+            warning: macros.configWarning("sources.#{source.handle}.hashtags", 'social-feeds'),
             errors: source.getErrors('hashtags'),
         }) }}
     </div>
@@ -73,8 +73,8 @@
 
 <div class="sf-switch-group">
     <div>
-        <div class="sf-switch-label">{{ 'Search' | t('social-feed') }}</div>
-        <div class="sf-switch-text">{{ 'Tweets matching search terms.' | t('social-feed') }}</div>
+        <div class="sf-switch-label">{{ 'Search' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Tweets matching search terms.' | t('social-feeds') }}</div>
     </div>
 
     <div class="sf-switch">
@@ -90,12 +90,12 @@
 <div class="{{ "source-type-#{inputKey}-search" }} {{ not source.enableSearch ? 'hidden' }}">
     <div class="sf-nested-settings">
         {{ forms.textField({
-            label: 'Search Terms' | t('social-feed'),
-            instructions: 'Enter search terms to fetch tweets for. Refer to the [docs](htttp://verbb.io/craft-plugins/social-feed/docs/providers/twitter) for the format.' | t('social-feed'),
+            label: 'Search Terms' | t('social-feeds'),
+            instructions: 'Enter search terms to fetch tweets for. Refer to the [docs](htttp://verbb.io/craft-plugins/social-feeds/docs/providers/twitter) for the format.' | t('social-feeds'),
             name: 'searchTerms',
             required: true,
             value: source.searchTerms ?? '',
-            warning: macros.configWarning("sources.#{source.handle}.searchTerms", 'social-feed'),
+            warning: macros.configWarning("sources.#{source.handle}.searchTerms", 'social-feeds'),
             errors: source.getErrors('searchTerms'),
         }) }}
     </div>
@@ -103,8 +103,8 @@
 
 <div class="sf-switch-group">
     <div>
-        <div class="sf-switch-label">{{ 'Mentions' | t('social-feed') }}</div>
-        <div class="sf-switch-text">{{ 'Tweets which mention your Twitter user.' | t('social-feed') }}</div>
+        <div class="sf-switch-label">{{ 'Mentions' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Tweets which mention your Twitter user.' | t('social-feeds') }}</div>
     </div>
 
     <div class="sf-switch">
@@ -118,8 +118,8 @@
 
 <div class="sf-switch-group">
     <div>
-        <div class="sf-switch-label">{{ 'Lists' | t('social-feed') }}</div>
-        <div class="sf-switch-text">{{ 'Tweets from a Twitter list.' | t('social-feed') }}</div>
+        <div class="sf-switch-label">{{ 'Lists' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Tweets from a Twitter list.' | t('social-feeds') }}</div>
     </div>
 
     <div class="sf-switch">
@@ -135,12 +135,12 @@
 <div class="{{ "source-type-#{inputKey}-lists" }} {{ not source.enableLists ? 'hidden' }}">
     <div class="sf-nested-settings">
         {{ forms.textField({
-            label: 'List ID' | t('social-feed'),
-            instructions: 'Enter a List ID to fetch tweets for.' | t('social-feed'),
+            label: 'List ID' | t('social-feeds'),
+            instructions: 'Enter a List ID to fetch tweets for.' | t('social-feeds'),
             name: 'listId',
             required: true,
             value: source.listId ?? '',
-            warning: macros.configWarning("sources.#{source.handle}.listId", 'social-feed'),
+            warning: macros.configWarning("sources.#{source.handle}.listId", 'social-feeds'),
             errors: source.getErrors('listId'),
         }) }}
     </div>
@@ -149,6 +149,6 @@
 {% endset %}
 
 {{ forms.field({
-    label: 'Source Type' | t('social-feed'),
-    instructions: 'Select what types of content this source should provide.' | t('social-feed'),
+    label: 'Source Type' | t('social-feeds'),
+    instructions: 'Select what types of content this source should provide.' | t('social-feeds'),
 }, inputs) }}

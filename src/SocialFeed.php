@@ -1,12 +1,12 @@
 <?php
-namespace verbb\socialfeed;
+namespace verbb\socialfeeds;
 
-use verbb\socialfeed\base\PluginTrait;
-use verbb\socialfeed\gql\interfaces\SocialFeedInterface;
-use verbb\socialfeed\gql\queries\SocialFeedQuery;
-use verbb\socialfeed\models\Settings;
-use verbb\socialfeed\utilities\CacheUtility;
-use verbb\socialfeed\variables\SocialFeedVariable;
+use verbb\socialfeeds\base\PluginTrait;
+use verbb\socialfeeds\gql\interfaces\SocialFeedsInterface;
+use verbb\socialfeeds\gql\queries\SocialFeedsQuery;
+use verbb\socialfeeds\models\Settings;
+use verbb\socialfeeds\utilities\CacheUtility;
+use verbb\socialfeeds\variables\SocialFeedsVariable;
 
 use Craft;
 use craft\base\Model;
@@ -26,7 +26,7 @@ use craft\web\twig\variables\CraftVariable;
 
 use yii\base\Event;
 
-class SocialFeed extends Plugin
+class SocialFeeds extends Plugin
 {
     // Properties
     // =========================================================================
@@ -73,12 +73,12 @@ class SocialFeed extends Plugin
 
     public function getPluginName(): string
     {
-        return Craft::t('social-feed', $this->getSettings()->pluginName);
+        return Craft::t('social-feeds', $this->getSettings()->pluginName);
     }
 
     public function getSettingsResponse(): mixed
     {
-        return Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('social-feed/settings'));
+        return Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('social-feeds/settings'));
     }
 
     public function getCpNavItem(): ?array
@@ -87,24 +87,24 @@ class SocialFeed extends Plugin
 
         $nav['label'] = $this->getPluginName();
 
-        if (Craft::$app->getUser()->checkPermission('socialFeed-feeds')) {
+        if (Craft::$app->getUser()->checkPermission('socialFeeds-feeds')) {
             $nav['subnav']['feeds'] = [
-                'label' => Craft::t('social-feed', 'Feeds'),
-                'url' => 'social-feed/feeds',
+                'label' => Craft::t('social-feeds', 'Feeds'),
+                'url' => 'social-feeds/feeds',
             ];
         }
 
-        if (Craft::$app->getUser()->checkPermission('socialFeed-sources')) {
+        if (Craft::$app->getUser()->checkPermission('socialFeeds-sources')) {
             $nav['subnav']['sources'] = [
-                'label' => Craft::t('social-feed', 'Sources'),
-                'url' => 'social-feed/sources',
+                'label' => Craft::t('social-feeds', 'Sources'),
+                'url' => 'social-feeds/sources',
             ];
         }
 
         if (Craft::$app->getUser()->getIsAdmin() && Craft::$app->getConfig()->getGeneral()->allowAdminChanges) {
             $nav['subnav']['settings'] = [
-                'label' => Craft::t('social-feed', 'Settings'),
-                'url' => 'social-feed/settings',
+                'label' => Craft::t('social-feeds', 'Settings'),
+                'url' => 'social-feeds/settings',
             ];
         }
 
@@ -127,28 +127,28 @@ class SocialFeed extends Plugin
     private function _registerCpRoutes(): void
     {
         Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_CP_URL_RULES, function(RegisterUrlRulesEvent $event) {
-            $event->rules['social-feed'] = 'social-feed/feeds/index';
-            $event->rules['social-feed/feeds'] = 'social-feed/feeds/index';
-            $event->rules['social-feed/feeds/new'] = 'social-feed/feeds/edit';
-            $event->rules['social-feed/feeds/<feedHandle:{handle}>'] = 'social-feed/feeds/edit';
-            $event->rules['social-feed/sources'] = 'social-feed/sources/index';
-            $event->rules['social-feed/sources/new'] = 'social-feed/sources/edit';
-            $event->rules['social-feed/sources/<handle:{handle}>'] = 'social-feed/sources/edit';
-            $event->rules['social-feed/settings'] = 'social-feed/plugin/settings';
+            $event->rules['social-feeds'] = 'social-feeds/feeds/index';
+            $event->rules['social-feeds/feeds'] = 'social-feeds/feeds/index';
+            $event->rules['social-feeds/feeds/new'] = 'social-feeds/feeds/edit';
+            $event->rules['social-feeds/feeds/<feedHandle:{handle}>'] = 'social-feeds/feeds/edit';
+            $event->rules['social-feeds/sources'] = 'social-feeds/sources/index';
+            $event->rules['social-feeds/sources/new'] = 'social-feeds/sources/edit';
+            $event->rules['social-feeds/sources/<handle:{handle}>'] = 'social-feeds/sources/edit';
+            $event->rules['social-feeds/settings'] = 'social-feeds/plugin/settings';
         });
     }
 
     private function _registerSiteRoutes(): void
     {
         Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_SITE_URL_RULES, function(RegisterUrlRulesEvent $event) {
-            $event->rules['social-feed/auth/callback'] = 'social-feed/auth/callback';
+            $event->rules['social-feeds/auth/callback'] = 'social-feeds/auth/callback';
         });
     }
 
     private function _registerVariables(): void
     {
         Event::on(CraftVariable::class, CraftVariable::EVENT_INIT, function(Event $event) {
-            $event->sender->set('socialFeed', SocialFeedVariable::class);
+            $event->sender->set('socialFeeds', SocialFeedsVariable::class);
         });
     }
 
@@ -156,10 +156,10 @@ class SocialFeed extends Plugin
     {
         Event::on(UserPermissions::class, UserPermissions::EVENT_REGISTER_PERMISSIONS, function(RegisterUserPermissionsEvent $event) {
             $event->permissions[] = [
-                'heading' => Craft::t('social-feed', 'Social Feed'),
+                'heading' => Craft::t('social-feeds', 'Social Feeds'),
                 'permissions' => [
-                    'socialFeed-feeds' => ['label' => Craft::t('social-feed', 'Feeds')],
-                    'socialFeed-sources' => ['label' => Craft::t('social-feed', 'Sources')],
+                    'socialFeeds-feeds' => ['label' => Craft::t('social-feeds', 'Feeds')],
+                    'socialFeeds-sources' => ['label' => Craft::t('social-feeds', 'Sources')],
                 ],
             ];
         });
@@ -175,11 +175,11 @@ class SocialFeed extends Plugin
     private function _registerGraphQl(): void
     {
         Event::on(Gql::class, Gql::EVENT_REGISTER_GQL_TYPES, function(RegisterGqlTypesEvent $event) {
-            $event->types[] = SocialFeedInterface::class;
+            $event->types[] = SocialFeedsInterface::class;
         });
 
         Event::on(Gql::class, Gql::EVENT_REGISTER_GQL_QUERIES, function(RegisterGqlQueriesEvent $event) {
-            $queries = SocialFeedQuery::getQueries();
+            $queries = SocialFeedsQuery::getQueries();
                     
             foreach ($queries as $key => $value) {
                 $event->queries[$key] = $value;
@@ -187,9 +187,9 @@ class SocialFeed extends Plugin
         });
 
         Event::on(Gql::class, Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS, function (RegisterGqlSchemaComponentsEvent $event) {  
-            $label = Craft::t('social-feed', 'Social Feed');
+            $label = Craft::t('social-feeds', 'Social Feeds');
 
-            $event->queries[$label]['socialFeed.all:read'] = ['label' => Craft::t('social-feed', 'Query Social Feed')];
+            $event->queries[$label]['socialFeeds.all:read'] = ['label' => Craft::t('social-feeds', 'Query Social Feeds')];
         });
     }
 }

@@ -1,8 +1,8 @@
 <?php
-namespace verbb\socialfeed\controllers;
+namespace verbb\socialfeeds\controllers;
 
-use verbb\socialfeed\SocialFeed;
-use verbb\socialfeed\base\SourceInterface;
+use verbb\socialfeeds\SocialFeeds;
+use verbb\socialfeeds\base\SourceInterface;
 
 use Craft;
 use craft\helpers\ArrayHelper;
@@ -20,16 +20,16 @@ class SourcesController extends Controller
 
     public function actionIndex(): Response
     {
-        $sources = SocialFeed::$plugin->getSources()->getAllSources();
+        $sources = SocialFeeds::$plugin->getSources()->getAllSources();
 
-        return $this->renderTemplate('social-feed/sources', [
+        return $this->renderTemplate('social-feeds/sources', [
             'sources' => $sources,
         ]);
     }
 
     public function actionEdit(?string $handle = null, SourceInterface $source = null): Response
     {
-        $sourcesService = SocialFeed::$plugin->getSources();
+        $sourcesService = SocialFeeds::$plugin->getSources();
 
         if ($source === null) {
             if ($handle !== null) {
@@ -66,12 +66,12 @@ class SourcesController extends Controller
         ArrayHelper::multisort($sourceOptions, 'label');
 
         if ($handle && $sourcesService->getSourceByHandle($handle)) {
-            $title = trim($source->name) ?: Craft::t('social-feed', 'Edit Source');
+            $title = trim($source->name) ?: Craft::t('social-feeds', 'Edit Source');
         } else {
-            $title = Craft::t('social-feed', 'Create a new source');
+            $title = Craft::t('social-feeds', 'Create a new source');
         }
 
-        return $this->renderTemplate('social-feed/sources/_edit', [
+        return $this->renderTemplate('social-feeds/sources/_edit', [
             'title' => $title,
             'source' => $source,
             'sourceOptions' => $sourceOptions,
@@ -84,7 +84,7 @@ class SourcesController extends Controller
     {
         $this->requirePostRequest();
 
-        $sourcesService = SocialFeed::$plugin->getSources();
+        $sourcesService = SocialFeeds::$plugin->getSources();
         $sourceId = $this->request->getParam('sourceId') ?: null;
         $type = $this->request->getParam('type');
 
@@ -106,10 +106,10 @@ class SourcesController extends Controller
         ]);
 
         if (!$sourcesService->saveSource($source)) {
-            return $this->asModelFailure($source, Craft::t('social-feed', 'Couldn’t save source.'), 'source');
+            return $this->asModelFailure($source, Craft::t('social-feeds', 'Couldn’t save source.'), 'source');
         }
 
-        return $this->asModelSuccess($source, Craft::t('social-feed', 'Source saved.'), 'source');
+        return $this->asModelSuccess($source, Craft::t('social-feeds', 'Source saved.'), 'source');
     }
 
     public function actionReorder(): Response
@@ -118,7 +118,7 @@ class SourcesController extends Controller
         $this->requireAcceptsJson();
 
         $sourceIds = Json::decode($this->request->getRequiredBodyParam('ids'));
-        SocialFeed::$plugin->getSources()->reorderSources($sourceIds);
+        SocialFeeds::$plugin->getSources()->reorderSources($sourceIds);
 
         return $this->asSuccess();
     }
@@ -130,7 +130,7 @@ class SourcesController extends Controller
 
         $sourceId = $this->request->getRequiredBodyParam('id');
 
-        SocialFeed::$plugin->getSources()->deleteSourceById($sourceId);
+        SocialFeeds::$plugin->getSources()->deleteSourceById($sourceId);
 
         return $this->asSuccess();
     }
@@ -139,7 +139,7 @@ class SourcesController extends Controller
     {
         $this->requireAcceptsJson();
 
-        $sourcesService = SocialFeed::$plugin->getSources();
+        $sourcesService = SocialFeeds::$plugin->getSources();
 
         $sourceHandle = $this->request->getRequiredBodyParam('source');
         $setting = $this->request->getRequiredBodyParam('setting');

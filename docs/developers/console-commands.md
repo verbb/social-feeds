@@ -11,5 +11,5 @@ Option | Description
 `--limit` | The number of posts to fetch from the provider API. Default to `postsLimit` plugin setting.
 
 ```shell
-./craft social-feed/posts/refresh --source=mySourceHandle
+./craft social-feeds/posts/refresh --source=mySourceHandle
 ```

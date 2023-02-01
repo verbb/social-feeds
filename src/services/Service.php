@@ -1,5 +1,5 @@
 <?php
-namespace verbb\socialfeed\services;
+namespace verbb\socialfeeds\services;
 
 use craft\base\Component;
 

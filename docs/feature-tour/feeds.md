@@ -4,10 +4,10 @@ Feeds are a collection of [Sources](docs:feature-tour/sources) and serve as an a
 To get started, ensure you create your Sources first. Then, create a Feed, enabling any sources you'd like included.
 
 ## Fetching Feed Posts
-To fetch the Posts for a feed, use `craft.socialFeed.getPosts()`.
+To fetch the Posts for a feed, use `craft.socialFeeds.getPosts()`.
 
 ```twig
-{% set posts = craft.socialFeed.getPosts('myFeedHandle') %}
+{% set posts = craft.socialFeeds.getPosts('myFeedHandle') %}
 
 {% for post in posts %}
     ID: {{ post.id }}<br>

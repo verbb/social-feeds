@@ -1,5 +1,5 @@
 # GraphQL
-Social Feed supports accessing [Feed](docs:feature-tour/feeds) and [Source](docs:feature-tour/sources) objects via GraphQL, along with [Post](docs:feature-tour/posts) objects. Be sure to read about [Craft's GraphQL support](https://craftcms.com/docs/4.x/graphql.html).
+Social Feeds supports accessing [Feed](docs:feature-tour/feeds) and [Source](docs:feature-tour/sources) objects via GraphQL, along with [Post](docs:feature-tour/posts) objects. Be sure to read about [Craft's GraphQL support](https://craftcms.com/docs/4.x/graphql.html).
 
 ## Feeds
 
@@ -29,7 +29,7 @@ Social Feed supports accessing [Feed](docs:feature-tour/feeds) and [Source](docs
 ```json JSON Response
 {
     "data": {
-        "socialFeed": {
+        "socialFeeds": {
             "feeds": [
                 {
                     "handle": "myFeed"
@@ -105,7 +105,7 @@ This is the interface implemented by all feeds.
 ```json JSON Response
 {
     "data": {
-        "socialFeed": {
+        "socialFeeds": {
             "sources": [
                 {
                     "handle": "mySource"
@@ -180,7 +180,7 @@ This is the interface implemented by all feeds.
 ```json JSON Response
 {
     "data": {
-        "socialFeed": {
+        "socialFeeds": {
             "posts(limit: 10)": [
                 {
                     "id": "900949524373003",

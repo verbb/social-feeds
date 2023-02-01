@@ -1,11 +1,11 @@
 <?php
-namespace verbb\socialfeed\gql\resolvers;
+namespace verbb\socialfeeds\gql\resolvers;
 
 use craft\gql\base\Resolver;
 
 use GraphQL\Type\Definition\ResolveInfo;
 
-class SocialFeedResolver extends Resolver
+class SocialFeedsResolver extends Resolver
 {
     // Static Methods
     // =========================================================================

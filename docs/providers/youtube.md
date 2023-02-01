@@ -1,5 +1,5 @@
 # YouTube
-Follow these steps to configure YouTube for Social Feed.
+Follow these steps to configure YouTube for Social Feeds.
 
 ## Connecting to YouTube
 
@@ -26,13 +26,13 @@ Google requires your Craft install to be on a public domain with SSL enabled. Ho
 For example, you might have a Redirect URI like the following:
 
 ```
-http://my-site.test/social-feed/auth/callback
+http://my-site.test/social-feeds/auth/callback
 ```
 
 Using this URL for Google won't work, as it'll detect `.test` is a non-public domain name. Using the Proxy Redirect URI will change the redirect URL to be:
 
 ```
-https://formie.verbb.io?return=http://my-site.test/social-feed/auth/callback
+https://formie.verbb.io?return=http://my-site.test/social-feeds/auth/callback
 ```
 
 Here, it routes the request through to our Verbb servers, which forwards on the request to the URL in the `return` parameter (which would be your local project).

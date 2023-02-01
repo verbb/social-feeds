@@ -1,5 +1,5 @@
 <?php
-namespace verbb\socialfeed\gql\arguments;
+namespace verbb\socialfeeds\gql\arguments;
 
 use craft\gql\base\Arguments;
 

@@ -1,31 +1,31 @@
 {% import '_includes/forms' as forms %}
 
-<h2>{{ 'Social Feed Cache' | t('social-feed') }}</h2>
+<h2>{{ 'Social Feeds Cache' | t('social-feeds') }}</h2>
 
-<h3>{{ 'Reset Cache' | t('social-feed') }}</h3>
+<h3>{{ 'Reset Cache' | t('social-feeds') }}</h3>
 
-{{ 'Resetting the cache will ensure that next time posts are fetched for a feed, they‘ll be called directly from the API. This **won‘t** delete any saved posts, but will prompt Social Feed to fetch the latest posts for sources.' | t('social-feed') | md | raw }}
+{{ 'Resetting the cache will ensure that next time posts are fetched for a feed, they‘ll be called directly from the API. This **won‘t** delete any saved posts, but will prompt Social Feeds to fetch the latest posts for sources.' | t('social-feeds') | md | raw }}
 
 <form class="utility" method="post" accept-charset="UTF-8">
-    <input type="hidden" name="action" value="social-feed/plugin/reset-cache">
+    <input type="hidden" name="action" value="social-feeds/plugin/reset-cache">
 
-    {{ redirectInput('utilities/social-feed-cache') }}
+    {{ redirectInput('utilities/social-feeds-cache') }}
     {{ csrfInput() }}
 
-    <input type="submit" class="btn submit" value="{{ 'Reset Cache' | t('social-feed')  }}">
+    <input type="submit" class="btn submit" value="{{ 'Reset Cache' | t('social-feeds')  }}">
 </form>
 
 <hr>
 
-<h3>{{ 'Delete Cache' | t('social-feed') }}</h3>
+<h3>{{ 'Delete Cache' | t('social-feeds') }}</h3>
 
-{{ 'Deleting the cache will **permanently** delete all saved posts. Some providers have limits on the number of posts that can be fetched, and as such, you may be unable to recover any deleted posts again. These posts may no longer be able to be fetched via their APIs.' | t('social-feed') | md | raw }}
+{{ 'Deleting the cache will **permanently** delete all saved posts. Some providers have limits on the number of posts that can be fetched, and as such, you may be unable to recover any deleted posts again. These posts may no longer be able to be fetched via their APIs.' | t('social-feeds') | md | raw }}
 
 <form class="utility" method="post" accept-charset="UTF-8">
-    <input type="hidden" name="action" value="social-feed/plugin/delete-cache">
+    <input type="hidden" name="action" value="social-feeds/plugin/delete-cache">
 
-    {{ redirectInput('utilities/social-feed-cache') }}
+    {{ redirectInput('utilities/social-feeds-cache') }}
     {{ csrfInput() }}
 
-    <input type="submit" class="btn submit" value="{{ 'Delete Cache' | t('social-feed')  }}">
+    <input type="submit" class="btn submit" value="{{ 'Delete Cache' | t('social-feeds')  }}">
 </form>

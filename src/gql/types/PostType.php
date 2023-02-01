@@ -1,7 +1,7 @@
 <?php
-namespace verbb\socialfeed\gql\types;
+namespace verbb\socialfeeds\gql\types;
 
-use verbb\socialfeed\gql\interfaces\PostInterface;
+use verbb\socialfeeds\gql\interfaces\PostInterface;
 
 use craft\gql\base\ObjectType;
 

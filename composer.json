@@ -1,5 +1,5 @@
 {
-    "name": "verbb/social-feed",
+    "name": "verbb/social-feeds",
     "description": "Aggregate social media content with feeds.",
     "type": "craft-plugin",
     "version": "1.0.0",
@@ -11,10 +11,10 @@
     ],
     "support": {
         "email": "support@verbb.io",
-        "issues": "https://github.com/verbb/social-feed/issues?state=open",
-        "source": "https://github.com/verbb/social-feed",
-        "docs": "https://github.com/verbb/social-feed",
-        "rss": "https://github.com/verbb/social-feed/commits/v2.atom"
+        "issues": "https://github.com/verbb/social-feeds/issues?state=open",
+        "source": "https://github.com/verbb/social-feeds",
+        "docs": "https://github.com/verbb/social-feeds",
+        "rss": "https://github.com/verbb/social-feeds/commits/v2.atom"
     },
     "license": "proprietary",
     "authors": [
@@ -33,13 +33,13 @@
     },
     "autoload": {
         "psr-4": {
-          "verbb\\socialfeed\\": "src/"
+          "verbb\\socialfeeds\\": "src/"
         }
     },
     "extra": {
-        "name": "Social Feed",
-        "handle": "social-feed",
-        "changelogUrl": "https://raw.githubusercontent.com/verbb/social-feed/craft-4/CHANGELOG.md",
-        "class": "verbb\\socialfeed\\SocialFeed"
+        "name": "Social Feeds",
+        "handle": "social-feeds",
+        "changelogUrl": "https://raw.githubusercontent.com/verbb/social-feeds/craft-4/CHANGELOG.md",
+        "class": "verbb\\socialfeeds\\SocialFeeds"
     }
 }

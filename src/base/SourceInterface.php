@@ -1,5 +1,5 @@
 <?php
-namespace verbb\socialfeed\base;
+namespace verbb\socialfeeds\base;
 
 use craft\base\SavableComponentInterface;
 

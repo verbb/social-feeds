@@ -1,7 +1,7 @@
 <?php
-namespace verbb\socialfeed\controllers;
+namespace verbb\socialfeeds\controllers;
 
-use verbb\socialfeed\SocialFeed;
+use verbb\socialfeeds\SocialFeeds;
 
 use Craft;
 use craft\web\Controller;
@@ -39,23 +39,23 @@ class AuthController extends Controller
         $sourceHandle = $this->request->getRequiredParam('source');
 
         try {
-            if (!($source = SocialFeed::$plugin->getSources()->getSourceByHandle($sourceHandle))) {
-                return $this->asFailure(Craft::t('social-feed', 'Unable to find source “{source}”.', ['source' => $sourceHandle]));
+            if (!($source = SocialFeeds::$plugin->getSources()->getSourceByHandle($sourceHandle))) {
+                return $this->asFailure(Craft::t('social-feeds', 'Unable to find source “{source}”.', ['source' => $sourceHandle]));
             }
 
             // Keep track of which source instance is for, so we can fetch it in the callback
             Session::set('sourceHandle', $sourceHandle);
 
-            return Auth::$plugin->getOAuth()->connect('social-feed', $source);
+            return Auth::$plugin->getOAuth()->connect('social-feeds', $source);
         } catch (Throwable $e) {
-            SocialFeed::error('Unable to authorize connect “{source}”: “{message}” {file}:{line}', [
+            SocialFeeds::error('Unable to authorize connect “{source}”: “{message}” {file}:{line}', [
                 'source' => $sourceHandle,
                 'message' => $e->getMessage(),
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),
             ]);
 
-            return $this->asFailure(Craft::t('social-feed', 'Unable to authorize connect “{source}”.', ['source' => $sourceHandle]));
+            return $this->asFailure(Craft::t('social-feeds', 'Unable to authorize connect “{source}”.', ['source' => $sourceHandle]));
         }
     }
 
@@ -67,23 +67,23 @@ class AuthController extends Controller
 
         // Get the source we're current authorizing
         if (!($sourceHandle = Session::get('sourceHandle'))) {
-            Session::setError('social-feed', Craft::t('social-feed', 'Unable to find source.'), true);
+            Session::setError('social-feeds', Craft::t('social-feeds', 'Unable to find source.'), true);
 
             return $this->redirect($origin);
         }
 
-        if (!($source = SocialFeed::$plugin->getSources()->getSourceByHandle($sourceHandle))) {
-            Session::setError('social-feed', Craft::t('social-feed', 'Unable to find source “{source}”.', ['source' => $sourceHandle]), true);
+        if (!($source = SocialFeeds::$plugin->getSources()->getSourceByHandle($sourceHandle))) {
+            Session::setError('social-feeds', Craft::t('social-feeds', 'Unable to find source “{source}”.', ['source' => $sourceHandle]), true);
 
             return $this->redirect($origin);
         }
 
         try {
             // Fetch the access token from the source and create a Token for us to use
-            $token = Auth::$plugin->getOAuth()->callback('social-feed', $source);
+            $token = Auth::$plugin->getOAuth()->callback('social-feeds', $source);
 
             if (!$token) {
-                Session::setError('social-feed', Craft::t('social-feed', 'Unable to fetch token.'), true);
+                Session::setError('social-feeds', Craft::t('social-feeds', 'Unable to fetch token.'), true);
 
                 return $this->redirect($origin);
             }
@@ -92,22 +92,22 @@ class AuthController extends Controller
             $token->reference = $source->id;
             Auth::$plugin->getTokens()->upsertToken($token);
         } catch (Throwable $e) {
-            $error = Craft::t('social-feed', 'Unable to process callback for “{source}”: “{message}” {file}:{line}', [
+            $error = Craft::t('social-feeds', 'Unable to process callback for “{source}”: “{message}” {file}:{line}', [
                 'source' => $sourceHandle,
                 'message' => $e->getMessage(),
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),
             ]);
 
-            SocialFeed::error($error);
+            SocialFeeds::error($error);
 
             // Show the error detail in the CP
-            Craft::$app->getSession()->setFlash('social-feed:callback-error', $error);
+            Craft::$app->getSession()->setFlash('social-feeds:callback-error', $error);
 
             return $this->redirect($origin);
         }
 
-        Session::setNotice('social-feed', Craft::t('social-feed', '{provider} connected.', ['provider' => $source->providerName]), true);
+        Session::setNotice('social-feeds', Craft::t('social-feeds', '{provider} connected.', ['provider' => $source->providerName]), true);
 
         return $this->redirect($redirect);
     }
@@ -116,14 +116,14 @@ class AuthController extends Controller
     {
         $sourceHandle = $this->request->getRequiredParam('source');
 
-        if (!($source = SocialFeed::$plugin->getSources()->getSourceByHandle($sourceHandle))) {
-            return $this->asFailure(Craft::t('social-feed', 'Unable to find source “{source}”.', ['source' => $sourceHandle]));
+        if (!($source = SocialFeeds::$plugin->getSources()->getSourceByHandle($sourceHandle))) {
+            return $this->asFailure(Craft::t('social-feeds', 'Unable to find source “{source}”.', ['source' => $sourceHandle]));
         }
 
         // Delete all tokens for this source
-        Auth::$plugin->getTokens()->deleteTokenByOwnerReference('social-feed', $source->id);
+        Auth::$plugin->getTokens()->deleteTokenByOwnerReference('social-feeds', $source->id);
 
-        return $this->asModelSuccess($source, Craft::t('social-feed', '{provider} disconnected.', ['provider' => $source->providerName]), 'source');
+        return $this->asModelSuccess($source, Craft::t('social-feeds', '{provider} disconnected.', ['provider' => $source->providerName]), 'source');
     }
 
 }

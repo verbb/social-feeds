@@ -1,10 +1,10 @@
 <?php
-namespace verbb\socialfeed\services;
+namespace verbb\socialfeeds\services;
 
-use verbb\socialfeed\SocialFeed;
-use verbb\socialfeed\base\SourceInterface;
-use verbb\socialfeed\models\Post;
-use verbb\socialfeed\records\Post as PostRecord;
+use verbb\socialfeeds\SocialFeeds;
+use verbb\socialfeeds\base\SourceInterface;
+use verbb\socialfeeds\models\Post;
+use verbb\socialfeeds\records\Post as PostRecord;
 
 use Craft;
 use craft\base\Component;
@@ -37,7 +37,7 @@ class Posts extends Component
 
     public function getPostsForFeed(string $feedHandle, array $options = []): array
     {
-        $feed = SocialFeed::$plugin->getFeeds()->getFeedByHandle($feedHandle);
+        $feed = SocialFeeds::$plugin->getFeeds()->getFeedByHandle($feedHandle);
 
         if (!$feed || !$feed->enabled) {
             return [];
@@ -50,7 +50,7 @@ class Posts extends Component
     {
         $posts = $this->getPostsForFeed($feedHandle, $options);
 
-        return Template::raw(Craft::$app->getView()->renderTemplate('social-feed/_posts/index', [
+        return Template::raw(Craft::$app->getView()->renderTemplate('social-feeds/_posts/index', [
             'posts' => $posts,
             'renderOptions' => $options,
         ], View::TEMPLATE_MODE_CP));
@@ -58,7 +58,7 @@ class Posts extends Component
 
     public function getPostsForSources(array $sources, array $options = []): array
     {
-        $settings = SocialFeed::$plugin->getSettings();
+        $settings = SocialFeeds::$plugin->getSettings();
 
         $posts = [];
 
@@ -136,7 +136,7 @@ class Posts extends Component
 
     public function checkForPostRefresh(SourceInterface $source): void
     {
-        $settings = SocialFeed::$plugin->getSettings();
+        $settings = SocialFeeds::$plugin->getSettings();
 
         // Get the plugin setting for how long to cache items for and convert it from the friendly
         // DateInterval or seconds value to an interval. Then check against now. 
@@ -185,11 +185,11 @@ class Posts extends Component
             }
 
             // Update the sources' last fetch date
-            Db::update('{{%socialfeed_sources}}', [
+            Db::update('{{%socialfeeds_sources}}', [
                 'dateLastFetch' => Db::prepareDateForDb(new DateTime())
             ], ['id' => $source->id]);
         } catch (Throwable $e) {
-            SocialFeed::error('Error refreshing posts for source “{source}”: “{message}” {file}:{line}', [
+            SocialFeeds::error('Error refreshing posts for source “{source}”: “{message}” {file}:{line}', [
                 'source' => $source->handle,
                 'message' => $e->getMessage(),
                 'file' => $e->getFile(),
@@ -220,7 +220,7 @@ class Posts extends Component
                 'dateCreated',
                 'dateUpdated',
             ])
-            ->from(['{{%socialfeed_posts}}'])
+            ->from(['{{%socialfeeds_posts}}'])
             ->orderBy(['datePosted' => SORT_DESC]);
     }
 

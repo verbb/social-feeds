@@ -1,85 +1,85 @@
 <?php
-namespace verbb\socialfeed\variables;
+namespace verbb\socialfeeds\variables;
 
-use verbb\socialfeed\SocialFeed;
-use verbb\socialfeed\base\SourceInterface;
-use verbb\socialfeed\models\Feed;
+use verbb\socialfeeds\SocialFeeds;
+use verbb\socialfeeds\base\SourceInterface;
+use verbb\socialfeeds\models\Feed;
 
 use Twig\Markup;
 
-class SocialFeedVariable
+class SocialFeedsVariable
 {
     // Public Methods
     // =========================================================================
 
-    public function getPlugin(): SocialFeed
+    public function getPlugin(): SocialFeeds
     {
-        return SocialFeed::$plugin;
+        return SocialFeeds::$plugin;
     }
 
     public function getPluginName(): string
     {
-        return SocialFeed::$plugin->getPluginName();
+        return SocialFeeds::$plugin->getPluginName();
     }
 
     public function getAllSources(): array
     {
-        return SocialFeed::$plugin->getSources()->getAllSources();
+        return SocialFeeds::$plugin->getSources()->getAllSources();
     }
 
     public function getAllEnabledSources(): array
     {
-        return SocialFeed::$plugin->getSources()->getAllEnabledSources();
+        return SocialFeeds::$plugin->getSources()->getAllEnabledSources();
     }
 
     public function getAllConfiguredSources(): array
     {
-        return SocialFeed::$plugin->getSources()->getAllConfiguredSources();
+        return SocialFeeds::$plugin->getSources()->getAllConfiguredSources();
     }
 
     public function getSourceById(int $id): ?SourceInterface
     {
-        return SocialFeed::$plugin->getSources()->getSourceById($id);
+        return SocialFeeds::$plugin->getSources()->getSourceById($id);
     }
 
     public function getSourceByHandle(string $handle): ?SourceInterface
     {
-        return SocialFeed::$plugin->getSources()->getSourceByHandle($handle);
+        return SocialFeeds::$plugin->getSources()->getSourceByHandle($handle);
     }
 
     public function getAllFeeds(): array
     {
-        return SocialFeed::$plugin->getFeeds()->getAllFeeds();
+        return SocialFeeds::$plugin->getFeeds()->getAllFeeds();
     }
 
     public function getAllEnabledFeeds(): array
     {
-        return SocialFeed::$plugin->getFeeds()->getAllEnabledFeeds();
+        return SocialFeeds::$plugin->getFeeds()->getAllEnabledFeeds();
     }
 
     public function getFeedById(int $id): ?Feed
     {
-        return SocialFeed::$plugin->getFeeds()->getFeedById($id);
+        return SocialFeeds::$plugin->getFeeds()->getFeedById($id);
     }
 
     public function getFeedByUid(string $uid): ?Feed
     {
-        return SocialFeed::$plugin->getFeeds()->getFeedByUid($uid);
+        return SocialFeeds::$plugin->getFeeds()->getFeedByUid($uid);
     }
 
     public function getFeedByHandle(string $handle): ?Feed
     {
-        return SocialFeed::$plugin->getFeeds()->getFeedByHandle($handle);
+        return SocialFeeds::$plugin->getFeeds()->getFeedByHandle($handle);
     }
 
     public function getPosts(string $feedHandle, array $options = []): array
     {
-        return SocialFeed::$plugin->getPosts()->getPostsForFeed($feedHandle, $options);
+        return SocialFeeds::$plugin->getPosts()->getPostsForFeed($feedHandle, $options);
     }
 
     public function renderPosts(string $feedHandle, array $options = []): Markup
     {
-        return SocialFeed::$plugin->getPosts()->renderPostsForFeed($feedHandle, $options);
+        return SocialFeeds::$plugin->getPosts()->renderPostsForFeed($feedHandle, $options);
     }
 
 }

@@ -1,17 +1,17 @@
-{% extends 'social-feed/_layouts' %}
+{% extends 'social-feeds/_layouts' %}
 
 {% do view.registerAssetBundle('craft\\web\\assets\\admintable\\AdminTableAsset') -%}
 
 {% set crumbs = [
-    { label: craft.socialFeed.getPluginName() | t('social-feed'), url: url('social-feed') },
-    { label: 'Feeds' | t('social-feed'), url: url('social-feed/feeds') }
+    { label: craft.socialFeeds.getPluginName() | t('social-feeds'), url: url('social-feeds') },
+    { label: 'Feeds' | t('social-feeds'), url: url('social-feeds/feeds') }
 ] %}
 
-{% set title = 'Feeds' | t('social-feed') %}
+{% set title = 'Feeds' | t('social-feeds') %}
 {% set selectedSubnavItem = 'feeds' %}
 
 {% block actionButton %}
-    <a class="btn submit add icon" href="{{ url('social-feed/feeds/new') }}">{{ 'New feed' | t('social-feed') }}</a>
+    <a class="btn submit add icon" href="{{ url('social-feeds/feeds/new') }}">{{ 'New feed' | t('social-feeds') }}</a>
 {% endblock %}
 
 {% block blockContent %}
@@ -26,7 +26,7 @@
     {% set tableData = tableData | merge([{
         id: feed.id,
         title: feed.name | t('site'),
-        url: url('social-feed/feeds/' ~ feed.handle),
+        url: url('social-feeds/feeds/' ~ feed.handle),
         handle: feed.handle,
         enabled: feed.enabled,
     }]) %}
@@ -38,9 +38,9 @@
         { name: '__slot:handle', title: Craft.t('app', 'Handle') },
         { name: 'enabled', title: Craft.t('app', 'Status'), callback: function(value) {
             if (value) {
-                return '<span class="status on"></span>' + Craft.t('social-feed', 'Enabled');
+                return '<span class="status on"></span>' + Craft.t('social-feeds', 'Enabled');
             } else {
-                return '<span class="status"></span>' + Craft.t('social-feed', 'Disabled');
+                return '<span class="status"></span>' + Craft.t('social-feeds', 'Disabled');
             }
         } },
     ];
@@ -48,9 +48,9 @@
     new Craft.VueAdminTable({
         columns: columns,
         container: '#feeds-vue-admin-table',
-        reorderAction: 'social-feed/feeds/reorder',
-        deleteAction: 'social-feed/feeds/delete',
-        emptyMessage: Craft.t('social-feed', 'No feeds exist yet.'),
+        reorderAction: 'social-feeds/feeds/reorder',
+        deleteAction: 'social-feeds/feeds/delete',
+        emptyMessage: Craft.t('social-feeds', 'No feeds exist yet.'),
         tableData: {{ tableData | json_encode | raw }},
     });
 {% endjs %}

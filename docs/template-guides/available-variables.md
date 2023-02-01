@@ -1,35 +1,35 @@
 # Available Variables
 The following are common methods you will want to call in your front end templates:
 
-### `craft.socialFeed.getAllFeeds()`
+### `craft.socialFeeds.getAllFeeds()`
 Returns a collection of [Feed](docs:developers/feed) objects.
 
-### `craft.socialFeed.getAllEnabledFeeds()`
+### `craft.socialFeeds.getAllEnabledFeeds()`
 Returns a collection of enabled [Feed](docs:developers/feed) objects.
 
-### `craft.socialFeed.getFeedById(id)`
+### `craft.socialFeeds.getFeedById(id)`
 Returns a [Feed](docs:developers/feed) object by its ID.
 
-### `craft.socialFeed.getFeedByHandle(handle)`
+### `craft.socialFeeds.getFeedByHandle(handle)`
 Returns a [Feed](docs:developers/feed) object by its handle.
 
-### `craft.socialFeed.getAllSources()`
+### `craft.socialFeeds.getAllSources()`
 Returns a collection of [Source](docs:developers/source) objects.
 
-### `craft.socialFeed.getAllEnabledSources()`
+### `craft.socialFeeds.getAllEnabledSources()`
 Returns a collection of enabled [Source](docs:developers/source) objects.
 
-### `craft.socialFeed.getAllConfiguredSources()`
+### `craft.socialFeeds.getAllConfiguredSources()`
 Returns a collection of configured [Source](docs:developers/source) objects.
 
-### `craft.socialFeed.getSourceById(id)`
+### `craft.socialFeeds.getSourceById(id)`
 Returns a [Source](docs:developers/source) object by its ID.
 
-### `craft.socialFeed.getSourceByHandle(handle)`
+### `craft.socialFeeds.getSourceByHandle(handle)`
 Returns a [Source](docs:developers/source) object by its handle.
 
-### `craft.socialFeed.getPosts(feedHandle, options)`
+### `craft.socialFeeds.getPosts(feedHandle, options)`
 Returns a collection of [Post](docs:developers/post) objects for the provided [Feed](docs:developers/feed) handle.
 
-### `craft.socialFeed.renderPosts(feedHandle, options)`
+### `craft.socialFeeds.renderPosts(feedHandle, options)`
 Returns the HTML of rendered [Post](docs:developers/post) objects for the provided [Feed](docs:developers/feed) handle.

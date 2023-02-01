@@ -1,5 +1,5 @@
 # Twitter
-Follow these steps to configure Twitter for Social Feed.
+Follow these steps to configure Twitter for Social Feeds.
 
 ## Connecting to Twitter
 
@@ -17,12 +17,12 @@ Follow these steps to configure Twitter for Social Feed.
     - **App permissions** set to **Read**
     - **Request email from users** is enabled
     - **Type of App** set to **Web App, Automated App or Bot**
-    - In the **Callback URI / Redirect URL** field, enter the value from the **Redirect URI** field in Social Feed.
+    - In the **Callback URI / Redirect URL** field, enter the value from the **Redirect URI** field in Social Feeds.
 1. Click the **Save** button.
 1. Click the **Keys & Tokens** tab.
 1. Click the **Regenerate** button for the **OAuth 2.0 Client ID and Client Secret**.
-1. Copy the **Client ID** from {name} and paste in the **Client ID** field in Social Feed.
-1. Copy the **Client Secret** from {name} and paste in the **Client Secret** field in Social Feed.
+1. Copy the **Client ID** from {name} and paste in the **Client ID** field in Social Feeds.
+1. Copy the **Client Secret** from {name} and paste in the **Client Secret** field in Social Feeds.
 
 ## Available Content
 Twitter provides the following types of content as posts.

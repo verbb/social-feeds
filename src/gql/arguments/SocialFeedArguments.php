@@ -1,9 +1,9 @@
 <?php
-namespace verbb\socialfeed\gql\arguments;
+namespace verbb\socialfeeds\gql\arguments;
 
 use craft\gql\base\Arguments;
 
-class SocialFeedArguments extends Arguments
+class SocialFeedsArguments extends Arguments
 {
     // Static Methods
     // =========================================================================

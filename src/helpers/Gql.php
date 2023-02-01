@@ -1,5 +1,5 @@
 <?php
-namespace verbb\socialfeed\helpers;
+namespace verbb\socialfeeds\helpers;
 
 use craft\helpers\Gql as GqlHelper;
 
@@ -8,10 +8,10 @@ class Gql extends GqlHelper
     // Public Methods
     // =========================================================================
 
-    public static function canQuerySocialFeed(): bool
+    public static function canQuerySocialFeeds(): bool
     {
         $allowedEntities = self::extractAllowedEntitiesFromSchema();
 
-        return isset($allowedEntities['socialFeed']);
+        return isset($allowedEntities['socialFeeds']);
     }
 }

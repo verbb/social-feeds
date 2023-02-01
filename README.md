@@ -1,7 +1,7 @@
-# Social Feed Plugin for Craft CMS
-<img width="500" src="https://verbb.io/uploads/plugins/social-feed/social-feed-social-card.png?v=2">
+# Social Feeds Plugin for Craft CMS
+<img width="500" src="https://verbb.io/uploads/plugins/social-feeds/social-feeds-social-card.png?v=2">
 
-Social Feed is a Craft CMS plugin for fetching content from social media and displaying it on your site.
+Social Feeds is a Craft CMS plugin for fetching content from social media and displaying it on your site.
 
 ## Features
 - Fetch content from social media accounts, using Facebook Page posts, Twitter hashtags, YouTube channel videos and more
@@ -19,10 +19,10 @@ Social Feed is a Craft CMS plugin for fetching content from social media and dis
 - YouTube
 
 ## Documentation
-Visit the [Social Feed Plugin page](https://verbb.io/craft-plugins/social-feed) for all documentation, guides, pricing and developer resources.
+Visit the [Social Feeds Plugin page](https://verbb.io/craft-plugins/social-feeds) for all documentation, guides, pricing and developer resources.
 
 ## Support
-Get in touch with us via the [Social Feed Support page](https://verbb.io/craft-plugins/social-feed/support) or by [creating a Github issue](https://github.com/verbb/social-feed/issues)
+Get in touch with us via the [Social Feeds Support page](https://verbb.io/craft-plugins/social-feeds/support) or by [creating a Github issue](https://github.com/verbb/social-feeds/issues)
 
 <h2></h2>
 

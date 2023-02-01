@@ -1,8 +1,8 @@
 <?php
-namespace verbb\socialfeed\controllers;
+namespace verbb\socialfeeds\controllers;
 
-use verbb\socialfeed\SocialFeed;
-use verbb\socialfeed\models\Feed;
+use verbb\socialfeeds\SocialFeeds;
+use verbb\socialfeeds\models\Feed;
 
 use Craft;
 use craft\helpers\Json;
@@ -18,16 +18,16 @@ class FeedsController extends Controller
 
     public function actionIndex(): Response
     {
-        $feeds = SocialFeed::$plugin->getFeeds()->getAllFeeds();
+        $feeds = SocialFeeds::$plugin->getFeeds()->getAllFeeds();
 
-        return $this->renderTemplate('social-feed/feeds', [
+        return $this->renderTemplate('social-feeds/feeds', [
             'feeds' => $feeds,
         ]);
     }
 
     public function actionEdit(?string $feedHandle = null, ?Feed $feed = null): Response
     {
-        $feedsService = SocialFeed::$plugin->getFeeds();
+        $feedsService = SocialFeeds::$plugin->getFeeds();
 
         if ($feed === null) {
             if ($feedHandle !== null) {
@@ -42,12 +42,12 @@ class FeedsController extends Controller
         }
 
         if ($feed->id) {
-            $title = trim($feed->name) ?: Craft::t('social-feed', 'Edit Feed');
+            $title = trim($feed->name) ?: Craft::t('social-feeds', 'Edit Feed');
         } else {
-            $title = Craft::t('social-feed', 'Create a new feed');
+            $title = Craft::t('social-feeds', 'Create a new feed');
         }
 
-        return $this->renderTemplate('social-feed/feeds/_edit', [
+        return $this->renderTemplate('social-feeds/feeds/_edit', [
             'title' => $title,
             'feed' => $feed,
         ]);
@@ -64,11 +64,11 @@ class FeedsController extends Controller
         $feed->enabled = (bool)$this->request->getParam('enabled');
         $feed->sources = $this->request->getParam('sources');
 
-        if (!SocialFeed::$plugin->getFeeds()->saveFeed($feed)) {
+        if (!SocialFeeds::$plugin->getFeeds()->saveFeed($feed)) {
             return $this->asModelFailure($feed, modelName: 'feed');
         }
 
-        return $this->asModelSuccess($feed, Craft::t('social-feed', 'Feed saved.'));
+        return $this->asModelSuccess($feed, Craft::t('social-feeds', 'Feed saved.'));
     }
 
     public function actionReorder(): Response
@@ -77,7 +77,7 @@ class FeedsController extends Controller
         $this->requireAcceptsJson();
 
         $feedIds = Json::decode($this->request->getRequiredBodyParam('ids'));
-        SocialFeed::$plugin->getFeeds()->reorderFeeds($feedIds);
+        SocialFeeds::$plugin->getFeeds()->reorderFeeds($feedIds);
 
         return $this->asSuccess();
     }
@@ -89,7 +89,7 @@ class FeedsController extends Controller
 
         $feedId = $this->request->getRequiredBodyParam('id');
 
-        SocialFeed::$plugin->getFeeds()->deleteFeedById($feedId);
+        SocialFeeds::$plugin->getFeeds()->deleteFeedById($feedId);
 
         return $this->asSuccess();
     }
@@ -102,14 +102,14 @@ class FeedsController extends Controller
         $sources = [];
 
         foreach ($sourceIds as $sourceId) {
-            if ($source = SocialFeed::$plugin->getSources()->getSourceById($sourceId)) {
+            if ($source = SocialFeeds::$plugin->getSources()->getSourceById($sourceId)) {
                 $sources[] = $source;
             }
         }
 
-        $posts = SocialFeed::$plugin->getPosts()->getPostsForSources($sources);
+        $posts = SocialFeeds::$plugin->getPosts()->getPostsForSources($sources);
 
-        return $this->renderTemplate('social-feed/feeds/_preview', [
+        return $this->renderTemplate('social-feeds/feeds/_preview', [
             'posts' => $posts,
         ]);
     }

@@ -1,7 +1,7 @@
 <?php
-namespace verbb\socialfeed\models;
+namespace verbb\socialfeeds\models;
 
-use verbb\socialfeed\SocialFeed;
+use verbb\socialfeeds\SocialFeeds;
 
 use Craft;
 use craft\base\Model;
@@ -49,7 +49,7 @@ class Post extends Model
 
     public function getSource(): ?string
     {
-        foreach (SocialFeed::$plugin->getSources()->getAllSourceTypes() as $type) {
+        foreach (SocialFeeds::$plugin->getSources()->getAllSourceTypes() as $type) {
             if ($this->sourceType === $type::$providerHandle) {
                 return $type;
             }

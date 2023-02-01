@@ -1,9 +1,9 @@
 <?php
-namespace verbb\socialfeed\services;
+namespace verbb\socialfeeds\services;
 
-use verbb\socialfeed\events\FeedEvent;
-use verbb\socialfeed\models\Feed;
-use verbb\socialfeed\records\Feed as FeedRecord;
+use verbb\socialfeeds\events\FeedEvent;
+use verbb\socialfeeds\models\Feed;
+use verbb\socialfeeds\records\Feed as FeedRecord;
 
 use Craft;
 use craft\base\MemoizableArray;
@@ -103,7 +103,7 @@ class Feeds extends Component
 
         if ($isNewFeed) {
             $maxSortOrder = (new Query())
-                ->from(['{{%socialfeed_feeds}}'])
+                ->from(['{{%socialfeeds_feeds}}'])
                 ->max('[[sortOrder]]');
 
             $feedRecord->sortOrder = $maxSortOrder ? $maxSortOrder + 1 : 1;
@@ -171,7 +171,7 @@ class Feeds extends Component
         }
 
         Craft::$app->getDb()->createCommand()
-            ->delete('{{%socialfeed_feeds}}', ['id' => $feed->id])
+            ->delete('{{%socialfeeds_feeds}}', ['id' => $feed->id])
             ->execute();
 
         // Fire an 'afterDeleteFeed' event
@@ -219,7 +219,7 @@ class Feeds extends Component
                 'dateCreated',
                 'dateUpdated',
             ])
-            ->from(['{{%socialfeed_feeds}}'])
+            ->from(['{{%socialfeeds_feeds}}'])
             ->orderBy(['sortOrder' => SORT_ASC]);
     }
 
@@ -229,7 +229,7 @@ class Feeds extends Component
             $feedRecord = FeedRecord::findOne(['id' => $feedId]);
 
             if (!$feedRecord) {
-                throw new Exception(Craft::t('social-feed', 'No feed exists with the ID “{id}”.', ['id' => $feedId]));
+                throw new Exception(Craft::t('social-feeds', 'No feed exists with the ID “{id}”.', ['id' => $feedId]));
             }
         } else {
             $feedRecord = new FeedRecord();

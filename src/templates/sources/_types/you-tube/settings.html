@@ -1,16 +1,16 @@
 {% import '_includes/forms' as forms %}
 {% import 'verbb-base/_macros' as macros %}
-{% import 'social-feed/_macros' as customForms %}
+{% import 'social-feeds/_macros' as customForms %}
 
-{% include 'social-feed/sources/_oauth' %}
+{% include 'social-feeds/sources/_oauth' %}
 
 {{ forms.booleanMenuField({
-    label: 'Proxy Redirect URI' | t('social-feed'),
-    instructions: 'Whether to proxy the redirect URI through Verbb‘s servers. This should **only** be used for local testing. See [docs](https://verbb.io/craft-plugins/social-feed/docs/feature-tour/providers#local-testing-proxy) for more.' | t('social-feed') | md,
+    label: 'Proxy Redirect URI' | t('social-feeds'),
+    instructions: 'Whether to proxy the redirect URI through Verbb‘s servers. This should **only** be used for local testing. See [docs](https://verbb.io/craft-plugins/social-feeds/docs/feature-tour/providers#local-testing-proxy) for more.' | t('social-feeds') | md,
     name: 'proxyRedirect',
     includeEnvVars: true,
     value: source.proxyRedirect ?? false,
-    warning: macros.configWarning("sources.#{source.handle}.proxyRedirect", 'social-feed'),
+    warning: macros.configWarning("sources.#{source.handle}.proxyRedirect", 'social-feeds'),
     errors: source.getErrors('proxyRedirect'),
 }) }}
 
@@ -21,8 +21,8 @@
 
 <div class="sf-switch-group" data-toggle-group="{{ "source-type-#{inputKey}" }} ">
     <div>
-        <div class="sf-switch-label">{{ 'Channel' | t('social-feed') }}</div>
-        <div class="sf-switch-text">{{ 'Videos from any YouTube channel.' | t('social-feed') }}</div>
+        <div class="sf-switch-label">{{ 'Channel' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Videos from any YouTube channel.' | t('social-feeds') }}</div>
     </div>
 
     <div class="sf-switch">
@@ -38,12 +38,12 @@
 <div class="{{ "source-type-#{inputKey}-channel" }} {{ not source.enableChannel ? 'hidden' }}">
     <div class="sf-nested-settings">
         {{ forms.textField({
-            label: '{name} Channel' | t('social-feed', { name: source.providerName }),
-            instructions: 'The {name} Channel to pull content from.' | t('social-feed', { name: source.providerName }),
+            label: '{name} Channel' | t('social-feeds', { name: source.providerName }),
+            instructions: 'The {name} Channel to pull content from.' | t('social-feeds', { name: source.providerName }),
             name: 'channelId',
             required: true,
             value: source.channelId ?? '',
-            warning: macros.configWarning("sources.#{source.handle}.channelId", 'social-feed'),
+            warning: macros.configWarning("sources.#{source.handle}.channelId", 'social-feeds'),
             errors: source.getErrors('channelId'),
         }) }}
     </div>
@@ -51,8 +51,8 @@
 
 <div class="sf-switch-group" data-toggle-group="{{ "source-type-#{inputKey}" }} ">
     <div>
-        <div class="sf-switch-label">{{ 'User' | t('social-feed') }}</div>
-        <div class="sf-switch-text">{{ 'Videos from any YouTube user.' | t('social-feed') }}</div>
+        <div class="sf-switch-label">{{ 'User' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Videos from any YouTube user.' | t('social-feeds') }}</div>
     </div>
 
     <div class="sf-switch">
@@ -68,12 +68,12 @@
 <div class="{{ "source-type-#{inputKey}-user" }} {{ not source.enableUser ? 'hidden' }}">
     <div class="sf-nested-settings">
         {{ forms.textField({
-            label: '{name} User' | t('social-feed', { name: source.providerName }),
-            instructions: 'The {name} User to pull content from.' | t('social-feed', { name: source.providerName }),
+            label: '{name} User' | t('social-feeds', { name: source.providerName }),
+            instructions: 'The {name} User to pull content from.' | t('social-feeds', { name: source.providerName }),
             name: 'userId',
             required: true,
             value: source.userId ?? '',
-            warning: macros.configWarning("sources.#{source.handle}.userId", 'social-feed'),
+            warning: macros.configWarning("sources.#{source.handle}.userId", 'social-feeds'),
             errors: source.getErrors('userId'),
         }) }}
     </div>
@@ -81,8 +81,8 @@
 
 <div class="sf-switch-group" data-toggle-group="{{ "source-type-#{inputKey}" }} ">
     <div>
-        <div class="sf-switch-label">{{ 'Playlist' | t('social-feed') }}</div>
-        <div class="sf-switch-text">{{ 'Videos from any YouTube playlist.' | t('social-feed') }}</div>
+        <div class="sf-switch-label">{{ 'Playlist' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Videos from any YouTube playlist.' | t('social-feeds') }}</div>
     </div>
 
     <div class="sf-switch">
@@ -98,12 +98,12 @@
 <div class="{{ "source-type-#{inputKey}-playlist" }} {{ not source.enablePlaylist ? 'hidden' }}">
     <div class="sf-nested-settings">
         {{ forms.textField({
-            label: '{name} Playlist' | t('social-feed', { name: source.providerName }),
-            instructions: 'The {name} Playlist to pull content from.' | t('social-feed', { name: source.providerName }),
+            label: '{name} Playlist' | t('social-feeds', { name: source.providerName }),
+            instructions: 'The {name} Playlist to pull content from.' | t('social-feeds', { name: source.providerName }),
             name: 'playlistId',
             required: true,
             value: source.playlistId ?? '',
-            warning: macros.configWarning("sources.#{source.handle}.playlistId", 'social-feed'),
+            warning: macros.configWarning("sources.#{source.handle}.playlistId", 'social-feeds'),
             errors: source.getErrors('playlistId'),
         }) }}
     </div>
@@ -111,8 +111,8 @@
 
 <div class="sf-switch-group" data-toggle-group="{{ "source-type-#{inputKey}" }} ">
     <div>
-        <div class="sf-switch-label">{{ 'Search' | t('social-feed') }}</div>
-        <div class="sf-switch-text">{{ 'Videos matching search criteria.' | t('social-feed') }}</div>
+        <div class="sf-switch-label">{{ 'Search' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Videos matching search criteria.' | t('social-feeds') }}</div>
     </div>
 
     <div class="sf-switch">
@@ -128,12 +128,12 @@
 <div class="{{ "source-type-#{inputKey}-search" }} {{ not source.enableSearch ? 'hidden' }}">
     <div class="sf-nested-settings">
         {{ forms.textField({
-            label: 'Search Terms' | t('social-feed'),
-            instructions: 'Enter search terms to fetch tweets for. Refer to the [docs](htttp://verbb.io/craft-plugins/social-feed/docs/providers/youtube) for the format.' | t('social-feed'),
+            label: 'Search Terms' | t('social-feeds'),
+            instructions: 'Enter search terms to fetch tweets for. Refer to the [docs](htttp://verbb.io/craft-plugins/social-feeds/docs/providers/youtube) for the format.' | t('social-feeds'),
             name: 'searchTerms',
             required: true,
             value: source.searchTerms ?? '',
-            warning: macros.configWarning("sources.#{source.handle}.searchTerms", 'social-feed'),
+            warning: macros.configWarning("sources.#{source.handle}.searchTerms", 'social-feeds'),
             errors: source.getErrors('searchTerms'),
         }) }}
     </div>
@@ -142,6 +142,6 @@
 {% endset %}
 
 {{ forms.field({
-    label: 'Source Type' | t('social-feed'),
-    instructions: 'Select what types of content this source should provide.' | t('social-feed'),
+    label: 'Source Type' | t('social-feeds'),
+    instructions: 'Select what types of content this source should provide.' | t('social-feeds'),
 }, inputs) }}

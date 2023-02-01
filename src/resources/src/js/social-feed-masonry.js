@@ -1,13 +1,13 @@
 // ==========================================================================
 
-// Social Feed Plugin for Craft CMS
+// Social Feeds Plugin for Craft CMS
 // Author: Verbb - https://verbb.io/
 
 // ==========================================================================
 
 // @codekit-prepend "_flexmasonry.js"
 
-FlexMasonry.init('[data-social-feed]', {
+FlexMasonry.init('[data-social-feeds]', {
     responsive: true,
     breakpointCols: {
         'min-width: 1500px': 4,
