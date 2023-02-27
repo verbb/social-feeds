@@ -19,6 +19,8 @@ Create the following class to house your Source Provider logic.
 ```php
 namespace modules;
 
+use Craft;
+use Throwable;
 use verbb\socialfeeds\base\OAuthSource;
 use verbb\socialfeeds\models\Post;
 
