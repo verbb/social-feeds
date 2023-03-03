@@ -172,6 +172,7 @@ class Posts extends Component
             foreach ($posts as $post) {
                 $postRecord = PostRecord::findOne([
                     'sourceId' => $source->id,
+                    'cacheKey' => $source->getCacheKey(),
                     'postId' => $post->id,
                 ]) ?? new PostRecord();
 
