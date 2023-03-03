@@ -62,7 +62,7 @@ class FeedsController extends Controller
         $feed->name = $this->request->getParam('name');
         $feed->handle = $this->request->getParam('handle');
         $feed->enabled = (bool)$this->request->getParam('enabled');
-        $feed->sources = $this->request->getParam('sources');
+        $feed->sources = $this->request->getParam('sources') ?: [];
 
         if (!SocialFeeds::$plugin->getFeeds()->saveFeed($feed)) {
             return $this->asModelFailure($feed, modelName: 'feed');
