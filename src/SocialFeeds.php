@@ -32,7 +32,7 @@ class SocialFeeds extends Plugin
     // =========================================================================
 
     public bool $hasCpSettings = true;
-    public string $schemaVersion = '1.0.0';
+    public string $schemaVersion = '1.0.1';
 
 
     // Traits

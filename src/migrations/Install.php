@@ -85,9 +85,10 @@ class Install extends Migration
         $this->createIndex(null, '{{%socialfeeds_feeds}}', ['name'], true);
         $this->createIndex(null, '{{%socialfeeds_feeds}}', ['handle'], true);
 
-        $this->createIndex(null, '{{%socialfeeds_posts}}', ['sourceId'], true);
-        $this->createIndex(null, '{{%socialfeeds_posts}}', ['postId'], true);
-        $this->createIndex(null, '{{%socialfeeds_posts}}', ['datePosted'], true);
+        $this->createIndex(null, '{{%socialfeeds_posts}}', ['sourceId'], false);
+        $this->createIndex(null, '{{%socialfeeds_posts}}', ['cacheKey'], false);
+        $this->createIndex(null, '{{%socialfeeds_posts}}', ['postId'], false);
+        $this->createIndex(null, '{{%socialfeeds_posts}}', ['datePosted'], false);
     }
 
     public function addForeignKeys(): void
