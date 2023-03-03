@@ -1,6 +1,7 @@
 <?php
 namespace verbb\socialfeeds\base;
 
+use Craft;
 use craft\helpers\UrlHelper;
 
 use verbb\auth\Auth;
