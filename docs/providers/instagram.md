@@ -31,7 +31,7 @@ In order to fetch from Instagram, you must ensure the following:
     - Go to <a href="https://instagram.com/" target="_blank">Instagram</a> and login to the source you just invited.
     - Navigate to **(Profile Icon)** → **Edit Profile** → **Apps and Websites**.
     - Under the **Tester Invites** tab, accept the invitation.
-1. Navigate to **Settings* → **Basic**.
+1. Navigate to **Settings** → **Basic**.
 1. Copy the **App ID** from Facebook and paste in the **Client ID** field in Social Feeds.
 1. Copy the **App Secret** from Facebook and paste in the **Client Secret** field in Social Feeds.
 
