@@ -1,5 +1,5 @@
 # Social Feeds Plugin for Craft CMS
-<img width="500" src="https://verbb.io/uploads/plugins/social-feeds/social-feeds-social-card.png?v=2">
+<img width="500" src="https://verbb.imgix.net/plugins/social-feeds/social-feeds-social-card.png?v=2">
 
 Social Feeds is a Craft CMS plugin for fetching content from social media and displaying it on your site.
 
