@@ -6,7 +6,7 @@ You'll need to either fetch posts from a [Feed](docs:feature-tour/feeds) or a [S
 
 ```twig
 {# Get the source by its handle #}
-{% set source = craft.socialFeeds.getSoureByHandle('mySourceHandle') %}
+{% set source = craft.socialFeeds.getSourceByHandle('mySourceHandle') %}
 {% set posts = source.getPosts() %}
 
 {% for post in posts %}
