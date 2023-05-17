@@ -11,7 +11,7 @@ To fetch the Posts for a source, use `source.getPosts()`.
 
 ```twig
 {# Get the source by its handle #}
-{% set source = craft.socialFeeds.getSoureByHandle('mySourceHandle') %}
+{% set source = craft.socialFeeds.getSourceByHandle('mySourceHandle') %}
 
 {% for post in source.getPosts() %}
     ID: {{ post.id }}<br>
