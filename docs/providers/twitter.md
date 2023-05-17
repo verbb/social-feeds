@@ -1,6 +1,10 @@
 # Twitter
 Follow these steps to configure Twitter for Social Feeds.
 
+:::tip
+Fetching data from Twitter is only allowed on their paid, **Basic** [API Plan](https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api).
+:::
+
 ## Connecting to Twitter
 
 ### Step 1: Register a Twitter App

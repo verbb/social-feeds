@@ -14,6 +14,8 @@ In order to fetch posts from a Facebook Page or Facebook Group, you must be an A
 1. Go to the <a href="https://developers.facebook.com/apps/" target="_blank">Meta for Developers</a> page.
 1. Click the **Create App** button.
 1. Select **None** as the **App Type**, and fill in the rest of the details to create the app.
+
+### Step 3: Setup Facebook Login
 1. Once created, in the left-hand sidebar, click the **Add Product** button.
 1. Under **Facebook Login** click the **Set Up** button.
 1. Select **Web** as the type and your website address into **Site URL**, and click the **Save** button.
@@ -29,11 +31,11 @@ In order to fetch posts from a Facebook Page or Facebook Group, you must be an A
 1. Copy the **App Secret** from Facebook and paste in the **Client Secret** field in Social Feeds.
 1. Save the Social Feeds source, ready to connect.
 
-### Step 3: Connect to Facebook
+### Step 4: Connect to Facebook
 1. In the Social Feeds source settings, click the **Connect** button and login to Facebook.
 1. Ensure you pick either the Facebook Group or Facebook Page you have admin access to.
 
-### Step 4: Select your Facebook Page or Facebook Group
+### Step 5: Select your Facebook Page or Facebook Group
 1. Select either a **Facebook Page** or a **Facebook Group** that you'd like connected to.
 1. Click the **Save** button for the source.
 

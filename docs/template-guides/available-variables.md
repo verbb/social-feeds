@@ -1,5 +1,5 @@
 # Available Variables
-The following are common methods you will want to call in your front end templates:
+The following methods are available to call in your Twig templates:
 
 ### `craft.socialFeeds.getAllFeeds()`
 Returns a collection of [Feed](docs:developers/feed) objects.
