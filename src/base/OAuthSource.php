@@ -55,7 +55,7 @@ abstract class OAuthSource extends Source implements OAuthProviderInterface
 
     public function getRedirectUri(): ?string
     {
-        $siteId = Craft::$app->getSites()->getPrimarySite()->id;
+        $siteId = Craft::$app->getSites()->getCurrentSite()->id ?? Craft::$app->getSites()->getPrimarySite()->id;
 
         // We should always use the primary site for the redirect
         return UrlHelper::siteUrl('social-feeds/auth/callback', null, null, $siteId);
