@@ -79,14 +79,12 @@ class Twitter extends OAuthSource
         return $rules;
     }
 
-    public function getAuthorizationUrlOptions(): array
+    public function getDefaultScopes(): array
     {
         return [
-            'scope' => [
-                'tweet.read',
-                'users.read',
-                'offline.access',
-            ],
+            'tweet.read',
+            'users.read',
+            'offline.access',
         ];
     }
 

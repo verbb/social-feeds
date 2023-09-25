@@ -39,24 +39,22 @@ class Instagram extends OAuthSource
     // Public Methods
     // =========================================================================
 
-    public function getAuthorizationUrlOptions(): array
-    {
-        return [
-            'scope' => [
-                'pages_show_list',
-                'instagram_basic',
-                'instagram_manage_comments',
-                'pages_read_engagement',
-            ],
-        ];
-    }
-
     public function getOAuthProviderConfig(): array
     {
         $config = parent::getOAuthProviderConfig();
         $config['graphApiVersion'] = 'v15.0';
 
         return $config;
+    }
+
+    public function getDefaultScopes(): array
+    {
+        return [
+            'pages_show_list',
+            'instagram_basic',
+            'instagram_manage_comments',
+            'pages_read_engagement',
+        ];
     }
 
     public function fetchSourceSettings(string $settingsKey): ?array

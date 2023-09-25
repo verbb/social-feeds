@@ -74,16 +74,14 @@ class Facebook extends OAuthSource
         return $config;
     }
 
-    public function getAuthorizationUrlOptions(): array
+    public function getDefaultScopes(): array
     {
         return [
             // API version 7.0+
-            'scope' => [
-                'pages_read_engagement',
-                'pages_manage_metadata',
-                'pages_read_user_content',
-                'groups_access_member_info',
-            ],
+            'pages_read_engagement',
+            'pages_manage_metadata',
+            'pages_read_user_content',
+            'groups_access_member_info',
         ];
     }
 

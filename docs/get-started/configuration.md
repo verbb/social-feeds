@@ -35,6 +35,17 @@ return [
             'enabled' => true,
             'clientId' => 'xxxxxxxxxxxx',
             'clientSecret' => 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+
+            // Add in any additional OAuth scopes
+            'scopes' => [
+                'business_management',
+            ],
+
+            // Add in any additional OAuth authorization options, used when redirecting
+            // to the provider to start the OAuth authorization process
+            'authorizationOptions' => [
+                'extra' => 'value',
+            ],
         ],
         'twitter' => [
             'clientId' => 'xxxxxxxxxxxx',

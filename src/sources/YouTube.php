@@ -91,16 +91,19 @@ class YouTube extends OAuthSource
         return $uri;
     }
 
+    public function getDefaultScopes(): array
+    {
+        return [
+            'https://www.googleapis.com/auth/youtube.readonly',
+        ];
+    }
+
     public function getAuthorizationUrlOptions(): array
     {
         return [
             // If we ever need to clear the cache on an authorized request
             // 'prompt' => 'consent',
-
             'access_type' => 'offline',
-            'scope' => [
-                'https://www.googleapis.com/auth/youtube.readonly',
-            ],
         ];
     }
 

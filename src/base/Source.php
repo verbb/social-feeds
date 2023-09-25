@@ -66,6 +66,10 @@ abstract class Source extends SavableComponent implements SourceInterface
     public ?DateTime $dateLastFetch = null;
     public ?string $uid = null;
 
+    // Set via config files
+    public array $authorizationOptions = [];
+    public array $scopes = [];
+
 
     // Abstract Methods
     // =========================================================================
