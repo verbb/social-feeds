@@ -62,3 +62,19 @@ Instagram provides the following types of content as posts.
 - Profile Posts (Posts from your Instagram profile)
 - Hashtags (Posts containing hashtags)
 - Tagged Posts (Posts you have been tagged in)
+
+## Additional Scopes
+You may also be required to add additional scopes, depending on your account and app setup. If your app is setup "Business Account Access", you may be required to include the following scopes in your [configuration](docs:get-started/configuration):
+
+```php
+return [
+    'sources' => [
+        'instagram' => [
+            // Add in any additional OAuth scopes
+            'scopes' => [
+                'business_management',
+            ],
+        ],
+    ],
+];
+```
