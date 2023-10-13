@@ -43,37 +43,6 @@ class YouTube extends OAuthSource
     // Public Methods
     // =========================================================================
 
-    public function defineRules(): array
-    {
-        $rules = parent::defineRules();
-
-        $rules[] = [
-            ['channelId'], 'required', 'when' => function($model) {
-                return $model->enabled && $model->enableChannel;
-            },
-        ];
-
-        $rules[] = [
-            ['userId'], 'required', 'when' => function($model) {
-                return $model->enabled && $model->enableUser;
-            },
-        ];
-
-        $rules[] = [
-            ['playlistId'], 'required', 'when' => function($model) {
-                return $model->enabled && $model->enablePlaylist;
-            },
-        ];
-
-        $rules[] = [
-            ['searchTerms'], 'required', 'when' => function($model) {
-                return $model->enabled && $model->enableSearch;
-            },
-        ];
-
-        return $rules;
-    }
-
     public function getProxyRedirect(): ?bool
     {
         return App::parseBooleanEnv($this->proxyRedirect);
@@ -247,6 +216,41 @@ class YouTube extends OAuthSource
         }
         
         return $posts;
+    }
+
+
+    // Protected Methods
+    // =========================================================================
+
+    protected function defineRules(): array
+    {
+        $rules = parent::defineRules();
+
+        $rules[] = [
+            ['channelId'], 'required', 'when' => function($model) {
+                return $model->enabled && $model->enableChannel;
+            },
+        ];
+
+        $rules[] = [
+            ['userId'], 'required', 'when' => function($model) {
+                return $model->enabled && $model->enableUser;
+            },
+        ];
+
+        $rules[] = [
+            ['playlistId'], 'required', 'when' => function($model) {
+                return $model->enabled && $model->enablePlaylist;
+            },
+        ];
+
+        $rules[] = [
+            ['searchTerms'], 'required', 'when' => function($model) {
+                return $model->enabled && $model->enableSearch;
+            },
+        ];
+
+        return $rules;
     }
 
 

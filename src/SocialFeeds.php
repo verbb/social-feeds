@@ -50,8 +50,6 @@ class SocialFeeds extends Plugin
 
         self::$plugin = $this;
 
-        $this->_registerComponents();
-        $this->_registerLogTarget();
         $this->_registerVariables();
         $this->_registerGraphQl();
 

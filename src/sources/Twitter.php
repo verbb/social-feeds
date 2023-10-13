@@ -48,37 +48,6 @@ class Twitter extends OAuthSource
     // Public Methods
     // =========================================================================
 
-    public function defineRules(): array
-    {
-        $rules = parent::defineRules();
-
-        $rules[] = [
-            ['userHandles'], 'required', 'when' => function($model) {
-                return $model->enabled && $model->enableUserHandles;
-            },
-        ];
-
-        $rules[] = [
-            ['hashtags'], 'required', 'when' => function($model) {
-                return $model->enabled && $model->enableHashtags;
-            },
-        ];
-
-        $rules[] = [
-            ['searchTerms'], 'required', 'when' => function($model) {
-                return $model->enabled && $model->enableSearch;
-            },
-        ];
-
-        $rules[] = [
-            ['listId'], 'required', 'when' => function($model) {
-                return $model->enabled && $model->enableLists;
-            },
-        ];
-
-        return $rules;
-    }
-
     public function getDefaultScopes(): array
     {
         return [
@@ -301,5 +270,40 @@ class Twitter extends OAuthSource
         }
         
         return $posts;
+    }
+
+
+    // Protected Methods
+    // =========================================================================
+
+    protected function defineRules(): array
+    {
+        $rules = parent::defineRules();
+
+        $rules[] = [
+            ['userHandles'], 'required', 'when' => function($model) {
+                return $model->enabled && $model->enableUserHandles;
+            },
+        ];
+
+        $rules[] = [
+            ['hashtags'], 'required', 'when' => function($model) {
+                return $model->enabled && $model->enableHashtags;
+            },
+        ];
+
+        $rules[] = [
+            ['searchTerms'], 'required', 'when' => function($model) {
+                return $model->enabled && $model->enableSearch;
+            },
+        ];
+
+        $rules[] = [
+            ['listId'], 'required', 'when' => function($model) {
+                return $model->enabled && $model->enableLists;
+            },
+        ];
+
+        return $rules;
     }
 }

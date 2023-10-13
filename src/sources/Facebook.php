@@ -41,31 +41,6 @@ class Facebook extends OAuthSource
     // Public Methods
     // =========================================================================
 
-    public function defineRules(): array
-    {
-        $rules = parent::defineRules();
-
-        $rules[] = [
-            ['endpoint'], 'required', 'when' => function($model) {
-                return $model->enabled;
-            },
-        ];
-
-        $rules[] = [
-            ['groupId'], 'required', 'when' => function($model) {
-                return $model->enabled && $model->endpoint === 'group' && $model->isConnected();
-            },
-        ];
-
-        $rules[] = [
-            ['pageId'], 'required', 'when' => function($model) {
-                return $model->enabled && $model->endpoint === 'page' && $model->isConnected();
-            },
-        ];
-
-        return $rules;
-    }
-
     public function getOAuthProviderConfig(): array
     {
         $config = parent::getOAuthProviderConfig();
@@ -504,5 +479,34 @@ class Facebook extends OAuthSource
         }
 
         return $posts;
+    }
+
+
+    // Protected Methods
+    // =========================================================================
+
+    protected function defineRules(): array
+    {
+        $rules = parent::defineRules();
+
+        $rules[] = [
+            ['endpoint'], 'required', 'when' => function($model) {
+                return $model->enabled;
+            },
+        ];
+
+        $rules[] = [
+            ['groupId'], 'required', 'when' => function($model) {
+                return $model->enabled && $model->endpoint === 'group' && $model->isConnected();
+            },
+        ];
+
+        $rules[] = [
+            ['pageId'], 'required', 'when' => function($model) {
+                return $model->enabled && $model->endpoint === 'page' && $model->isConnected();
+            },
+        ];
+
+        return $rules;
     }
 }

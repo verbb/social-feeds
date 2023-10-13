@@ -1,6 +1,7 @@
 <?php
 namespace verbb\socialfeeds\services;
 
+use verbb\socialfeeds\SocialFeeds;
 use verbb\socialfeeds\events\FeedEvent;
 use verbb\socialfeeds\models\Feed;
 use verbb\socialfeeds\records\Feed as FeedRecord;
@@ -91,7 +92,7 @@ class Feeds extends Component
         }
 
         if ($runValidation && !$feed->validate()) {
-            Craft::info('Feed not saved due to validation error.', __METHOD__);
+            SocialFeeds::info('Feed not saved due to validation error.');
             return false;
         }
 

@@ -2,7 +2,7 @@
     "name": "verbb/social-feeds",
     "description": "Aggregate social media content with feeds.",
     "type": "craft-plugin",
-    "version": "1.0.2",
+    "version": "2.0.0-beta.1",
     "keywords": [
         "craft",
         "cms",
@@ -24,22 +24,22 @@
         }
     ],
     "require": {
-        "php": "^8.0.2",
-        "craftcms/cms": "^4.0.0",
+        "php": "^8.2",
+        "craftcms/cms": "^5.0.0-alpha.1",
         "symfony/property-access": "^6.0",
         "symfony/serializer": "^6.0",
-        "verbb/auth": "^1.0.0",
-        "verbb/base": "^2.0.0"
+        "verbb/auth": "^2.0.0-beta.1",
+        "verbb/base": "^3.0.0-beta.1"
     },
     "autoload": {
         "psr-4": {
-          "verbb\\socialfeeds\\": "src/"
+            "verbb\\socialfeeds\\": "src/"
         }
     },
     "extra": {
         "name": "Social Feeds",
         "handle": "social-feeds",
-        "changelogUrl": "https://raw.githubusercontent.com/verbb/social-feeds/craft-4/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/verbb/social-feeds/craft-5/CHANGELOG.md",
         "class": "verbb\\socialfeeds\\SocialFeeds"
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace verbb\socialfeeds\services;
 
+use verbb\socialfeeds\SocialFeeds;
 use verbb\socialfeeds\sources as sourceTypes;
 use verbb\socialfeeds\base\SourceInterface;
 use verbb\socialfeeds\events\SourceEvent;
@@ -165,7 +166,7 @@ class Sources extends Component
         }
 
         if ($runValidation && !$source->validate()) {
-            Craft::info('Source not saved due to validation error.', __METHOD__);
+            SocialFeeds::info('Source not saved due to validation error.');
             return false;
         }
 

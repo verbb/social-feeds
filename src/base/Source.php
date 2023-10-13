@@ -81,29 +81,6 @@ abstract class Source extends SavableComponent implements SourceInterface
     // Public Methods
     // =========================================================================
 
-    public function defineRules(): array
-    {
-        $rules = parent::defineRules();
-
-        $rules[] = [['name', 'handle'], 'required'];
-        $rules[] = [['id'], 'number', 'integerOnly' => true];
-
-        $rules[] = [
-            ['handle'],
-            HandleValidator::class,
-            'reservedWords' => [
-                'dateCreated',
-                'dateUpdated',
-                'edit',
-                'id',
-                'title',
-                'uid',
-            ],
-        ];
-
-        return $rules;
-    }
-
     public function getProviderName(): string
     {
         return static::displayName();
@@ -178,6 +155,29 @@ abstract class Source extends SavableComponent implements SourceInterface
 
     // Protected Methods
     // =========================================================================
+
+    protected function defineRules(): array
+    {
+        $rules = parent::defineRules();
+
+        $rules[] = [['name', 'handle'], 'required'];
+        $rules[] = [['id'], 'number', 'integerOnly' => true];
+
+        $rules[] = [
+            ['handle'],
+            HandleValidator::class,
+            'reservedWords' => [
+                'dateCreated',
+                'dateUpdated',
+                'edit',
+                'id',
+                'title',
+                'uid',
+            ],
+        ];
+
+        return $rules;
+    }
 
     protected function setSettingCache(array $values): void
     {
