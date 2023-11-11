@@ -33,8 +33,8 @@ return [
     'sources' => [
         'facebook' => [
             'enabled' => true,
-            'clientId' => 'xxxxxxxxxxxx',
-            'clientSecret' => 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+            'clientId' => '••••••••••••••••••••••••••••',
+            'clientSecret' => '••••••••••••••••••••••••••••',
 
             // Add in any additional OAuth scopes
             'scopes' => [
@@ -48,8 +48,8 @@ return [
             ],
         ],
         'twitter' => [
-            'clientId' => 'xxxxxxxxxxxx',
-            'clientSecret' => 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+            'clientId' => '••••••••••••••••••••••••••••',
+            'clientSecret' => '••••••••••••••••••••••••••••',
         ],
     ],
 ];
