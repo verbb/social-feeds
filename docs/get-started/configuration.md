@@ -30,26 +30,29 @@ Supply your client configurations as per the below. The `key` for each item shou
 
 ```php
 return [
-    'sources' => [
-        'facebook' => [
-            'enabled' => true,
-            'clientId' => '••••••••••••••••••••••••••••',
-            'clientSecret' => '••••••••••••••••••••••••••••',
+    '*' => [
+        // ...
+        'sources' => [
+            'facebook' => [
+                'enabled' => true,
+                'clientId' => '••••••••••••••••••••••••••••',
+                'clientSecret' => '••••••••••••••••••••••••••••',
 
-            // Add in any additional OAuth scopes
-            'scopes' => [
-                'business_management',
-            ],
+                // Add in any additional OAuth scopes
+                'scopes' => [
+                    'business_management',
+                ],
 
-            // Add in any additional OAuth authorization options, used when redirecting
-            // to the provider to start the OAuth authorization process
-            'authorizationOptions' => [
-                'extra' => 'value',
+                // Add in any additional OAuth authorization options, used when redirecting
+                // to the provider to start the OAuth authorization process
+                'authorizationOptions' => [
+                    'extra' => 'value',
+                ],
             ],
-        ],
-        'twitter' => [
-            'clientId' => '••••••••••••••••••••••••••••',
-            'clientSecret' => '••••••••••••••••••••••••••••',
+            'twitter' => [
+                'clientId' => '••••••••••••••••••••••••••••',
+                'clientSecret' => '••••••••••••••••••••••••••••',
+            ],
         ],
     ],
 ];
