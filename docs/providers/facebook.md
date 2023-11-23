@@ -22,7 +22,7 @@ In order to fetch posts from a Facebook Page or Facebook Group, you must be an A
 1. Navigate to the **Facebook Login** section in the left-hand siderbar, click **Settings**.
 1. For the **Valid OAuth Redirect URIs** setting, enter the value from the **Redirect URI** field in Social Feeds.
 1. Click the **Save Changes** button.
-1. Navigate to **Settings** → **Basic** item in the left-hand sidebar.
+1. Navigate to **App Settings** → **Basic** item in the left-hand sidebar.
 1. Enter your domain name to the **App Domains** field.
 1. Enter your **Privacy Policy URL**, **Terms of Service URL** and **Site URL**.
 1. Click the **Save Changes** button.
@@ -38,6 +38,10 @@ In order to fetch posts from a Facebook Page or Facebook Group, you must be an A
 ### Step 5: Select your Facebook Page or Facebook Group
 1. Select either a **Facebook Page** or a **Facebook Group** that you'd like connected to.
 1. Click the **Save** button for the source.
+
+:::tip
+Ensure that you pick **Facebook Login for Business** and not **Facebook Login**, which are different products. If you must use **Facebook Login for Business**, you'll need to provide additional scopes. 
+:::
 
 ## Available Content
 Facebook provides the following types of content as posts.

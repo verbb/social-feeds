@@ -33,7 +33,7 @@ In order to fetch from Instagram, you must ensure the following:
     - Go to <a href="https://instagram.com/" target="_blank">Instagram</a> and login to the source you just invited.
     - Navigate to **(Profile Icon)** → **Edit Profile** → **Apps and Websites**.
     - Under the **Tester Invites** tab, accept the invitation.
-1. Navigate to **Settings** → **Basic**.
+1. Navigate to **App Settings** → **Basic**.
 1. Copy the **App ID** from Facebook and paste in the **Client ID** field in Social Feeds.
 1. Copy the **App Secret** from Facebook and paste in the **Client Secret** field in Social Feeds.
 
@@ -44,7 +44,7 @@ In order to fetch from Instagram, you must ensure the following:
 1. Navigate to the **Facebook Login** section in the left-hand siderbar, click **Settings**.
 1. For the **Valid OAuth Redirect URIs** setting, enter the value from the **Redirect URI** field in Social Feeds.
 1. Click the **Save Changes** button.
-1. Navigate to **Settings** → **Basic** item in the left-hand sidebar.
+1. Navigate to **App Settings** → **Basic** item in the left-hand sidebar.
 1. Enter your domain name to the **App Domains** field.
 1. Enter your **Privacy Policy URL**, **Terms of Service URL** and **Site URL**.
 1. Click the **Save Changes** button.
