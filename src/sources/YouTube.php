@@ -102,6 +102,7 @@ class YouTube extends OAuthSource
     {
         $options = parent::getAuthorizationUrlOptions();
         $options['access_type'] = 'offline';
+        $options['prompt'] = 'consent';
         
         return $options;
     }
