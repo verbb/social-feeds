@@ -2,9 +2,10 @@
 You can register your own Source Provider to add support for other social media platforms, or even extend an existing Source Provider.
 
 ```php
-use modules\MySourceProvider;
+namespace modules\sitemodule;
 
 use craft\events\RegisterComponentTypesEvent;
+use modules\sitemodule\MySourceProvider;
 use verbb\socialfeeds\services\Sources;
 use yii\base\Event;
 
@@ -17,7 +18,7 @@ Event::on(Sources::class, Sources::EVENT_REGISTER_SOURCE_TYPES, function(Registe
 Create the following class to house your Source Provider logic.
 
 ```php
-namespace modules;
+namespace modules\sitemodule;
 
 use Craft;
 use Throwable;

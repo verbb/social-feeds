@@ -69,11 +69,11 @@ class YouTube extends OAuthSource
 
     public function getAuthorizationUrlOptions(): array
     {
-        return [
-            // If we ever need to clear the cache on an authorized request
-            // 'prompt' => 'consent',
-            'access_type' => 'offline',
-        ];
+        $options = parent::getAuthorizationUrlOptions();
+        $options['access_type'] = 'offline';
+        $options['prompt'] = 'consent';
+        
+        return $options;
     }
 
     public function fetchPosts(): ?array

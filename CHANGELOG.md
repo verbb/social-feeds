@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.3 - 2023-12-08
+
+### Fixed
+- Fix YouTube offline access type.
+
 ## 1.0.2 - 2023-09-26
 
 ### Added
