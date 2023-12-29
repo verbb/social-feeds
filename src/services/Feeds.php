@@ -10,6 +10,7 @@ use Craft;
 use craft\base\MemoizableArray;
 use craft\db\Query;
 use craft\helpers\ArrayHelper;
+use craft\helpers\Db;
 
 use yii\base\Component;
 
@@ -171,9 +172,7 @@ class Feeds extends Component
             ]));
         }
 
-        Craft::$app->getDb()->createCommand()
-            ->delete('{{%socialfeeds_feeds}}', ['id' => $feed->id])
-            ->execute();
+        Db::delete('{{%socialfeeds_feeds}}', ['id' => $feed->id]);
 
         // Fire an 'afterDeleteFeed' event
         if ($this->hasEventHandlers(self::EVENT_AFTER_DELETE_FEED)) {

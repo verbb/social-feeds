@@ -6,6 +6,7 @@ use verbb\socialfeeds\models\Post;
 
 use Craft;
 use craft\base\SavableComponent;
+use craft\helpers\Db;
 use craft\helpers\Json;
 use craft\helpers\StringHelper;
 use craft\validators\HandleValidator;
@@ -186,9 +187,7 @@ abstract class Source extends SavableComponent implements SourceInterface
         $data = Json::encode($this->cache);
 
         // Direct DB update to keep it out of PC, plus speed
-        Craft::$app->getDb()->createCommand()
-            ->update('{{%socialfeeds_sources}}', ['cache' => $data], ['id' => $this->id])
-            ->execute();
+        Db::update('{{%socialfeeds_sources}}', ['cache' => $data], ['id' => $this->id]);
     }
 
     protected function getSettingCache(string $key): mixed

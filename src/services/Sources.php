@@ -14,6 +14,7 @@ use craft\errors\MissingComponentException;
 use craft\events\RegisterComponentTypesEvent;
 use craft\helpers\ArrayHelper;
 use craft\helpers\Component as ComponentHelper;
+use craft\helpers\Db;
 use craft\helpers\Json;
 
 use yii\base\Component;
@@ -258,9 +259,7 @@ class Sources extends Component
             ]));
         }
 
-        Craft::$app->getDb()->createCommand()
-            ->delete('{{%socialfeeds_sources}}', ['id' => $source->id])
-            ->execute();
+        Db::delete('{{%socialfeeds_sources}}', ['id' => $source->id]);
 
         // Fire an 'afterDeleteSource' event
         if ($this->hasEventHandlers(self::EVENT_AFTER_DELETE_SOURCE)) {
