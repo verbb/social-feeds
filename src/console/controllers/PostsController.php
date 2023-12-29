@@ -3,10 +3,14 @@ namespace verbb\socialfeeds\console\controllers;
 
 use verbb\socialfeeds\SocialFeeds;
 
-use yii\console\Controller;
-use yii\console\ExitCode;
-use yii\helpers\Console;
+use craft\console\Controller;
+use craft\helpers\Console;
 
+use yii\console\ExitCode;
+
+/**
+ * Manages Social Feeds Posts.
+ */
 class PostsController extends Controller
 {
     // Properties
@@ -38,6 +42,9 @@ class PostsController extends Controller
         return $options;
     }
 
+    /**
+     * Refresh a source's posts.
+     */
     public function actionRefresh(): int
     {
         if (!$this->source) {
