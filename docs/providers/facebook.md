@@ -40,8 +40,29 @@ In order to fetch posts from a Facebook Page or Facebook Group, you must be an A
 1. Click the **Save** button for the source.
 
 :::tip
-Ensure that you pick **Facebook Login for Business** and not **Facebook Login**, which are different products. If you must use **Facebook Login for Business**, you'll need to provide additional scopes. 
+Ensure that you pick **Facebook Login** and not **Facebook Login for Business**, which are different products. If you must use **Facebook Login for Business**, you'll need to provide additional scopes, as per the below. 
 :::
+
+### Facebook Login for Business
+If you require the use of the **Facebook Login for Business** product in your Facebook App, you may do so, but note that you'll need to supply additional scopes in your [configuration](docs:get-started/configuration).
+
+```php
+<?php
+
+return [
+    '*' => [
+        // ...
+        'sources' => [
+            'facebook' => [
+                // ...
+                'scopes' => [
+                    'business_management',
+                ],
+            ],
+        ],
+    ]
+];
+```
 
 ## Available Content
 Facebook provides the following types of content as posts.
@@ -54,3 +75,4 @@ Facebook provides the following types of content as posts.
 - Photos (Photos from your Facebook Photos group)
 - Videos (Videos from your Facebook Videos group)
 - Events (Events from your Facebook Events group)
+
