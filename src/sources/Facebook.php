@@ -81,7 +81,6 @@ class Facebook extends OAuthSource
             'pages_read_engagement',
             'pages_manage_metadata',
             'pages_read_user_content',
-            'groups_access_member_info',
         ];
     }
 
