@@ -19,9 +19,9 @@ class CacheUtility extends Utility
         return 'social-feeds-cache';
     }
 
-    public static function iconPath(): ?string
+    public static function icon(): ?string
     {
-        return Craft::getAlias('@vendor/verbb/social-feeds/src/icon-mask.svg');
+        return '@verbb/socialfeeds/icon-mask.svg';
     }
 
     public static function contentHtml(): string
