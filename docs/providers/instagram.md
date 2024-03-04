@@ -28,8 +28,11 @@ In order to fetch from Instagram, you must ensure the following:
 1. Enter the name of your new Facebook app, and click the **Click Create App** button.
 1. For the **Valid OAuth Redirect URIs** setting, enter the value from the **Redirect URI** field in Social Feeds.
 1. For the **Deauthorize Callback URL** and **Data Deletion Request Callback URL** settings, enter your website URL.
+1. Under the **User Token Generator** section, click the **Add or Remove Instagram Testers** button.
+1. Click the **Add People** button.
+1. Select **Instagram Tester** option and enter your Instagram source’s username(s).
 1. Navigate to **App Roles** → **Roles** in the left-hand sidebar.
-1. Under the **Instagram Testers** section, click the **Add Instagram Testers** button.
+1. Under the **User Token Generator** section, click the **Add Instagram Testers** button.
 1. Provide your Instagram source’s username(s).
 1. Click the **Submit** button to send the invitation.
     - Go to <a href="https://instagram.com/" target="_blank">Instagram</a> and login to the source you just invited.
