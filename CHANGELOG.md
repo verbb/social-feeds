@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.4 - 2024-02-11
+
+### Fixed
+- Fix Facebook source not connecting.
+
 ## 1.0.3 - 2023-12-08
 
 ### Fixed
