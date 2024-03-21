@@ -66,6 +66,10 @@ $(document).on('click', '[data-refresh-settings]', function(e) {
 
                 if (response.data.error) {
                     errorMessage += `<br><code>${response.data.error}</code>`;
+
+                    if (response.data.file && response.data.line) {
+                        errorMessage += `<br><code>${response.data.file}:${response.data.line}</code>`;
+                    }
                 }
 
                 setError(errorMessage)
@@ -80,6 +84,10 @@ $(document).on('click', '[data-refresh-settings]', function(e) {
 
             if (error.response && error.response.data && error.response.data.error) {
                 errorMessage += `<br><code>${error.response.data.error}</code>`;
+
+                if (error.response.data.file && error.response.data.line) {
+                    errorMessage += `<br><code>${error.response.data.file}:${error.response.data.line}</code>`;
+                }
             }
 
             setError(errorMessage);
@@ -173,6 +181,10 @@ $(document).on('click', '.sf-refresh-btn', function(e) {
 
                 if (response.data.error) {
                     errorMessage += `<br><code>${response.data.error}</code>`;
+
+                    if (response.data.file && response.data.line) {
+                        errorMessage += `<br><code>${response.data.file}:${response.data.line}</code>`;
+                    }
                 }
 
                 setError(errorMessage)
@@ -187,6 +199,10 @@ $(document).on('click', '.sf-refresh-btn', function(e) {
 
             if (error.response && error.response.data && error.response.data.error) {
                 errorMessage += `<br><code>${error.response.data.error}</code>`;
+
+                if (error.response.data.file && error.response.data.line) {
+                    errorMessage += `<br><code>${error.response.data.file}:${error.response.data.line}</code>`;
+                }
             }
 
             setError(errorMessage);
