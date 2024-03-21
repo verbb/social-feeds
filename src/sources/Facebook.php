@@ -234,7 +234,7 @@ class Facebook extends OAuthSource
                 ];  
             } else if ($this->enablePhotos) {
                 $postType = 'photo';
-                $endpoint[] = 'photos?type=uploaded';
+                $endpoint[] = 'photos';
 
                 $fields = [
                     'album',
