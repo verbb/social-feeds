@@ -120,7 +120,7 @@ class Facebook extends OAuthSource
                     if ($pageAccessToken && $token = $this->getToken()) {
                         $token->accessToken = $pageAccessToken;
 
-                        Auth::$plugin->getTokens()->saveToken($token);
+                        Auth::getInstance()->getTokens()->saveToken($token);
                     }
                 } catch (Throwable $e) {
                     self::apiError($this, $e, false);

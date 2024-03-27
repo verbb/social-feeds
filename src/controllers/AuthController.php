@@ -46,7 +46,7 @@ class AuthController extends Controller
             // Keep track of which source instance is for, so we can fetch it in the callback
             Session::set('sourceHandle', $sourceHandle);
 
-            return Auth::$plugin->getOAuth()->connect('social-feeds', $source);
+            return Auth::getInstance()->getOAuth()->connect('social-feeds', $source);
         } catch (Throwable $e) {
             SocialFeeds::error('Unable to authorize connect “{source}”: “{message}” {file}:{line}', [
                 'source' => $sourceHandle,
@@ -80,7 +80,7 @@ class AuthController extends Controller
 
         try {
             // Fetch the access token from the source and create a Token for us to use
-            $token = Auth::$plugin->getOAuth()->callback('social-feeds', $source);
+            $token = Auth::getInstance()->getOAuth()->callback('social-feeds', $source);
 
             if (!$token) {
                 Session::setError('social-feeds', Craft::t('social-feeds', 'Unable to fetch token.'), true);
@@ -90,7 +90,7 @@ class AuthController extends Controller
 
             // Save the token to the Auth plugin, with a reference to this source
             $token->reference = $source->id;
-            Auth::$plugin->getTokens()->upsertToken($token);
+            Auth::getInstance()->getTokens()->upsertToken($token);
         } catch (Throwable $e) {
             $error = Craft::t('social-feeds', 'Unable to process callback for “{source}”: “{message}” {file}:{line}', [
                 'source' => $sourceHandle,
@@ -121,7 +121,7 @@ class AuthController extends Controller
         }
 
         // Delete all tokens for this source
-        Auth::$plugin->getTokens()->deleteTokenByOwnerReference('social-feeds', $source->id);
+        Auth::getInstance()->getTokens()->deleteTokenByOwnerReference('social-feeds', $source->id);
 
         return $this->asModelSuccess($source, Craft::t('social-feeds', '{provider} disconnected.', ['provider' => $source->providerName]), 'source');
     }
