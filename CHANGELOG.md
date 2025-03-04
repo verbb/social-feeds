@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.5 - 2025-03-04
+
+### Changed
+- Update support for Twitter to X.
+- Improve accessibility of some items for posts.
+
 ## 2.0.4 - 2025-02-05
 
 ### Changed
