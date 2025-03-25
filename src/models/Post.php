@@ -104,13 +104,17 @@ class Post extends Model
 
     public function getImage(): ?array
     {
+        $providerName = '';
         $url = $this->images[0]->url ?? null;
 
         if (!$url) {
             return null;
         }
 
-        $providerName = $this?->getSource()::displayName() ?? '';
+        if ($source = $this->getSource()) {
+            $providerName = $source::displayName();
+        }
+
         $name = $this->author->name ?? null;
 
         $altText = 'Photo from ' . $name . ' on ' . $providerName . ' at ' . $this->dateCreated->format('Y-m-d H:i:s');
