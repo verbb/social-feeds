@@ -42,14 +42,14 @@
             if (value) {
                 return '<span class="status on"></span>' + Craft.t('social-feeds', 'Enabled');
             } else {
-                return '<span class="status"></span>' + Craft.t('social-feeds', 'Disabled');
+                return '<span class="status disabled"></span>' + Craft.t('social-feeds', 'Disabled');
             }
         } },
         { name: 'connected', title: Craft.t('app', 'Connected'), callback: function(value) {
             if (value) {
                 return '<span class="status on"></span>' + Craft.t('social-feeds', 'Connected');
             } else {
-                return '<span class="status"></span>' + Craft.t('social-feeds', 'Disconnected');
+                return '<span class="status disabled"></span>' + Craft.t('social-feeds', 'Disconnected');
             }
         } },
         { name: 'provider', title: Craft.t('app', 'Provider'), callback: function(provider) {
