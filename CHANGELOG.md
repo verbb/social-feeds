@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.11 - 2025-05-01
+
+### Fixed
+- Fix an error with fetching post image when provider is not set.
+- Fix an error with Twitter/X source.
+
 ## 1.0.10 - 2025-03-04
 
 ### Changed
