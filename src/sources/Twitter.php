@@ -265,7 +265,7 @@ class Twitter extends OAuthSource
                 $posts[] = new Post([
                     'sourceId' => $this->id,
                     'sourceHandle' => $this->handle,
-                    'sourceType' => 'x',
+                    'sourceType' => self::$providerHandle,
                     'id' => $item['id'] ?? null,
                     'text' => $text,
                     'url' => 'https://twitter.com/' . ($author->username ?? '') . '/status/' . $item['id'],
