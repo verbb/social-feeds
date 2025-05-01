@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.6 - 2025-05-01
+
+### Fixed
+- Fix an error with fetching post image when provider is not set.
+- Fix an error with Twitter/X source.
+- Fix status indicator for various UI elements.
+
 ## 2.0.5 - 2025-03-04
 
 ### Changed
