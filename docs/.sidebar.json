@@ -24,6 +24,7 @@
         "children": [
             "providers/facebook",
             "providers/instagram",
+            "providers/linkedin",
             "providers/twitter",
             "providers/youtube"
         ]
