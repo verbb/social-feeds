@@ -50,6 +50,7 @@ class Sources extends Component
         $sourceTypes = [
             sourceTypes\Facebook::class,
             sourceTypes\Instagram::class,
+            sourceTypes\LinkedIn::class,
             sourceTypes\Twitter::class,
             sourceTypes\YouTube::class,
         ];

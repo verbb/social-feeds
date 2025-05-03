@@ -1,0 +1,48 @@
+{% import '_includes/forms' as forms %}
+{% import 'verbb-base/_macros' as macros %}
+{% import 'social-feeds/_macros' as customForms %}
+
+{% include 'social-feeds/sources/_oauth' %}
+
+<hr>
+
+{% set inputs %}
+{% set inputKey = random() %}
+
+<div class="sf-switch-group" data-toggle-group="{{ "source-type-#{inputKey}" }} ">
+    <div>
+        <div class="sf-switch-label">{{ 'Company Posts' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Posts from your LinkedIn company page.' | t('social-feeds') }}</div>
+    </div>
+
+    <div class="sf-switch">
+        {{ forms.lightswitch({
+            name: 'enableCompany',
+            on: source.enableCompany,
+            small: true,
+            toggle: ".source-type-#{inputKey}-company",
+        }) }}
+    </div>
+</div>
+
+<div class="{{ "source-type-#{inputKey}-company" }} {{ not source.enableCompany ? 'hidden' }}">
+    <div class="sf-nested-settings">
+        {{ forms.textField({
+            label: 'Company URL' | t('social-feeds'),
+            instructions: 'Your full company URL.' | t('social-feeds'),
+            name: 'companyUrl',
+            required: true,
+            placeholder: 'e.g. https://www.linkedin.com/company/my_company',
+            value: source.companyUrl ?? '',
+            warning: macros.configWarning("sources.#{source.handle}.companyUrl", 'social-feeds'),
+            errors: source.getErrors('companyUrl'),
+        }) }}
+    </div>
+</div>
+
+{% endset %}
+
+{{ forms.field({
+    label: 'Source Type' | t('social-feeds'),
+    instructions: 'Select what types of content this source should provide.' | t('social-feeds'),
+}, inputs) }}

@@ -15,6 +15,7 @@ Social Feeds is a Craft CMS plugin for fetching content from social media and di
 ## Supports
 - Facebook
 - Instagram
+- LinkedIn
 - Twitter
 - YouTube
 
