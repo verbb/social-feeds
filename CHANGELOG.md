@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.12 - 2025-05-20
+
+### Added
+- Add LinkedIn source.
+
 ## 1.0.11 - 2025-05-01
 
 ### Fixed
