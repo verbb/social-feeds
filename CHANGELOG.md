@@ -64,6 +64,11 @@
 - Update `symfony/property-access` dependency.
 - Fix an error when uninstalling.
 
+## 1.0.14 - 2025-07-18
+
+### Changed
+- Update `symfony/property-access` and `symfony/serializer` dependency.
+
 ## 1.0.13 - 2025-07-18
 
 ### Changed
