@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.9 - 2025-07-18
+
+### Changed
+- Update `symfony/property-access` and `symfony/serializer` dependency.
+
 ## 2.0.8 - 2025-07-18
 
 ### Changed
