@@ -59,6 +59,11 @@
 - Update `symfony/property-access` dependency.
 - Fix an error when uninstalling.
 
+## 1.0.13 - 2025-07-18
+
+### Changed
+- Update English translations.
+
 ## 1.0.12 - 2025-05-20
 
 ### Added
