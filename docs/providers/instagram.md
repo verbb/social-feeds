@@ -17,9 +17,10 @@ In order to fetch from Instagram, you must ensure the following:
 ### Step 1: Register a Facebook App
 1. Go to the <a href="https://developers.facebook.com/apps/" target="_blank">Meta for Developers</a> page.
 1. Click the **Create App** button.
-1. Select **I don’t want to connect a business portfolio yet.** and click the **Next** button.
-1. Select **Other** and click the **Next** button.
-1. Select **Business** and click the **Next** button.
+1. Fill in the app details and click the **Next** button.
+1. Select **Others** → **Other** and click the **Next** button.
+1. If asked to connect to a business portfolio, select **I don’t want to connect a business portfolio yet.** and click the **Next** button.
+1. Select **Business** as the app type and click the **Next** button.
 1. Fill in the **App Name** and **App Contact Email**. The **Business Portfolio** is optional.
 
 ### Step 2: Setup Instagram Graph API
