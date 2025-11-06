@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.15 - 2025-11-06
+
+### Changed
+- Update Linkedin API version.
+
 ## 1.0.14 - 2025-07-18
 
 ### Changed
