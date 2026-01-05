@@ -55,13 +55,19 @@ class PostsController extends Controller
 
         $source = SocialFeeds::$plugin->getSources()->getSourceByHandle($this->source, true, true);
 
+        if (!$source) {
+            $this->stderr('Invalid source handle specified.' . PHP_EOL, Console::FG_RED);
+
+            return ExitCode::UNSPECIFIED_ERROR;
+        }
+
         if ($this->limit) {
             SocialFeeds::$plugin->getSettings()->postsLimit = $this->limit;
         }
 
-        if ($source) {
-            SocialFeeds::$plugin->getPosts()->refreshPosts($source, $this);
-        }
+        SocialFeeds::$plugin->getPosts()->refreshPosts($source, $this);
+
+        $this->stdout("Source handle: $this->source was refreshed successfully!" . PHP_EOL, Console::FG_GREEN);
 
         return ExitCode::OK;
     }
