@@ -1,12 +1,14 @@
 <?php
 namespace verbb\socialfeeds\console\controllers;
 
+use Throwable;
 use verbb\socialfeeds\SocialFeeds;
 
 use craft\console\Controller;
 use craft\helpers\Console;
 
 use yii\console\ExitCode;
+use yii\helpers\BaseConsole;
 
 /**
  * Manages Social Feeds Posts.
@@ -68,6 +70,28 @@ class PostsController extends Controller
         SocialFeeds::$plugin->getPosts()->refreshPosts($source, $this);
 
         $this->stdout("Source handle: $this->source was refreshed successfully!" . PHP_EOL, Console::FG_GREEN);
+
+        return ExitCode::OK;
+    }
+
+    /**
+     * Refresh all enabled sources
+     *
+     * @throws Throwable
+     * @return int
+     */
+    public function actionRefreshEnabledSources(): int
+    {
+        $sources = SocialFeeds::$plugin->getSources()->getAllEnabledSources();
+
+        foreach ($sources as $source) {
+
+            $this->stdout("Refreshing posts for source: $source->handle" . PHP_EOL, Console::FG_YELLOW);
+
+            SocialFeeds::$plugin->getPosts()->refreshPosts($source, $this);
+        }
+
+        $this->stdout('All caches for sources cleared successfully' . PHP_EOL, Console::FG_GREEN);
 
         return ExitCode::OK;
     }
