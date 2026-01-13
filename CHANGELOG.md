@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.11 - 2026-01-13
+
+### Added
+- Add additional action for refresh all enabled sources without handle.
+- Add additional console output for post refresh console command.
+
 ## 2.0.10 - 2025-11-06
 
 ### Changed
