@@ -1,4 +1,4 @@
-<p align="center"><img src="https://verbb.imgix.net/plugins/social-feeds/social-feeds-icon.svg" width="100" height="100" alt="Social Feeds icon"></p>
+<p align="center"><img src="https://assets.verbb.io/plugins/social-feeds/social-feeds-icon.svg" width="100" height="100" alt="Social Feeds icon"></p>
 <h1 align="center">Social Feeds for Craft CMS</h1>
 
 Social Feeds is a Craft CMS plugin for fetching content from social media and displaying it on your site.
