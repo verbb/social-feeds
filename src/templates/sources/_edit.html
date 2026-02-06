@@ -148,7 +148,7 @@
             </div>
 
             <div class="input ltr">
-                <a class="btn small formsubmit" data-action="social-feeds/auth/connect" data-param="source" data-value="{{ source.handle }}" data-redirect="{{ ('social-feeds/sources/' ~ source.handle) | hash }}">{{ 'Connect' | t('social-feeds') }}</a>
+                <a class="btn small formsubmit" data-action="social-feeds/auth/connect" data-param="source" data-value="{{ source.handle }}" data-redirect="{{ '{cpEditUrl}' | hash }}">{{ 'Connect' | t('social-feeds') }}</a>
             </div>
         </div>
     {% endif %}
