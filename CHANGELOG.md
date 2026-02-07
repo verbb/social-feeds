@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.12 - 2026-02-07
+
+### Fixed
+- Fix a redirect error when connecting to a source in the control panel.
+- Fix an error when creating a new source.
+
 ## 2.0.11 - 2026-01-13
 
 ### Added
