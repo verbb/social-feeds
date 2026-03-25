@@ -13,5 +13,6 @@ class Settings extends Model
     public bool $enableCache = true;
     public mixed $cacheDuration = 'PT6H';
     public int $postsLimit = 50;
+    public ?string $redirectUri = null;
 
 }
