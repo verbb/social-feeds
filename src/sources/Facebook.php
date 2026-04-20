@@ -32,6 +32,7 @@ class Facebook extends OAuthSource
     public bool $enableProfile = true;
     public bool $enablePhotos = false;
     public bool $enableVideos = false;
+    public bool $enableReels = false;
     public bool $enableEvents = false;
     public ?string $pageId = null;
 
@@ -231,56 +232,12 @@ class Facebook extends OAuthSource
                 $postType = 'video';
                 $endpoint[] = 'videos';
 
-                $fields = [
-                    // 'ad_breaks',
-                    // 'backdated_time',
-                    // 'backdated_time_granularity',
-                    'content_category',
-                    'content_tags',
-                    'created_time',
-                    'custom_labels',
-                    'description',
-                    'embed_html',
-                    // 'embeddable',
-                    'event',
-                    // 'format',
-                    'from{picture,id,name,link}',
-                    // 'icon',
-                    'id',
-                    // 'is_crosspost_video',
-                    // 'is_crossposting_eligible',
-                    // 'is_episode',
-                    // 'is_instagram_eligible',
-                    // 'is_reference_only',
-                    'length',
-                    'live_status',
-                    // 'music_video_copyright',
-                    'place',
-                    'post_views',
-                    // 'premiere_living_room_status',
-                    // 'privacy',
-                    'published',
-                    // 'scheduled_publish_time',
-                    'source',
-                    // 'status',
-                    'title',
-                    'universal_video_id',
-                    'updated_time',
-                    'views',
+                $fields = $this->_facebookVideoFields();
+            } else if ($this->enableReels) {
+                $postType = 'reel';
+                $endpoint[] = 'video_reels';
 
-                    'captions',
-                    'comments.summary(true).limit(0)',
-                    // 'crosspost_shared_pages',
-                    'likes.summary(true).limit(0)',
-                    'permalink_url',
-                    'picture',
-                    // 'poll_settings',
-                    // 'polls',
-                    // 'sponsor_tags',
-                    'tags',
-                    'thumbnails',
-                    'video_insights',
-                ];
+                $fields = $this->_facebookVideoFields();
             } else if ($this->enableEvents) {
                 $postType = 'event';
                 $endpoint[] = 'events';
@@ -393,14 +350,31 @@ class Facebook extends OAuthSource
                     ];
                 }
 
-                if ($postType === 'video') {
-                    $images[] = new PostMedia([
-                        'type' => PostMedia::TYPE_IMAGE,
-                        'id' => $item['thumbnails']['data'][0]['id'] ?? null,
-                        'url' => $item['thumbnails']['data'][0]['uri'] ?? null,
-                        'width' => $item['thumbnails']['data'][0]['width'] ?? null,
-                        'height' => $item['thumbnails']['data'][0]['height'] ?? null,
-                    ]);
+                if ($postType === 'video' || $postType === 'reel') {
+                    $thumb = $item['thumbnails']['data'][0] ?? null;
+
+                    if ($thumb && !empty($thumb['uri'])) {
+                        $images[] = new PostMedia([
+                            'type' => PostMedia::TYPE_IMAGE,
+                            'id' => $thumb['id'] ?? null,
+                            'url' => $thumb['uri'],
+                            'width' => $thumb['width'] ?? null,
+                            'height' => $thumb['height'] ?? null,
+                        ]);
+                    } else {
+                        $pictureUrl = null;
+
+                        if (!empty($item['picture'])) {
+                            $pictureUrl = is_string($item['picture']) ? $item['picture'] : ($item['picture']['data']['url'] ?? null);
+                        }
+
+                        if ($pictureUrl) {
+                            $images[] = new PostMedia([
+                                'type' => PostMedia::TYPE_IMAGE,
+                                'url' => $pictureUrl,
+                            ]);
+                        }
+                    }
 
                     $videos[] = new PostMedia([
                         'type' => PostMedia::TYPE_VIDEO,
@@ -412,6 +386,10 @@ class Facebook extends OAuthSource
                         'length' => $item['length'] ?? null,
                         'views' => $item['views'] ?? null,
                     ];
+
+                    if ($postType === 'reel') {
+                        $meta['reel'] = true;
+                    }
                 }
 
                 if ($postType === 'event') {
@@ -428,13 +406,19 @@ class Facebook extends OAuthSource
                     $item['message'] = $item['description'] ?? null;
                 }
 
+                $postText = $item['message'] ?? null;
+                
+                if ($postType === 'video' || $postType === 'reel') {
+                    $postText = $item['description'] ?? $item['title'] ?? $postText;
+                }
+
                 $posts[] = new Post([
                     'sourceId' => $this->id,
                     'sourceHandle' => $this->handle,
                     'sourceType' => self::$providerHandle,
                     'id' => $item['id'] ?? null,
-                    'title' => $item['name'] ?? null,
-                    'text' => $item['message'] ?? null,
+                    'title' => $item['name'] ?? ($item['title'] ?? null),
+                    'text' => $postText,
                     'url' => $item['permalink_url'] ?? null,
                     'postType' => $postType,
                     'likes' => $item['likes']['summary']['total_count'] ?? null,
@@ -467,6 +451,40 @@ class Facebook extends OAuthSource
 
     // Protected Methods
     // =========================================================================
+
+    protected function _facebookVideoFields(): array
+    {
+        return [
+            'content_category',
+            'content_tags',
+            'created_time',
+            'custom_labels',
+            'description',
+            'embed_html',
+            'event',
+            'from{picture,id,name,link}',
+            'id',
+            'length',
+            'live_status',
+            'place',
+            'post_views',
+            'published',
+            'source',
+            'title',
+            'universal_video_id',
+            'updated_time',
+            'views',
+
+            'captions',
+            'comments.summary(true).limit(0)',
+            'likes.summary(true).limit(0)',
+            'permalink_url',
+            'picture',
+            'tags',
+            'thumbnails',
+            'video_insights',
+        ];
+    }
 
     protected function defineRules(): array
     {

@@ -46,4 +46,5 @@ Facebook provides the following types of content as posts.
 - Page Feed (Posts from your Facebook page)
 - Photos (Photos from your Facebook Photos page)
 - Videos (Videos from your Facebook Videos page)
+- Reels (Reels from your Facebook page)
 - Events (Events from your Facebook Events page)

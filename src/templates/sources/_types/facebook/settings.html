@@ -63,6 +63,21 @@
 
 <div class="sf-switch-group" data-toggle-group="{{ "source-type-#{inputKey}" }} ">
     <div>
+        <div class="sf-switch-label">{{ 'Reels' | t('social-feeds') }}</div>
+        <div class="sf-switch-text">{{ 'Reels published to your Facebook page.' | t('social-feeds') }}</div>
+    </div>
+
+    <div class="sf-switch">
+        {{ forms.lightswitch({
+            name: 'enableReels',
+            on: source.enableReels,
+            small: true,
+        }) }}
+    </div>
+</div>
+
+<div class="sf-switch-group" data-toggle-group="{{ "source-type-#{inputKey}" }} ">
+    <div>
         <div class="sf-switch-label">{{ 'Events' | t('social-feeds') }}</div>
         <div class="sf-switch-text">{{ 'Events from your Facebook Events page.' | t('social-feeds') }}</div>
     </div>
