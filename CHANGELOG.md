@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.14 - 2026-04-29
+
+### Added
+- Add Reels support for Facebook.
+
 ## 2.0.13 - 2026-03-28
 
 ### Added
