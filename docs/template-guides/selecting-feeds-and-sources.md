@@ -1,5 +1,8 @@
-# Available Variables
-The following methods are available to call in your Twig templates:
+# Selecting Feeds and Sources
+
+Choose a feed by the handle configured for it. A feed describes what you want to display; its sources provide the connected accounts. Use enabled-source lookups when disabled connections should be excluded.
+
+## Calls Used in This Task
 
 ### `craft.socialFeeds.getAllFeeds()`
 Returns a collection of [Feed](docs:developers/feed) objects.
@@ -28,8 +31,3 @@ Returns a [Source](docs:developers/source) object by its ID.
 ### `craft.socialFeeds.getSourceByHandle(handle)`
 Returns a [Source](docs:developers/source) object by its handle.
 
-### `craft.socialFeeds.getPosts(feedHandle, options)`
-Returns a collection of [Post](docs:developers/post) objects for the provided [Feed](docs:developers/feed) handle.
-
-### `craft.socialFeeds.renderPosts(feedHandle, options)`
-Returns the HTML of rendered [Post](docs:developers/post) objects for the provided [Feed](docs:developers/feed) handle.

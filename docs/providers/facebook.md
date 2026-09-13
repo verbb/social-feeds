@@ -36,7 +36,7 @@ In order to fetch posts from a Facebook Page, you must be an Admin for the page 
 1. Ensure you pick the Facebook Business account associated with the Page you need to access.
 1. Ensure you pick the Facebook Page you have admin access to.
 
-### Step 5: Select your Facebook Page
+### Step 5: Select Your Facebook Page
 1. Select a **Facebook Page** that you'd like connected to.
 1. Click the **Save** button for the source.
 

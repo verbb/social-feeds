@@ -7,7 +7,7 @@ You'll need to either fetch posts from a [Feed](docs:feature-tour/feeds) or a [S
 ```twig
 {# Get the source by its handle #}
 {% set source = craft.socialFeeds.getSourceByHandle('mySourceHandle') %}
-{% set posts = source.getPosts() %}
+{% set posts = source ? source.getPosts() : [] %}
 
 {% for post in posts %}
     ID: {{ post.id }}<br>
@@ -23,7 +23,7 @@ You'll need to either fetch posts from a [Feed](docs:feature-tour/feeds) or a [S
 {% endfor %}
 ```
 
-It'll be up to you on how to render your Posts!
+Use this approach when your site's templates should control the markup for each post.
 
 ## Rendering Posts
 Another approach is to let Social Feeds handle the rendering of your Posts for you. This can only be done for a [Feed](docs:feature-tour/feeds).
@@ -32,7 +32,7 @@ Another approach is to let Social Feeds handle the rendering of your Posts for y
 {{ craft.socialFeeds.renderPosts('myFeedHandle') }}
 ```
 
-This will render your Posts as cards, with all the CSS applied without having to lift a finger.
+This will render your Posts as cards, with the plugin’s styles applied.
 
 ### Render Options
 You can also pass in some additional options to render.

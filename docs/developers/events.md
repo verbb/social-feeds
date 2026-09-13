@@ -3,7 +3,7 @@ Social Feeds provides a collection of events for extending its functionality. Mo
 
 ## Feed Events
 
-### The `beforeSaveFeed` event
+### The `beforeSaveFeed` Event
 The event that is triggered before a feed is saved.
 
 ```php
@@ -18,7 +18,7 @@ Event::on(Feeds::class, Feeds::EVENT_BEFORE_SAVE_FEED, function(FeedEvent $event
 });
 ```
 
-### The `afterSaveFeed` event
+### The `afterSaveFeed` Event
 The event that is triggered after a feed is saved.
 
 ```php
@@ -33,7 +33,7 @@ Event::on(Feeds::class, Feeds::EVENT_AFTER_SAVE_FEED, function(FeedEvent $event)
 });
 ```
 
-### The `beforeDeleteFeed` event
+### The `beforeDeleteFeed` Event
 The event that is triggered before a feed is deleted.
 
 ```php
@@ -47,7 +47,7 @@ Event::on(Feeds::class, Feeds::EVENT_BEFORE_DELETE_FEED, function(FeedEvent $eve
 });
 ```
 
-### The `afterDeleteFeed` event
+### The `afterDeleteFeed` Event
 The event that is triggered after a feed is deleted.
 
 ```php
@@ -63,7 +63,7 @@ Event::on(Feeds::class, Feeds::EVENT_AFTER_DELETE_FEED, function(FeedEvent $even
 
 ## Source Events
 
-### The `beforeSaveSource` event
+### The `beforeSaveSource` Event
 The event that is triggered before a source is saved.
 
 ```php
@@ -78,7 +78,7 @@ Event::on(Sources::class, Sources::EVENT_BEFORE_SAVE_SOURCE, function(SourceEven
 });
 ```
 
-### The `afterSaveSource` event
+### The `afterSaveSource` Event
 The event that is triggered after a source is saved.
 
 ```php
@@ -93,7 +93,7 @@ Event::on(Sources::class, Sources::EVENT_AFTER_SAVE_SOURCE, function(SourceEvent
 });
 ```
 
-### The `beforeDeleteSource` event
+### The `beforeDeleteSource` Event
 The event that is triggered before a source is deleted.
 
 ```php
@@ -107,7 +107,7 @@ Event::on(Sources::class, Sources::EVENT_BEFORE_DELETE_SOURCE, function(SourceEv
 });
 ```
 
-### The `afterDeleteSource` event
+### The `afterDeleteSource` Event
 The event that is triggered after a source is deleted.
 
 ```php

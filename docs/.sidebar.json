@@ -33,7 +33,8 @@
         "title": "Template Guides",
         "collapsable": false,
         "children": [
-            "template-guides/available-variables",
+            "template-guides/selecting-feeds-and-sources",
+            "template-guides/displaying-feed-posts",
             "template-guides/rendering-posts"
         ]
     },

@@ -47,7 +47,7 @@ In order to fetch from Instagram, you must ensure the following:
 1. Ensure you pick the Facebook Page that has admin access to your Instagram account.
 1. Ensure you pick the Instagram Account to access.
 
-### Step 5: Select your Instagram Business Account
+### Step 5: Select Your Instagram Business Account
 1. Select the **Instagram Business Account** that is linked to your Facebook page, to pull content from.
 1. Click the **Save** button for the account.
 

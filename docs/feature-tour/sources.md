@@ -4,7 +4,7 @@ A Source allows you to connect to a social media provider to fetch Posts from. S
 ## Provider Settings
 Each provider will be different, but almost all require OAuth authentication. Create a Source and follow the documentation for the provider to get your Client ID/Secret credentials. Once configured, connect to the provider, going through the OAuth handshake to retrieve a token.
 
-Once connected, you'll be able to define what content you want to fetch from the provider. For example, Facebook can fetch Posts from a public Facebook Page, or just Videos. For Twitter, you can fetch Posts from a user, or from a nominated hashtag.
+Once connected, select the content supported by that provider and account. The available choices depend on the provider's API and permissions. Check the provider's settings rather than assuming that every source can retrieve posts by user, page or hashtag.
 
 ## Fetching Source Posts
 To fetch the Posts for a source, use `source.getPosts()`.
@@ -13,7 +13,7 @@ To fetch the Posts for a source, use `source.getPosts()`.
 {# Get the source by its handle #}
 {% set source = craft.socialFeeds.getSourceByHandle('mySourceHandle') %}
 
-{% for post in source.getPosts() %}
+{% for post in (source ? source.getPosts() : []) %}
     ID: {{ post.id }}<br>
     Content: {{ post.getContent() }}
 {% endfor %}

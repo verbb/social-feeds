@@ -54,7 +54,7 @@ Social Feeds supports accessing [Feed](docs:feature-tour/feeds) and [Source](doc
 ```
 :::
 
-### The `feeds` query
+### The `feeds` Query
 This query is used to query [Feed](docs:feature-tour/feeds) objects. You can also use the singular `feed` to fetch a single Feed.
 
 | Argument | Type | Description
@@ -65,7 +65,7 @@ This query is used to query [Feed](docs:feature-tour/feeds) objects. You can als
 | `limit`| `Int` | Sets the limit for paginated results.
 
 
-### The `FeedInterface` interface
+### The `FeedInterface` Interface
 This is the interface implemented by all feeds.
 
 | Field | Type | Description
@@ -131,7 +131,7 @@ This is the interface implemented by all feeds.
 ```
 :::
 
-### The `sources` query
+### The `sources` Query
 This query is used to query [Source](docs:feature-tour/sources) objects. You can also use the singular `source` to fetch a single Source.
 
 | Argument | Type | Description
@@ -142,7 +142,7 @@ This query is used to query [Source](docs:feature-tour/sources) objects. You can
 | `limit`| `Int` | Sets the limit for paginated results.
 
 
-### The `SourceInterface` interface
+### The `SourceInterface` Interface
 This is the interface implemented by all feeds.
 
 | Field | Type | Description
@@ -193,7 +193,7 @@ This is the interface implemented by all feeds.
 ```
 :::
 
-### The `posts` query
+### The `posts` Query
 This query is used to query [Post](docs:feature-tour/posts) objects. It must be called from a `SourceInterface`, or a `FeedInterface`.
 
 | Argument | Type | Description
@@ -202,7 +202,7 @@ This query is used to query [Post](docs:feature-tour/posts) objects. It must be 
 | `offset`| `Int` | Sets the offset for paginated results.
 
 
-### The `PostInterface` interface
+### The `PostInterface` Interface
 This is the interface implemented by all posts.
 
 | Field | Type | Description
@@ -228,7 +228,7 @@ This is the interface implemented by all posts.
 | `meta`| `String` | The post’s meta data as a JSON string.
 
 
-### The `PostAuthorInterface` interface
+### The `PostAuthorInterface` Interface
 This is the interface implemented by post authors.
 
 | Field | Type | Description
@@ -240,7 +240,7 @@ This is the interface implemented by post authors.
 | `photo`| `String` | The author’s photo.
 
 
-### The `PostLinkInterface` interface
+### The `PostLinkInterface` Interface
 This is the interface implemented by post links.
 
 | Field | Type | Description
@@ -250,7 +250,7 @@ This is the interface implemented by post links.
 | `url`| `String` | The link’s url.
 
 
-### The `PostMediaInterface` interface
+### The `PostMediaInterface` Interface
 This is the interface implemented by post media items.
 
 | Field | Type | Description
