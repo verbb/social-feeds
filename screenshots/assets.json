@@ -1,0 +1,19 @@
+{
+  "assets": [
+    {
+      "path": "feature-tour/social-feeds.png",
+      "kind": "external-data-capture",
+      "note": "Genuine rendered feed populated from external social providers."
+    },
+    {
+      "path": "feature-tour/social-feeds-types.png",
+      "kind": "composition",
+      "note": "Montage of genuine provider configuration controls rendered by Social Feeds."
+    },
+    {
+      "path": "feature-tour/social-feeds-preview.png",
+      "kind": "external-data-capture",
+      "note": "Genuine control-panel preview populated from external social providers."
+    }
+  ]
+}

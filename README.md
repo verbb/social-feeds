@@ -4,7 +4,7 @@
 Social Feeds is a Craft CMS plugin for fetching content from social media and displaying it on your site.
 
 ## Features
-- Fetch content from social media accounts, using Facebook Page posts, Twitter hashtags, YouTube channel videos and more
+- Fetch content from social media accounts, using Facebook Page posts, X (Twitter) hashtags, YouTube channel videos and more
 - Full control over the rendering of content in Twig.
 - Create aggregate posts across multiple providers with Feeds.
 - Intelligent caching to check for new posts in the background.
@@ -16,7 +16,7 @@ Social Feeds is a Craft CMS plugin for fetching content from social media and di
 - Facebook
 - Instagram
 - LinkedIn
-- Twitter
+- X (Twitter)
 - YouTube
 
 ## Documentation
