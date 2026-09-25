@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+- Update LinkedIn API version.
+
 ## 2.0.17 - 2026-09-14
 
 ### Changed
