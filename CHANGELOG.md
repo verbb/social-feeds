@@ -6,6 +6,9 @@
 - Route plugin settings through the plugin’s authorized settings controller.
 - Update LinkedIn API version.
 
+### Fixed
+- Fixed OAuth callback transaction validation.
+
 ## 2.0.17 - 2026-09-14
 
 ### Changed
