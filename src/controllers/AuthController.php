@@ -4,6 +4,7 @@ namespace verbb\socialfeeds\controllers;
 use verbb\socialfeeds\SocialFeeds;
 
 use Craft;
+use craft\elements\User;
 use craft\web\Controller;
 
 use yii\web\Response;
@@ -18,7 +19,7 @@ class AuthController extends Controller
     // Properties
     // =========================================================================
 
-    protected array|int|bool $allowAnonymous = ['connect', 'callback'];
+    protected array|int|bool $allowAnonymous = ['callback'];
 
 
     // Public Methods
@@ -36,6 +37,9 @@ class AuthController extends Controller
 
     public function actionConnect(): ?Response
     {
+        $this->requirePermission('socialFeeds-sources');
+        $this->requirePostRequest();
+
         $sourceHandle = $this->request->getRequiredParam('source');
 
         try {
@@ -74,7 +78,7 @@ class AuthController extends Controller
             return $response;
         }
 
-        $oauth->claimCallback('social-feeds');
+        $oauth->claimAuthorizedCallback('social-feeds', fn(User $user): bool => $user->can('socialFeeds-sources'));
         
         // Get both the origin (failure) and redirect (success) URLs
         $origin = Session::get('origin');
@@ -129,6 +133,9 @@ class AuthController extends Controller
 
     public function actionDisconnect(): ?Response
     {
+        $this->requirePermission('socialFeeds-sources');
+        $this->requirePostRequest();
+
         $sourceHandle = $this->request->getRequiredParam('source');
 
         if (!($source = SocialFeeds::$plugin->getSources()->getSourceByHandle($sourceHandle))) {
