@@ -16,6 +16,18 @@ class FeedsController extends Controller
     // Public Methods
     // =========================================================================
 
+    public function beforeAction($action): bool
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        $this->requireCpRequest();
+        $this->requirePermission('socialFeeds-feeds');
+
+        return true;
+    }
+
     public function actionIndex(): Response
     {
         $feeds = SocialFeeds::$plugin->getFeeds()->getAllFeeds();
@@ -96,6 +108,7 @@ class FeedsController extends Controller
 
     public function actionPreview(): Response
     {
+        $this->requirePostRequest();
         $this->requireAcceptsJson();
 
         $sourceIds = array_filter($this->request->getParam('sources'));

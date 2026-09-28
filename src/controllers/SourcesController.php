@@ -18,6 +18,18 @@ class SourcesController extends Controller
     // Public Methods
     // =========================================================================
 
+    public function beforeAction($action): bool
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        $this->requireCpRequest();
+        $this->requirePermission('socialFeeds-sources');
+
+        return true;
+    }
+
     public function actionIndex(): Response
     {
         $sources = SocialFeeds::$plugin->getSources()->getAllSources();
@@ -137,6 +149,7 @@ class SourcesController extends Controller
 
     public function actionRefreshSettings(): Response
     {
+        $this->requirePostRequest();
         $this->requireAcceptsJson();
 
         $sourcesService = SocialFeeds::$plugin->getSources();
