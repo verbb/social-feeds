@@ -6,6 +6,7 @@ use verbb\socialfeeds\SocialFeeds;
 use Craft;
 use craft\base\Model;
 use craft\helpers\DateTimeHelper;
+use craft\helpers\Html;
 use craft\helpers\Template;
 
 use DateTime;
@@ -69,7 +70,7 @@ class Post extends Model
 
         $content = $this->title ?: $this->text;
 
-        return Template::raw((string)$content);
+        return Template::raw(Html::encode((string)$content));
     }
 
     public function getSourceName(): ?string

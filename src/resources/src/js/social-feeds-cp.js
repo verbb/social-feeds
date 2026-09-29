@@ -25,29 +25,38 @@ $(document).on('click', '[data-refresh-settings]', function(e) {
         setting: setting,
     }
 
-    const setError = function(text) {
+    const setError = function(text, details = []) {
         let $error = $container.find('.sf-error');
 
         if (!text) {
             $error.remove();
+
+            return;
         }
 
         if (!$error.length) {
             $error = $('<div class="sf-error error"></div>').appendTo($container);
         }
 
-        $error.html(text);
+        $error.empty().text(text);
+
+        $.each(details, (index, detail) => {
+            $error.append($('<br>'));
+            $('<code></code>').text(detail).appendTo($error);
+        });
     }
 
     const setSelect = function(values) {
         let currentValue = $select.val();
-        let options = '';
+
+        $select.empty();
 
         $.each(values, (key, option) => {
-            options += '<option value="' + option.value + '">' + option.label + '</option>';
+            $('<option></option>')
+                .val(option.value)
+                .text(option.label)
+                .appendTo($select);
         });
-
-        $select.html(options);
 
         // Set any original value back
         if (currentValue) {
@@ -62,17 +71,18 @@ $(document).on('click', '[data-refresh-settings]', function(e) {
     Craft.sendActionRequest('POST', 'social-feeds/sources/refresh-settings', { data })
         .then((response) => {
             if (response.data.error) {
-                let errorMessage = Craft.t('social-feeds', 'An error occurred.');
+                const errorMessage = Craft.t('social-feeds', 'An error occurred.');
+                const errorDetails = [];
 
                 if (response.data.error) {
-                    errorMessage += `<br><code>${response.data.error}</code>`;
+                    errorDetails.push(response.data.error);
 
                     if (response.data.file && response.data.line) {
-                        errorMessage += `<br><code>${response.data.file}:${response.data.line}</code>`;
+                        errorDetails.push(`${response.data.file}:${response.data.line}`);
                     }
                 }
 
-                setError(errorMessage)
+                setError(errorMessage, errorDetails)
 
                 return;
             }
@@ -80,17 +90,18 @@ $(document).on('click', '[data-refresh-settings]', function(e) {
             setSelect(response.data);
         })
         .catch((error) => {
-            let errorMessage = error;
+            const errorMessage = error;
+            const errorDetails = [];
 
             if (error.response && error.response.data && error.response.data.error) {
-                errorMessage += `<br><code>${error.response.data.error}</code>`;
+                errorDetails.push(error.response.data.error);
 
                 if (error.response.data.file && error.response.data.line) {
-                    errorMessage += `<br><code>${error.response.data.file}:${error.response.data.line}</code>`;
+                    errorDetails.push(`${error.response.data.file}:${error.response.data.line}`);
                 }
             }
 
-            setError(errorMessage);
+            setError(errorMessage, errorDetails);
         })
         .finally(() => {
             $btn.removeClass('sf-loading sf-loading-sm');
@@ -151,18 +162,25 @@ $(document).on('click', '.sf-refresh-btn', function(e) {
 
     $btn.addClass('sf-loading sf-loading-sm');
 
-    const setError = function(text) {
+    const setError = function(text, details = []) {
         let $error = $container.find('.sf-error');
 
         if (!text) {
             $error.remove();
+
+            return;
         }
 
         if (!$error.length) {
             $error = $('<div class="sf-error error"></div>').prependTo($container);
         }
 
-        $error.html(text);
+        $error.empty().text(text);
+
+        $.each(details, (index, detail) => {
+            $error.append($('<br>'));
+            $('<code></code>').text(detail).appendTo($error);
+        });
     }
 
     var postData = Garnish.getPostData($('#main-form')),
@@ -177,17 +195,18 @@ $(document).on('click', '.sf-refresh-btn', function(e) {
     Craft.sendActionRequest('POST', 'social-feeds/feeds/preview', { data })
         .then((response) => {
             if (response.data.error) {
-                let errorMessage = Craft.t('social-feeds', 'An error occurred.');
+                const errorMessage = Craft.t('social-feeds', 'An error occurred.');
+                const errorDetails = [];
 
                 if (response.data.error) {
-                    errorMessage += `<br><code>${response.data.error}</code>`;
+                    errorDetails.push(response.data.error);
 
                     if (response.data.file && response.data.line) {
-                        errorMessage += `<br><code>${response.data.file}:${response.data.line}</code>`;
+                        errorDetails.push(`${response.data.file}:${response.data.line}`);
                     }
                 }
 
-                setError(errorMessage)
+                setError(errorMessage, errorDetails)
 
                 return;
             }
@@ -195,17 +214,18 @@ $(document).on('click', '.sf-refresh-btn', function(e) {
             $container.html(response.data);
         })
         .catch((error) => {
-            let errorMessage = error;
+            const errorMessage = error;
+            const errorDetails = [];
 
             if (error.response && error.response.data && error.response.data.error) {
-                errorMessage += `<br><code>${error.response.data.error}</code>`;
+                errorDetails.push(error.response.data.error);
 
                 if (error.response.data.file && error.response.data.line) {
-                    errorMessage += `<br><code>${error.response.data.file}:${error.response.data.line}</code>`;
+                    errorDetails.push(`${error.response.data.file}:${error.response.data.line}`);
                 }
             }
 
-            setError(errorMessage);
+            setError(errorMessage, errorDetails);
         })
         .finally(() => {
             $btn.removeClass('sf-loading sf-loading-sm');

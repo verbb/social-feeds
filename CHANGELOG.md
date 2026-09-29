@@ -8,6 +8,7 @@
 
 ### Fixed
 - Fixed a high-severity authorization vulnerability.
+- Fixed a high-severity stored cross-site scripting vulnerability.
 - Fixed OAuth callback transaction validation.
 - Fixed authorization for connecting and disconnecting OAuth sources.
 - Fixed OAuth callback redirects being evaluated as Twig templates.

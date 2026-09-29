@@ -9,6 +9,9 @@ use verbb\socialfeeds\models\PostAuthor;
 use verbb\socialfeeds\models\PostLink;
 use verbb\socialfeeds\models\PostMedia;
 
+use craft\helpers\Html;
+use craft\helpers\HtmlPurifier;
+
 use Throwable;
 
 use verbb\auth\helpers\Provider as ProviderHelper;
@@ -31,7 +34,18 @@ class Twitter extends OAuthSource
 
     public static function getPostContent(Post $post): ?string
     {
-        return null;
+        return HtmlPurifier::process((string)$post->text, [
+            'Attr.AllowedFrameTargets' => ['_blank'],
+            'HTML.Allowed' => 'a[href|rel|target]',
+            'HTML.TargetNoopener' => true,
+            'HTML.TargetNoreferrer' => true,
+            'URI.AllowedSchemes' => [
+                'http' => true,
+                'https' => true,
+            ],
+            'URI.Base' => 'https://twitter.com/',
+            'URI.MakeAbsolute' => true,
+        ]);
     }
 
 
@@ -236,28 +250,60 @@ class Twitter extends OAuthSource
                 $author = $userItems[$item['author_id']] ?? null;
 
                 // We have to do some extra work to format the text with links, hashtags, mentions and images
-                $text = $item['text'] ?? '';
+                $text = Html::encode($item['text'] ?? '');
 
                 $processedLinks = [];
                 foreach (($item['entities']['urls'] ?? []) as $url) {
+                    $urlValue = (string)($url['url'] ?? '');
+
+                    if (!$urlValue) {
+                        continue;
+                    }
+
+                    $encodedUrl = Html::encode($urlValue);
+
                     if (isset($url['media_key'])) {
-                        $text = str_replace($url['url'], '', $text);
+                        $text = str_replace($encodedUrl, '', $text);
                     } else {
                         // Prevent processing it twice
-                        if (!in_array($url['url'], $processedLinks)) {
-                            $text = str_replace($url['url'], '<a href="' . $url['url'] . '" target="_blank">' . $url['display_url'] . '</a>', $text);
+                        if (!in_array($urlValue, $processedLinks, true)) {
+                            $link = Html::a(Html::encode($url['display_url'] ?? $urlValue), $urlValue, [
+                                'target' => '_blank',
+                                'rel' => 'noopener noreferrer',
+                            ]);
 
-                            $processedLinks[] = $url['url'];
+                            $text = str_replace($encodedUrl, $link, $text);
+                            $processedLinks[] = $urlValue;
                         }
                     }
                 }
 
                 foreach (($item['entities']['hashtags'] ?? []) as $hashtag) {
-                    $text = str_replace('#' . $hashtag['tag'], '<a href="https://twitter.com/search?q=%23' . $hashtag['tag'] . '" target="_blank">#' . $hashtag['tag'] . '</a>', $text);
+                    $tag = (string)($hashtag['tag'] ?? '');
+
+                    if ($tag) {
+                        $label = '#' . $tag;
+                        $link = Html::a(Html::encode($label), 'https://twitter.com/search?q=%23' . rawurlencode($tag), [
+                            'target' => '_blank',
+                            'rel' => 'noopener noreferrer',
+                        ]);
+
+                        $text = str_replace(Html::encode($label), $link, $text);
+                    }
                 }
 
                 foreach (($item['entities']['mentions'] ?? []) as $mention) {
-                    $text = str_replace('@' . $mention['username'], '<a href="https://twitter.com/' . $mention['username'] . '" target="_blank">@' . $mention['username'] . '</a>', $text);
+                    $username = (string)($mention['username'] ?? '');
+
+                    if ($username) {
+                        $label = '@' . $username;
+                        $link = Html::a(Html::encode($label), 'https://twitter.com/' . rawurlencode($username), [
+                            'target' => '_blank',
+                            'rel' => 'noopener noreferrer',
+                        ]);
+
+                        $text = str_replace(Html::encode($label), $link, $text);
+                    }
                 }
 
                 $text = trim($text);
