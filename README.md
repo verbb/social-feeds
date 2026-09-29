@@ -1,16 +1,19 @@
 <p align="center"><img src="https://assets.verbb.io/plugins/social-feeds/social-feeds-icon.svg" width="100" height="100" alt="Social Feeds icon"></p>
 <h1 align="center">Social Feeds for Craft CMS</h1>
 
-Social Feeds is a Craft CMS plugin for fetching content from social media and displaying it on your site.
+Social Feeds is a Craft CMS plugin that brings selected social content into Craft so the site can present it on its own terms. Connect supported accounts, combine sources into feeds, cache updates in the background, and render the result with Twig or GraphQL.
+
+Connect supported social providers and collect account, page, hashtag, or channel content into a shared feed. Editors and developers can work with normalised posts rather than maintaining separate front-end requests for every network.
 
 ## Features
-- Fetch content from social media accounts, using Facebook Page posts, X (Twitter) hashtags, YouTube channel videos and more
-- Full control over the rendering of content in Twig.
-- Create aggregate posts across multiple providers with Feeds.
-- Intelligent caching to check for new posts in the background.
-- Ready-to-go template for if you want to quickly output posts without the effort.
-- GraphQL support for querying feeds, sources and posts.
-- Provides events to write your own providers.
+
+- Fetch content from supported social accounts and channels.
+- Combine posts from several providers into one ordered collection.
+- Refresh social content without blocking every front-end request.
+- Use a starter template or build the complete presentation yourself.
+- Query feeds and posts from a headless front end.
+- Register another source type through the plugin's events.
+- Check the combined content from the control panel before building the feed into the site.
 
 ## Supports
 - Facebook
