@@ -3,7 +3,7 @@
 ## Unreleased
 
 ### Fixed
-- Fixed a medium-severity information disclosure vulnerability.
+- Fixed medium-severity information disclosure vulnerabilities.
 
 ## 2.0.18 - 2026-09-30
 

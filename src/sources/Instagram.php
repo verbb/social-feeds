@@ -8,6 +8,10 @@ use verbb\socialfeeds\models\Post;
 use verbb\socialfeeds\models\PostAuthor;
 use verbb\socialfeeds\models\PostMedia;
 
+use Craft;
+
+use yii\base\InvalidConfigException;
+
 use Throwable;
 
 use verbb\auth\providers\Facebook as InstagramProvider;
@@ -21,6 +25,12 @@ class Instagram extends OAuthSource
     {
         return InstagramProvider::class;
     }
+
+
+    // Constants
+    // =========================================================================
+
+    private const ACCOUNT_ID_PATTERN = '/^[0-9]+$/D';
 
 
     // Properties
@@ -143,8 +153,10 @@ class Instagram extends OAuthSource
         ];
 
         try {
+            $accountId = $this->_getAccountIdPathSegment();
+
             if ($this->enableProfile) {
-                $profileResponse = $this->request('GET', "$this->accountId/media", [
+                $profileResponse = $this->request('GET', "$accountId/media", [
                     'query' => [
                         'fields' => implode(',', $extendedFields),
                         'limit' => $settings->postsLimit,
@@ -160,7 +172,7 @@ class Instagram extends OAuthSource
 
                 foreach ($hashtags as $hashtag) {
                     // Fetch the hashtag ID from Facebook or the cache
-                    $hashTagId = $this->_getOrSetHashtag($hashtag);
+                    $hashTagId = $this->_getOrSetHashtag($hashtag, $accountId);
                     $endpoint = null;
 
                     if ($this->hashtagsOrderBy === 'recent') {
@@ -171,7 +183,7 @@ class Instagram extends OAuthSource
 
                     $tagResponse = $this->request('GET', "$hashTagId/$endpoint", [
                         'query' => [
-                            'user_id' => $this->accountId,
+                            'user_id' => $accountId,
                             'fields' => implode(',', $standardFields),
                             'limit' => $settings->postsLimit,
                         ],
@@ -183,9 +195,9 @@ class Instagram extends OAuthSource
             }
 
             if ($this->enableTags) {
-                $taggedResponse = $this->request('GET', "$this->accountId/tags", [
+                $taggedResponse = $this->request('GET', "$accountId/tags", [
                     'query' => [
-                        'user_id' => $this->accountId,
+                        'user_id' => $accountId,
                         'fields' => implode(',', $standardFields),
                         'limit' => $settings->postsLimit,
                     ],
@@ -244,8 +256,43 @@ class Instagram extends OAuthSource
     }
 
 
+    // Protected Methods
+    // =========================================================================
+
+    protected function defineRules(): array
+    {
+        $rules = parent::defineRules();
+
+        $rules[] = [
+            ['accountId'], 'required', 'when' => function($model) {
+                return $model->enabled && $model->isConnected();
+            },
+        ];
+
+        $rules[] = [
+            ['accountId'],
+            'match',
+            'pattern' => self::ACCOUNT_ID_PATTERN,
+            'message' => Craft::t('social-feeds', 'Business Account ID must contain numbers only.'),
+        ];
+
+        return $rules;
+    }
+
+
     // Private Methods
     // =========================================================================
+
+    private function _getAccountIdPathSegment(): string
+    {
+        $accountId = (string)$this->accountId;
+
+        if (preg_match(self::ACCOUNT_ID_PATTERN, $accountId) !== 1) {
+            throw new InvalidConfigException('Instagram Business Account ID must contain numbers only.');
+        }
+
+        return rawurlencode($accountId);
+    }
 
     private function _getMediaItems(array $item): array
     {
@@ -275,7 +322,7 @@ class Instagram extends OAuthSource
         return ['images' => $images, 'videos' => $videos];
     }
 
-    private function _getOrSetHashtag(string $hashtag): string
+    private function _getOrSetHashtag(string $hashtag, string $accountId): string
     {
         $cachedHashtags = $this->cache['hashtags'] ?? [];
 
@@ -287,7 +334,7 @@ class Instagram extends OAuthSource
 
         $response = $this->request('GET', 'ig_hashtag_search', [
             'query' => [
-                'user_id' => $this->accountId,
+                'user_id' => $accountId,
                 'q' => $hashtag,
             ],
         ]);
