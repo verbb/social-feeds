@@ -2,6 +2,7 @@
 namespace verbb\socialfeeds\gql\interfaces;
 
 use verbb\socialfeeds\gql\types\generators\PostGenerator;
+use verbb\socialfeeds\helpers\SocialFeedsHelper;
 
 use Craft;
 use craft\gql\base\InterfaceType as BaseInterfaceType;
@@ -143,7 +144,7 @@ class PostInterface extends BaseInterfaceType
                 'type' => Type::string(),
                 'description' => 'The post’s raw data as a JSON string.',
                 'resolve' => function($post) {
-                    return Json::encode($post->data);
+                    return Json::encode(SocialFeedsHelper::scrubProviderSecrets($post->data));
                 },
             ],
             'meta' => [

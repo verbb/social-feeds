@@ -234,7 +234,7 @@ class Instagram extends OAuthSource
                     'url' => $item['permalink'] ?? null,
                     'postType' => strtolower(($item['media_type'] ?? null)),
                     'dateCreated' => $item['timestamp'] ?? null,
-                    'data' => $item,
+                    'data' => SocialFeedsHelper::scrubProviderSecrets($item),
                     'tags' => $tags,
                     'links' => $links,
                     'images' => $images,

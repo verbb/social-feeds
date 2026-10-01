@@ -3,6 +3,7 @@ namespace verbb\socialfeeds\sources;
 
 use verbb\socialfeeds\SocialFeeds;
 use verbb\socialfeeds\base\OAuthSource;
+use verbb\socialfeeds\helpers\SocialFeedsHelper;
 use verbb\socialfeeds\models\Post;
 use verbb\socialfeeds\models\PostAuthor;
 use verbb\socialfeeds\models\PostLink;
@@ -438,7 +439,7 @@ class Facebook extends OAuthSource
                     'replies' => $item['comments']['summary']['total_count'] ?? null,
                     'dateCreated' => $item['created_time'] ?? null,
                     'dateUpdated' => $item['updated_time'] ?? null,
-                    'data' => $item,
+                    'data' => SocialFeedsHelper::scrubProviderSecrets($item),
                     'tags' => $tags,
                     'links' => $links,
                     'images' => $images,

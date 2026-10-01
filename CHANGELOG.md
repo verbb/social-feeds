@@ -4,6 +4,7 @@
 
 ### Fixed
 - Fixed medium-severity information disclosure vulnerabilities.
+- Fixed a potential information disclosure vulnerability.
 
 ## 2.0.18 - 2026-09-30
 
