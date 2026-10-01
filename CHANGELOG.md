@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+- Fixed a medium-severity information disclosure vulnerability.
+
 ## 2.0.18 - 2026-09-30
 
 ### Changed

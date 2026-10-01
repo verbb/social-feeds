@@ -8,6 +8,10 @@ use verbb\socialfeeds\models\PostAuthor;
 use verbb\socialfeeds\models\PostLink;
 use verbb\socialfeeds\models\PostMedia;
 
+use Craft;
+
+use yii\base\InvalidConfigException;
+
 use Throwable;
 
 use verbb\auth\Auth;
@@ -22,6 +26,12 @@ class Facebook extends OAuthSource
     {
         return FacebookProvider::class;
     }
+
+
+    // Constants
+    // =========================================================================
+
+    private const PAGE_ID_PATTERN = '/^[0-9]+$/D';
 
 
     // Properties
@@ -98,9 +108,11 @@ class Facebook extends OAuthSource
         $posts = [];
 
         try {
+            $pageId = $this->_getPageIdPathSegment();
+
             // This will fail if not a page (Business or Group) so catch and continue
             try {
-                $response = $this->request('GET', $this->pageId, [
+                $response = $this->request('GET', $pageId, [
                     'query' => ['fields' => 'access_token'],
                 ]);
 
@@ -120,7 +132,7 @@ class Facebook extends OAuthSource
             $endpoint = [];
             $fields = [];
 
-            $endpoint[] = $this->pageId;
+            $endpoint[] = $pageId;
 
             if ($this->enableProfile) {
                 $postType = 'post';
@@ -491,11 +503,33 @@ class Facebook extends OAuthSource
         $rules = parent::defineRules();
 
         $rules[] = [
-           ['pageId'], 'required', 'when' => function($model) {
-               return $model->enabled && $model->isConnected();
-           },
+            ['pageId'], 'required', 'when' => function($model) {
+                return $model->enabled && $model->isConnected();
+            },
+        ];
+
+        $rules[] = [
+            ['pageId'],
+            'match',
+            'pattern' => self::PAGE_ID_PATTERN,
+            'message' => Craft::t('social-feeds', 'Page ID must contain numbers only.'),
         ];
 
         return $rules;
+    }
+
+
+    // Private Methods
+    // =========================================================================
+
+    private function _getPageIdPathSegment(): string
+    {
+        $pageId = (string)$this->pageId;
+
+        if (preg_match(self::PAGE_ID_PATTERN, $pageId) !== 1) {
+            throw new InvalidConfigException('Facebook Page ID must contain numbers only.');
+        }
+
+        return rawurlencode($pageId);
     }
 }
