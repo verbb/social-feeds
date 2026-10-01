@@ -8,5 +8,5 @@ class Service extends Component
     // Public Methods
     // =========================================================================
 
-    
+
 }

@@ -22,7 +22,7 @@ class Instagram extends OAuthSource
         return InstagramProvider::class;
     }
 
-    
+
     // Properties
     // =========================================================================
 
@@ -124,7 +124,7 @@ class Instagram extends OAuthSource
             'thumbnail_url',
             'timestamp',
             'username',
-            
+
             'children{media_type,media_url,thumbnail_url}',
             'comments.summary(true).limit(0)',
             'likes.summary(true).limit(0)',
@@ -154,7 +154,7 @@ class Instagram extends OAuthSource
                 $profileResponseData = $profileResponse['data'] ?? [];
                 $response['data'] = array_merge($response['data'], $profileResponseData);
             }
-            
+
             if ($this->enableHashtags) {
                 $hashtags = SocialFeedsHelper::splitString($this->hashtags);
 
@@ -165,7 +165,7 @@ class Instagram extends OAuthSource
 
                     if ($this->hashtagsOrderBy === 'recent') {
                         $endpoint = 'recent_media';
-                    } else if ($this->hashtagsOrderBy === 'rated') {
+                    } elseif ($this->hashtagsOrderBy === 'rated') {
                         $endpoint = 'top_media';
                     }
 
@@ -239,7 +239,7 @@ class Instagram extends OAuthSource
         } catch (Throwable $e) {
             self::apiError($this, $e, false);
         }
-        
+
         return $posts;
     }
 

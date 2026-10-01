@@ -79,7 +79,7 @@ class AuthController extends Controller
         }
 
         $oauth->claimAuthorizedCallback('social-feeds', fn(User $user): bool => $user->can('socialFeeds-sources'));
-        
+
         // Get both the origin (failure) and redirect (success) URLs
         $origin = Session::get('origin');
         $redirect = Session::get('redirect');

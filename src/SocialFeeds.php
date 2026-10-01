@@ -61,7 +61,7 @@ class SocialFeeds extends Plugin
         if (Craft::$app->getRequest()->getIsSiteRequest()) {
             $this->_registerSiteRoutes();
         }
-        
+
         if (Craft::$app->getEdition() !== Craft::Solo) {
             $this->_registerPermissions();
         }
@@ -182,13 +182,13 @@ class SocialFeeds extends Plugin
 
         Event::on(Gql::class, Gql::EVENT_REGISTER_GQL_QUERIES, function(RegisterGqlQueriesEvent $event) {
             $queries = SocialFeedsQuery::getQueries();
-                    
+
             foreach ($queries as $key => $value) {
                 $event->queries[$key] = $value;
             }
         });
 
-        Event::on(Gql::class, Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS, function (RegisterGqlSchemaComponentsEvent $event) {  
+        Event::on(Gql::class, Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS, function(RegisterGqlSchemaComponentsEvent $event) {
             $label = Craft::t('social-feeds', 'Social Feeds');
 
             $event->queries[$label]['socialFeeds.all:read'] = ['label' => Craft::t('social-feeds', 'Query Social Feeds')];

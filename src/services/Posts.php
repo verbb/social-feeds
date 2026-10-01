@@ -139,7 +139,7 @@ class Posts extends Component
         $settings = SocialFeeds::$plugin->getSettings();
 
         // Get the plugin setting for how long to cache items for and convert it from the friendly
-        // DateInterval or seconds value to an interval. Then check against now. 
+        // DateInterval or seconds value to an interval. Then check against now.
         // Don't forget the last fetch could be `null`.
 
         // Allow us to turn off auto-checking for posts when rendering/fetching. People might like to rely on a cron.

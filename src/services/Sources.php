@@ -80,7 +80,7 @@ class Sources extends Component
 
                 $config['settings'] = array_merge($settings, $configOverrides);
             }
-        }                
+        }
 
         try {
             return ComponentHelper::createComponent($config, SourceInterface::class);
@@ -140,7 +140,7 @@ class Sources extends Component
     public function getSourceByHandle(string $handle, bool $enabledOnly = false, bool $connectedOnly = false): ?SourceInterface
     {
         $source = $this->_sources()->firstWhere('handle', $handle, true);
-    
+
         if ($source && (($enabledOnly && !$source->enabled) || ($connectedOnly && !$source->isConnected()))) {
             return null;
         }

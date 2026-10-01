@@ -190,7 +190,7 @@ class Twitter extends OAuthSource
                                 ]);
                             }
                         }
-                    } else if ($attachment['type'] === 'photo') {
+                    } elseif ($attachment['type'] === 'photo') {
                         $mediaItems[$id][] = new PostMedia([
                             'type' => PostMedia::TYPE_IMAGE,
                             'id' => $id,
@@ -241,7 +241,7 @@ class Twitter extends OAuthSource
                     foreach ($media as $m) {
                         if ($m->type === PostMedia::TYPE_IMAGE) {
                             $images[] = $m;
-                        } else if ($m->type === PostMedia::TYPE_VIDEO) {
+                        } elseif ($m->type === PostMedia::TYPE_VIDEO) {
                             $videos[] = $m;
                         }
                     }
@@ -253,6 +253,7 @@ class Twitter extends OAuthSource
                 $text = Html::encode($item['text'] ?? '');
 
                 $processedLinks = [];
+
                 foreach (($item['entities']['urls'] ?? []) as $url) {
                     $urlValue = (string)($url['url'] ?? '');
 
@@ -330,7 +331,7 @@ class Twitter extends OAuthSource
         } catch (Throwable $e) {
             self::apiError($this, $e, false);
         }
-        
+
         return $posts;
     }
 

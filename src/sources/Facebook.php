@@ -23,12 +23,12 @@ class Facebook extends OAuthSource
         return FacebookProvider::class;
     }
 
-    
+
     // Properties
     // =========================================================================
 
     public static string $providerHandle = 'facebook';
-    
+
     public bool $enableProfile = true;
     public bool $enablePhotos = false;
     public bool $enableVideos = false;
@@ -191,8 +191,8 @@ class Facebook extends OAuthSource
                     // 'sharedposts',
                     // 'sponsor_tags',
                     // 'to',
-                ];  
-            } else if ($this->enablePhotos) {
+                ];
+            } elseif ($this->enablePhotos) {
                 $postType = 'photo';
                 $endpoint[] = 'photos';
 
@@ -228,17 +228,17 @@ class Facebook extends OAuthSource
                     'picture',
                     // 'sponsor_tags',
                 ];
-            } else if ($this->enableVideos) {
+            } elseif ($this->enableVideos) {
                 $postType = 'video';
                 $endpoint[] = 'videos';
 
                 $fields = $this->_facebookVideoFields();
-            } else if ($this->enableReels) {
+            } elseif ($this->enableReels) {
                 $postType = 'reel';
                 $endpoint[] = 'video_reels';
 
                 $fields = $this->_facebookVideoFields();
-            } else if ($this->enableEvents) {
+            } elseif ($this->enableEvents) {
                 $postType = 'event';
                 $endpoint[] = 'events';
 
@@ -407,7 +407,7 @@ class Facebook extends OAuthSource
                 }
 
                 $postText = $item['message'] ?? null;
-                
+
                 if ($postType === 'video' || $postType === 'reel') {
                     $postText = $item['description'] ?? $item['title'] ?? $postText;
                 }
@@ -490,10 +490,10 @@ class Facebook extends OAuthSource
     {
         $rules = parent::defineRules();
 
-         $rules[] = [
-            ['pageId'], 'required', 'when' => function($model) {
-                return $model->enabled && $model->isConnected();
-            },
+        $rules[] = [
+           ['pageId'], 'required', 'when' => function($model) {
+               return $model->enabled && $model->isConnected();
+           },
         ];
 
         return $rules;

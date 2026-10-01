@@ -23,12 +23,12 @@ class LinkedIn extends OAuthSource
         return LinkedInProvider::class;
     }
 
-    
+
     // Properties
     // =========================================================================
 
     public static string $providerHandle = 'linkedIn';
-    
+
     public bool $enableProfile = true;
     public bool $enableCompany = false;
     public ?string $profileUrl = null;
@@ -167,7 +167,7 @@ class LinkedIn extends OAuthSource
                             'title' => $mediaTitle,
                             'url' => $response['downloadUrl'] ?? null,
                         ]);
-                    } else if (str_contains($mediaId, ':video:')) {
+                    } elseif (str_contains($mediaId, ':video:')) {
                         $response = $this->request('GET', 'https://api.linkedin.com/rest/videos/' . urlencode($mediaId));
 
                         $images[] = new PostMedia([

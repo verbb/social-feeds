@@ -141,7 +141,7 @@ class Post extends Model
 
     public function getFriendlyDate(DateTime $date): string
     {
-        $diff = (new DateTime)->diff($date);
+        $diff = (new DateTime())->diff($date);
 
         return self::humanDuration($diff);
     }
@@ -155,7 +155,7 @@ class Post extends Model
     {
         return ProviderHelper::getIcon($this->sourceType);
     }
-    
+
 
     // Deserializer Methods
     // =========================================================================

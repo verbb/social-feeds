@@ -72,7 +72,7 @@ class YouTube extends OAuthSource
         $options = parent::getAuthorizationUrlOptions();
         $options['access_type'] = 'offline';
         $options['prompt'] = 'consent';
-        
+
         return $options;
     }
 
@@ -89,7 +89,7 @@ class YouTube extends OAuthSource
 
                 if ($this->enableChannel) {
                     $channelParam = ['id' => $this->channelId];
-                } else if ($this->enableUser) {
+                } elseif ($this->enableUser) {
                     $channelParam = ['forUsername' => $this->userId];
                 }
 
@@ -214,7 +214,7 @@ class YouTube extends OAuthSource
         } catch (Throwable $e) {
             self::apiError($this, $e, false);
         }
-        
+
         return $posts;
     }
 

@@ -35,7 +35,7 @@ class SocialFeedsInterface extends BaseInterfaceType
             'name' => static::getName(),
             'fields' => self::class . '::getFieldDefinitions',
             'description' => 'This is the interface implemented by Social Feeds.',
-            'resolveType' => function (array $value) {
+            'resolveType' => function(array $value) {
                 return GqlEntityRegistry::getEntity(SocialFeedsGenerator::getName());
             },
         ]));

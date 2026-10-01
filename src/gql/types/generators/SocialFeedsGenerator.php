@@ -20,7 +20,7 @@ class SocialFeedsGenerator implements GeneratorInterface
         $typeName = self::getName();
         $socialFeedsFields = SocialFeedsInterface::getFieldDefinitions();
         $socialFeedsArgs = SocialFeedsArguments::getArguments();
-        
+
         $gqlTypes[$typeName] = GqlEntityRegistry::getEntity($typeName) ?: GqlEntityRegistry::createEntity($typeName, new SocialFeedsType([
             'name' => $typeName,
             'args' => function() use ($socialFeedsArgs) {

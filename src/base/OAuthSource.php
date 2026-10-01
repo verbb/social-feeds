@@ -17,7 +17,7 @@ abstract class OAuthSource extends Source implements OAuthProviderInterface
     // =========================================================================
 
     use OAuthProviderTrait;
-    
+
 
     // Public Methods
     // =========================================================================
