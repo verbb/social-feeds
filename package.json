@@ -1,0 +1,15 @@
+{
+    "name": "social-feeds",
+    "private": true,
+    "scripts": {
+        "build": "npm run build:cp-css && npm run build:cp-js && npm run build:frontend-css && npm run build:masonry-js",
+        "build:cp-css": "vite build --mode cp-css",
+        "build:cp-js": "vite build --mode cp-js",
+        "build:frontend-css": "vite build --mode frontend-css",
+        "build:masonry-js": "vite build --mode masonry-js"
+    },
+    "devDependencies": {
+        "esbuild": "^0.28.2",
+        "vite": "^8.2.0"
+    }
+}

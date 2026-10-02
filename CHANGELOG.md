@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Changed
+- Updated the required version of `verbb/base` to 3.0.19.
+- Replaced CodeKit with Vite and reorganized control panel and frontend assets under `src/web`.
+
 ### Fixed
 - Fixed medium-severity information disclosure vulnerabilities.
 - Fixed a potential information disclosure vulnerability.

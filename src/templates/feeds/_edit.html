@@ -2,7 +2,7 @@
 {% import '_includes/forms' as forms %}
 {% import 'verbb-base/_macros' as macros %}
 
-{% do view.registerAssetBundle('verbb\\socialfeeds\\assetbundles\\FeedAsset') %}
+{% do view.registerAssetBundle('verbb\\socialfeeds\\web\\assets\\frontend\\FeedAsset') %}
 
 {% set crumbs = [
     { label: craft.socialFeeds.getPluginName() | t('social-feeds'), url: url('social-feeds') },

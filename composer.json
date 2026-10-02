@@ -29,7 +29,7 @@
         "symfony/property-access": "^6.0 || ^7.0",
         "symfony/serializer": "^6.0 || ^7.0",
         "verbb/auth": "^2.0.48",
-        "verbb/base": "^3.0.18"
+        "verbb/base": "^3.0.19"
     },
     "autoload": {
         "psr-4": {

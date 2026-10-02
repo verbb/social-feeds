@@ -5,9 +5,9 @@
 
 // ==========================================================================
 
-// @codekit-prepend "_flexmasonry.js"
+import './_flexmasonry.js';
 
-FlexMasonry.init('[data-social-feeds]', {
+window.FlexMasonry.init('[data-social-feeds]', {
     responsive: true,
     breakpointCols: {
         'min-width: 1500px': 4,
