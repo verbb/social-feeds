@@ -2,7 +2,7 @@
     "name": "verbb/social-feeds",
     "description": "A Craft CMS plugin for combining social content into cached feeds.",
     "type": "craft-plugin",
-    "version": "2.0.18",
+    "version": "2.0.19",
     "keywords": [
         "craft",
         "cms",
