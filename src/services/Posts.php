@@ -17,6 +17,7 @@ use craft\helpers\ConfigHelper;
 use craft\helpers\Template;
 use craft\web\View;
 
+use DateInterval;
 use DateTime;
 use DateTimeZone;
 use Throwable;
@@ -32,6 +33,12 @@ use Symfony\Component\Serializer\Serializer;
 
 class Posts extends Component
 {
+    // Properties
+    // =========================================================================
+
+    private array $_refreshAttempts = [];
+
+
     // Public Methods
     // =========================================================================
 
@@ -148,16 +155,71 @@ class Posts extends Component
         }
 
         $interval = DateTimeHelper::toDateInterval(ConfigHelper::durationInSeconds($settings->cacheDuration));
-        $threshold = $source->dateLastFetch?->add($interval)?->setTimezone(new DateTimeZone('UTC'));
         $currentTime = DateTimeHelper::currentUTCDateTime();
 
-        // Have we reached the cache duration threshold to fetch again?
-        if ($currentTime < $threshold) {
+        if (!$this->_sourceNeedsRefresh($source, $interval, $currentTime) || !$source->id) {
             return;
         }
 
-        // Fetch the posts for the source and update the database cache
-        $this->refreshPosts($source);
+        $mutexName = 'social-feeds:post-refresh:' . $source->id . ':' . $source->getCacheKey();
+
+        // Coalesce aliases for the remainder of this request, including failed refresh attempts.
+        if (array_key_exists($mutexName, $this->_refreshAttempts)) {
+            $dateLastFetch = $this->_refreshAttempts[$mutexName];
+
+            if ($dateLastFetch instanceof DateTime) {
+                $source->dateLastFetch = clone $dateLastFetch;
+            }
+
+            return;
+        }
+
+        $this->_refreshAttempts[$mutexName] = false;
+
+        try {
+            $mutex = Craft::$app->getMutex();
+            $acquired = $mutex->acquire($mutexName);
+        } catch (Throwable $e) {
+            $this->_logRefreshMutexError($source, $e);
+            return;
+        }
+
+        // Let another request complete the refresh while this one serves the existing cache.
+        if (!$acquired) {
+            return;
+        }
+
+        try {
+            // Re-read after claiming the refresh so stale source instances cannot repeat completed work.
+            $dateLastFetch = (new Query())
+                ->select(['dateLastFetch'])
+                ->from(['{{%socialfeeds_sources}}'])
+                ->where(['id' => $source->id])
+                ->scalar();
+
+            if ($dateLastFetch === false) {
+                return;
+            }
+
+            $source->dateLastFetch = DateTimeHelper::toDateTime($dateLastFetch, false, false) ?: null;
+
+            if (!$this->_sourceNeedsRefresh($source, $interval, $currentTime)) {
+                $this->_refreshAttempts[$mutexName] = clone $source->dateLastFetch;
+                return;
+            }
+
+            $this->refreshPosts($source);
+
+            if (!$this->_sourceNeedsRefresh($source, $interval, $currentTime)) {
+                $this->_refreshAttempts[$mutexName] = clone $source->dateLastFetch;
+            }
+        } finally {
+            try {
+                $mutex->release($mutexName);
+            } catch (Throwable $e) {
+                $this->_logRefreshMutexError($source, $e);
+            }
+        }
     }
 
     public function refreshPosts(SourceInterface $source, $consoleInstance = null): void
@@ -185,10 +247,14 @@ class Posts extends Component
                 $postRecord->save(false);
             }
 
-            // Update the sources' last fetch date
+            // Keep the persisted and in-memory freshness state aligned for every caller.
+            $dateLastFetch = DateTimeHelper::currentUTCDateTime();
+
             Db::update('{{%socialfeeds_sources}}', [
-                'dateLastFetch' => Db::prepareDateForDb(new DateTime())
+                'dateLastFetch' => Db::prepareDateForDb($dateLastFetch),
             ], ['id' => $source->id]);
+
+            $source->dateLastFetch = $dateLastFetch;
         } catch (Throwable $e) {
             SocialFeeds::error('Error refreshing posts for source “{source}”: “{message}” {file}:{line}', [
                 'source' => $source->handle,
@@ -207,6 +273,29 @@ class Posts extends Component
 
     // Private Methods
     // =========================================================================
+
+    private function _logRefreshMutexError(SourceInterface $source, Throwable $e): void
+    {
+        SocialFeeds::error('Unable to coordinate post refresh for source “{source}”: “{message}” {file}:{line}', [
+            'source' => $source->handle,
+            'message' => $e->getMessage(),
+            'file' => $e->getFile(),
+            'line' => $e->getLine(),
+        ]);
+    }
+
+    private function _sourceNeedsRefresh(SourceInterface $source, DateInterval $interval, DateTime $currentTime): bool
+    {
+        if (!$source->dateLastFetch) {
+            return true;
+        }
+
+        $threshold = (clone $source->dateLastFetch)
+            ->add($interval)
+            ->setTimezone(new DateTimeZone('UTC'));
+
+        return $currentTime >= $threshold;
+    }
 
     private function _createPostQuery(): Query
     {

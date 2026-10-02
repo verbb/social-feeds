@@ -4,6 +4,7 @@
 
 ### Fixed
 - Fixed a medium-severity resource exhaustion vulnerability.
+- Fixed a low-severity resource exhaustion vulnerability.
 
 ## 2.0.19 - 2026-10-02
 
