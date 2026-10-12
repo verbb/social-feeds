@@ -2,7 +2,6 @@
 namespace verbb\socialfeeds\migrations;
 
 use craft\db\Migration;
-use craft\helpers\MigrationHelper;
 
 use verbb\auth\Auth;
 
@@ -107,16 +106,8 @@ class Install extends Migration
 
     public function dropForeignKeys(): void
     {
-        if ($this->db->tableExists('{{%socialfeeds_sources}}')) {
-            MigrationHelper::dropAllForeignKeysOnTable('{{%socialfeeds_sources}}', $this);
-        }
-
-        if ($this->db->tableExists('{{%socialfeeds_feeds}}')) {
-            MigrationHelper::dropAllForeignKeysOnTable('{{%socialfeeds_feeds}}', $this);
-        }
-
         if ($this->db->tableExists('{{%socialfeeds_posts}}')) {
-            MigrationHelper::dropAllForeignKeysOnTable('{{%socialfeeds_posts}}', $this);
+            $this->dropForeignKeyIfExists('{{%socialfeeds_posts}}', 'sourceId');
         }
     }
 }

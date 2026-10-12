@@ -17,6 +17,7 @@ use craft\events\RegisterGqlSchemaComponentsEvent;
 use craft\events\RegisterGqlTypesEvent;
 use craft\events\RegisterUrlRulesEvent;
 use craft\events\RegisterUserPermissionsEvent;
+use craft\enums\CmsEdition;
 use craft\helpers\UrlHelper;
 use craft\services\Gql;
 use craft\services\UserPermissions;
@@ -62,7 +63,7 @@ class SocialFeeds extends Plugin
             $this->_registerSiteRoutes();
         }
 
-        if (Craft::$app->getEdition() !== Craft::Solo) {
+        if (Craft::$app->edition !== CmsEdition::Solo) {
             $this->_registerPermissions();
         }
 
