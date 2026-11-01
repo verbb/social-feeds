@@ -97,7 +97,6 @@ class FeedsController extends Controller
     public function actionDelete(): Response
     {
         $this->requirePostRequest();
-        $this->requireAcceptsJson();
 
         $feedId = $this->request->getRequiredBodyParam('id');
 

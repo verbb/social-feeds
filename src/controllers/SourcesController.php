@@ -138,7 +138,6 @@ class SourcesController extends Controller
     public function actionDelete(): Response
     {
         $this->requirePostRequest();
-        $this->requireAcceptsJson();
 
         $sourceId = $this->request->getRequiredBodyParam('id');
 
