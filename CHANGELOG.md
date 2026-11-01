@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 2.0.24 - 2026-11-01
 
 ### Fixed
 - Fixed the Delete action on feed and source edit pages failing with an error.
