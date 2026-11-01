@@ -20,6 +20,7 @@ class Feed extends Model
     public ?int $sortOrder = null;
     public ?DateTime $dateCreated = null;
     public ?DateTime $dateUpdated = null;
+    public ?string $uid = null;
 
     private ?array $_sources = null;
 

@@ -94,6 +94,7 @@ class Feeds extends Component
 
         if ($runValidation && !$feed->validate()) {
             SocialFeeds::info('Feed not saved due to validation error.');
+
             return false;
         }
 
@@ -218,6 +219,7 @@ class Feeds extends Component
                 'sortOrder',
                 'dateCreated',
                 'dateUpdated',
+                'uid',
             ])
             ->from(['{{%socialfeeds_feeds}}'])
             ->orderBy(['sortOrder' => SORT_ASC]);

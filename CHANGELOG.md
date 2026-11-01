@@ -4,6 +4,7 @@
 
 ### Fixed
 - Fixed the Delete action on feed and source edit pages failing with an error.
+- Fixed `craft.socialFeeds.getFeedByUid()` never returning a feed.
 
 ## 2.0.23 - 2026-10-22
 
