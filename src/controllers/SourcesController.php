@@ -135,13 +135,15 @@ class SourcesController extends Controller
         return $this->asSuccess();
     }
 
-    public function actionDelete(): Response
+    public function actionDelete(): ?Response
     {
         $this->requirePostRequest();
 
         $sourceId = $this->request->getRequiredBodyParam('id');
 
-        SocialFeeds::$plugin->getSources()->deleteSourceById($sourceId);
+        if (!SocialFeeds::$plugin->getSources()->deleteSourceById($sourceId)) {
+            return $this->asFailure(Craft::t('social-feeds', 'Couldn’t delete source.'));
+        }
 
         return $this->asSuccess();
     }

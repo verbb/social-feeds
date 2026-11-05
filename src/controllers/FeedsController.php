@@ -94,13 +94,15 @@ class FeedsController extends Controller
         return $this->asSuccess();
     }
 
-    public function actionDelete(): Response
+    public function actionDelete(): ?Response
     {
         $this->requirePostRequest();
 
         $feedId = $this->request->getRequiredBodyParam('id');
 
-        SocialFeeds::$plugin->getFeeds()->deleteFeedById($feedId);
+        if (!SocialFeeds::$plugin->getFeeds()->deleteFeedById($feedId)) {
+            return $this->asFailure(Craft::t('social-feeds', 'Couldn’t delete feed.'));
+        }
 
         return $this->asSuccess();
     }

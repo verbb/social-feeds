@@ -13,6 +13,8 @@ return [
   'Company URL' => 'Company URL',
   'Connect' => 'Connect',
   'Connected' => 'Connected',
+  'Couldn’t delete feed.' => 'Couldn’t delete feed.',
+  'Couldn’t delete source.' => 'Couldn’t delete source.',
   'Couldn’t save feed.' => 'Couldn’t save feed.',
   'Couldn’t save source.' => 'Couldn’t save source.',
   'Create a new feed' => 'Create a new feed',
