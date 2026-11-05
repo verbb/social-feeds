@@ -77,7 +77,7 @@ class FeedsController extends Controller
         $feed->sources = $this->request->getParam('sources') ?: [];
 
         if (!SocialFeeds::$plugin->getFeeds()->saveFeed($feed)) {
-            return $this->asModelFailure($feed, modelName: 'feed');
+            return $this->asModelFailure($feed, Craft::t('social-feeds', 'Couldn’t save feed.'), 'feed');
         }
 
         return $this->asModelSuccess($feed, Craft::t('social-feeds', 'Feed saved.'));

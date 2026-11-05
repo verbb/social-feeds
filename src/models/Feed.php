@@ -2,8 +2,10 @@
 namespace verbb\socialfeeds\models;
 
 use verbb\socialfeeds\SocialFeeds;
+use verbb\socialfeeds\records\Feed as FeedRecord;
 
 use craft\base\Model;
+use craft\validators\UniqueValidator;
 
 use DateTime;
 
@@ -44,6 +46,19 @@ class Feed extends Model
         }
 
         return $this->_sources = $sources;
+    }
+
+
+    // Protected Methods
+    // =========================================================================
+
+    protected function defineRules(): array
+    {
+        $rules = parent::defineRules();
+
+        $rules[] = [['handle'], UniqueValidator::class, 'targetClass' => FeedRecord::class];
+
+        return $rules;
     }
 
 }

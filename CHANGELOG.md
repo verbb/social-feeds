@@ -4,6 +4,7 @@
 
 ### Fixed
 - Fixed an error when previewing a feed with no sources selected.
+- Fixed a database error when saving a feed or source with a handle that’s already in use, which now shows a validation error.
 
 ## 2.0.24 - 2026-11-01
 

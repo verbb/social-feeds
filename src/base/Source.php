@@ -3,6 +3,7 @@ namespace verbb\socialfeeds\base;
 
 use verbb\socialfeeds\SocialFeeds;
 use verbb\socialfeeds\models\Post;
+use verbb\socialfeeds\records\Source as SourceRecord;
 
 use Craft;
 use craft\base\SavableComponent;
@@ -11,6 +12,7 @@ use craft\helpers\Json;
 use craft\helpers\StringHelper;
 use craft\helpers\UrlHelper;
 use craft\validators\HandleValidator;
+use craft\validators\UniqueValidator;
 
 use verbb\auth\helpers\Provider as ProviderHelper;
 
@@ -182,6 +184,8 @@ abstract class Source extends SavableComponent implements SourceInterface
                 'uid',
             ],
         ];
+
+        $rules[] = [['handle'], UniqueValidator::class, 'targetClass' => SourceRecord::class];
 
         return $rules;
     }
