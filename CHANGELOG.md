@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 2.0.25 - 2026-11-05
 
 ### Fixed
 - Fixed an error when previewing a feed with no sources selected.
