@@ -5,6 +5,7 @@
 ### Fixed
 - Fixed an error when previewing a feed with no sources selected.
 - Fixed a database error when saving a feed or source with a handle that’s already in use, which now shows a validation error.
+- Fixed the Delete action showing on new feed and source pages.
 
 ## 2.0.24 - 2026-11-01
 
