@@ -110,7 +110,7 @@ class FeedsController extends Controller
         $this->requirePostRequest();
         $this->requireAcceptsJson();
 
-        $sourceIds = array_filter($this->request->getParam('sources'));
+        $sourceIds = array_filter((array)$this->request->getParam('sources'));
         $sources = [];
 
         foreach ($sourceIds as $sourceId) {
