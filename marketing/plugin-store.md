@@ -12,7 +12,8 @@ Connect supported social providers and collect account, page, hashtag, or channe
 - Register another source type through the plugin's events.
 - Check the combined content from the control panel before building the feed into the site.
 
-## Supports
+## Providers
+
 - Facebook
 - Instagram
 - LinkedIn
