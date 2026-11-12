@@ -14,7 +14,7 @@ Aggregate social content by combining multiple sources into a single feed. Choos
 <!-- feature-section media-size="large" media-shadow="false" -->
 ## Control what content to show
 
-Use each provider’s available filters to focus a source on the content the site actually needs. Start with the ready-to-go template or query feed items in Twig for complete control, while background caching avoids asking providers for the same posts on every page view. Project-specific source types can join the same feed through plugin events.
+Use each provider’s available filters to focus a source on the content the site actually needs. Background caching avoids asking providers for the same posts on every page view. Project-specific source types can join the same feed through plugin events.
 
 ![Source controls for Facebook, YouTube and Twitter content.](../screenshots/social-feeds-types.png)
 

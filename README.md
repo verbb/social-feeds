@@ -15,7 +15,8 @@ Connect supported social providers and collect account, page, hashtag, or channe
 - Register another source type through the plugin's events.
 - Check the combined content from the control panel before building the feed into the site.
 
-## Supports
+## Providers
+
 - Facebook
 - Instagram
 - LinkedIn
@@ -23,10 +24,12 @@ Connect supported social providers and collect account, page, hashtag, or channe
 - YouTube
 
 ## Documentation
+
 Visit the [Social Feeds Plugin page](https://verbb.io/craft-plugins/social-feeds) for all documentation, guides, pricing and developer resources.
 
 ## Support
-Get in touch with us via the [Social Feeds Support page](https://verbb.io/craft-plugins/social-feeds/support) or by [creating a Github issue](https://github.com/verbb/social-feeds/issues)
+
+Get in touch with us via the [Social Feeds Support page](https://verbb.io/craft-plugins/social-feeds/support) or by [creating a GitHub issue](https://github.com/verbb/social-feeds/issues).
 
 <h2></h2>
 
