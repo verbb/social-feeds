@@ -43,13 +43,29 @@
         "title": "Developers",
         "collapsable": false,
         "children": [
-            "developers/feed",
-            "developers/source",
-            "developers/source-provider",
-            "developers/post",
             "developers/events",
-            "developers/graphql",
+            "developers/custom-sources",
             "developers/console-commands"
+        ]
+    },
+    {
+        "title": "GraphQL",
+        "collapsable": false,
+        "children": [
+            "graphql/queries",
+            "graphql/interfaces-types"
+        ]
+    },
+    {
+        "title": "Reference",
+        "collapsable": false,
+        "children": [
+            "reference/feed",
+            "reference/source",
+            "reference/post",
+            "reference/post-author",
+            "reference/post-media",
+            "reference/post-link"
         ]
     }
 ]

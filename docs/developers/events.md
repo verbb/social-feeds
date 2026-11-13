@@ -1,10 +1,11 @@
 # Events
-Social Feeds provides a collection of events for extending its functionality. Modules and plugins can register event listeners, typically in their `init()` methods, to modify Social Feeds’s behavior.
+
+Social Feeds provides events for extending its functionality. Modules and plugins can register event listeners, typically in their `init()` methods, to change Social Feeds’ behaviour.
 
 ## Feed Events
 
 ### The `beforeSaveFeed` Event
-The event that is triggered before a feed is saved.
+The event that is triggered before a feed is saved. Listeners can change the feed’s properties before it’s saved, but can’t cancel the save.
 
 ```php
 use verbb\socialfeeds\events\FeedEvent;
@@ -34,7 +35,7 @@ Event::on(Feeds::class, Feeds::EVENT_AFTER_SAVE_FEED, function(FeedEvent $event)
 ```
 
 ### The `beforeDeleteFeed` Event
-The event that is triggered before a feed is deleted.
+The event that is triggered before a feed is deleted. The deletion can’t be cancelled.
 
 ```php
 use verbb\socialfeeds\events\FeedEvent;
@@ -64,7 +65,7 @@ Event::on(Feeds::class, Feeds::EVENT_AFTER_DELETE_FEED, function(FeedEvent $even
 ## Source Events
 
 ### The `beforeSaveSource` Event
-The event that is triggered before a source is saved.
+The event that is triggered before a source is saved. Listeners can change the source’s properties before it’s saved, but can’t cancel the save.
 
 ```php
 use verbb\socialfeeds\events\SourceEvent;
@@ -94,7 +95,7 @@ Event::on(Sources::class, Sources::EVENT_AFTER_SAVE_SOURCE, function(SourceEvent
 ```
 
 ### The `beforeDeleteSource` Event
-The event that is triggered before a source is deleted.
+The event that is triggered before a source is deleted. The deletion can’t be cancelled.
 
 ```php
 use verbb\socialfeeds\events\SourceEvent;
@@ -118,5 +119,19 @@ use yii\base\Event;
 Event::on(Sources::class, Sources::EVENT_AFTER_DELETE_SOURCE, function(SourceEvent $event) {
     $source = $event->source;
     // ...
+});
+```
+
+### The `registerSourceTypes` Event
+The event that is triggered when Social Feeds builds the list of available source types. Append your class to `$event->types` to register it. [Custom Sources](docs:developers/custom-sources) shows a complete source class.
+
+```php
+use craft\events\RegisterComponentTypesEvent;
+use modules\sitemodule\MySource;
+use verbb\socialfeeds\services\Sources;
+use yii\base\Event;
+
+Event::on(Sources::class, Sources::EVENT_REGISTER_SOURCE_TYPES, function(RegisterComponentTypesEvent $event) {
+    $event->types[] = MySource::class;
 });
 ```

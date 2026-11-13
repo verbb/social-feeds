@@ -2,7 +2,7 @@
 Follow these steps to configure LinkedIn for Social Feeds.
 
 :::tip
-Fetching posts for a Profile is no longer possible with the public LinkedIn API. You will be required to use a Company Page.
+The public LinkedIn API doesn't allow fetching posts for a Profile, so use a Company Page.
 :::
 
 ## Connecting to LinkedIn

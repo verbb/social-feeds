@@ -8,7 +8,7 @@ Posts are cached per Source, not per Feed. So if you have multiple Feeds using t
 :::
 
 ## How It Works
-It all begins when you call `getPosts()` or `renderPosts()` for a Feed or Source. This will fetch the latest Posts from the respective social media API's, and create [Post](docs:developers/post) objects to represent a post.
+It all begins when you call `getPosts()` or `renderPosts()` for a Feed or Source. This will fetch the latest Posts from the respective social media API's, and create [Post](docs:reference/post) objects to represent a post.
 
 The Posts are saved to the `socialfeeds_posts` database table. We also then store the timestamp (`dateLastFetch`) against the Source in the `socialfeeds_sources` database table.
 

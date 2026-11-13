@@ -1,5 +1,5 @@
 # Rendering Posts
-There are two main methods of rendering [Post](docs:developers/post) objects, manual or automatic.
+There are two main methods of rendering [Post](docs:reference/post) objects, manual or automatic.
 
 ## Getting Posts
 You'll need to either fetch posts from a [Feed](docs:feature-tour/feeds) or a [Source](docs:feature-tour/sources).
