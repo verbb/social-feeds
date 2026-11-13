@@ -15,7 +15,8 @@
             "feature-tour/feeds",
             "feature-tour/sources",
             "feature-tour/posts",
-            "feature-tour/cache"
+            "feature-tour/cache",
+            "feature-tour/permissions"
         ]
     },
     {
