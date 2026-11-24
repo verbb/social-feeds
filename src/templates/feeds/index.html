@@ -10,13 +10,36 @@
 {% set title = 'Feeds' | t('social-feeds') %}
 {% set selectedSubnavItem = 'feeds' %}
 
+{# Until the first posts are fetched, the page is a setup checklist in place of the feeds list. #}
+{% set showSetup = setup is defined and not setup.fetched %}
+
+{% if showSetup or not feeds %}
+    {% do view.registerAssetBundle('verbb\\socialfeeds\\web\\assets\\cp\\SocialFeedsPluginKitAsset') %}
+{% endif %}
+
+{% if showSetup %}
+    {% set bareContent = true %}
+    {% set hidePluginFooter = true %}
+{% endif %}
+
+{# The checklist's create-a-feed step stands in for the New feed button until setup is done. #}
 {% block actionButton %}
-    <a class="btn submit add icon" href="{{ url('social-feeds/feeds/new') }}">{{ 'New feed' | t('social-feeds') }}</a>
+    {% if not showSetup %}
+        <a class="btn submit add icon" href="{{ url('social-feeds/feeds/new') }}">{{ 'New feed' | t('social-feeds') }}</a>
+    {% endif %}
 {% endblock %}
 
 {% block blockContent %}
 
-<div id="feeds-vue-admin-table"></div>
+{% if showSetup %}
+    {% include 'social-feeds/feeds/_setup' %}
+{% elseif not feeds %}
+    <pk-state-panel heading="{{ 'No feeds yet' | t('social-feeds') }}">
+        {{ 'A feed shows posts from one or more sources together on your site.' | t('social-feeds') }}
+    </pk-state-panel>
+{% else %}
+    <div id="feeds-vue-admin-table"></div>
+{% endif %}
 
 {% endblock %}
 
@@ -32,6 +55,7 @@
     }]) %}
 {% endfor %}
 
+{% if feeds and not showSetup %}
 {% js %}
     var columns = [
         { name: '__slot:title', title: Craft.t('app', 'Name') },
@@ -54,3 +78,4 @@
         tableData: {{ tableData | json_encode | raw }},
     });
 {% endjs %}
+{% endif %}

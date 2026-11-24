@@ -2,9 +2,12 @@
 namespace verbb\socialfeeds\controllers;
 
 use verbb\socialfeeds\SocialFeeds;
+use verbb\socialfeeds\base\Source;
 use verbb\socialfeeds\models\Feed;
 
 use Craft;
+use craft\db\Query;
+use craft\helpers\ArrayHelper;
 use craft\helpers\Json;
 use craft\web\Controller;
 
@@ -34,6 +37,7 @@ class FeedsController extends Controller
 
         return $this->renderTemplate('social-feeds/feeds', [
             'feeds' => $feeds,
+            'setup' => $this->_getSetup($feeds),
         ]);
     }
 
@@ -125,6 +129,34 @@ class FeedsController extends Controller
 
         return $this->renderTemplate('social-feeds/feeds/_preview', [
             'posts' => $posts,
+            'sources' => $sources,
         ]);
+    }
+
+
+    // Private Methods
+    // =========================================================================
+
+    private function _getSetup(array $feeds): array
+    {
+        $sources = SocialFeeds::$plugin->getSources()->getAllSources();
+        $connectedSource = ArrayHelper::firstWhere($sources, fn(Source $source) => $source->isConnected());
+
+        // A feed only fetches from its enabled, connected sources, so one without any can't finish setup.
+        $readyFeed = ArrayHelper::firstWhere($feeds, fn(Feed $feed) => $feed->sources && $feed->getSources());
+
+        // Stored posts or a recorded fetch both mean posts have been fetched. Each survives one of the
+        // cache utilities, so clearing the cache doesn't bring setup back.
+        $fetched = (new Query())->from(['{{%socialfeeds_posts}}'])->exists()
+            || (new Query())->from(['{{%socialfeeds_sources}}'])->where(['not', ['dateLastFetch' => null]])->exists();
+
+        return [
+            'source' => $sources[0] ?? null,
+            'connectedSource' => $connectedSource,
+            'feed' => $readyFeed ?? $feeds[0] ?? null,
+            'readyFeed' => $readyFeed,
+            'fetched' => $fetched,
+            'autoFetch' => SocialFeeds::$plugin->getSettings()->cacheDuration !== false,
+        ];
     }
 }

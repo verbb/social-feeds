@@ -3,6 +3,7 @@
 {% import 'verbb-base/_macros' as macros %}
 
 {% do view.registerAssetBundle('verbb\\socialfeeds\\web\\assets\\frontend\\FeedAsset') %}
+{% do view.registerAssetBundle('verbb\\socialfeeds\\web\\assets\\cp\\SocialFeedsPluginKitAsset') %}
 
 {% set crumbs = [
     { label: craft.socialFeeds.getPluginName() | t('social-feeds'), url: url('social-feeds') },
@@ -127,7 +128,11 @@
         </div>
     </div>
 
-    <div class="sf-feed-preview"></div>
+    <div class="sf-feed-preview">
+        <pk-state-panel heading="{{ 'No posts loaded yet' | t('social-feeds') }}">
+            {{ 'Load posts to see how this feed’s posts look.' | t('social-feeds') }}
+        </pk-state-panel>
+    </div>
 </div>
 
 {% endblock %}

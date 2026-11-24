@@ -225,3 +225,10 @@
 .btn.sf-loading {
     color: rgba(0, 0, 0, 0) !important;
 }
+
+/* Pages made of their own card, such as the setup checklist, without Craft's content pane around them. */
+.sf-bare-content #content.content-pane {
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}

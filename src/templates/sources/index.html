@@ -14,9 +14,19 @@
     <a class="btn submit add icon" href="{{ url('social-feeds/sources/new') }}">{{ 'New source' | t('social-feeds') }}</a>
 {% endblock %}
 
+{% if not sources %}
+    {% do view.registerAssetBundle('verbb\\socialfeeds\\web\\assets\\cp\\SocialFeedsPluginKitAsset') %}
+{% endif %}
+
 {% block blockContent %}
 
-<div id="sources-vue-admin-table"></div>
+{% if sources %}
+    <div id="sources-vue-admin-table"></div>
+{% else %}
+    <pk-state-panel heading="{{ 'No sources yet' | t('social-feeds') }}">
+        {{ 'A source is one social account, such as a Facebook Page or an Instagram or YouTube account.' | t('social-feeds') }}
+    </pk-state-panel>
+{% endif %}
 
 {% endblock %}
 
@@ -34,6 +44,7 @@
     }]) %}
 {% endfor %}
 
+{% if sources %}
 {% js %}
     var columns = [
         { name: '__slot:title', title: Craft.t('app', 'Name') },
@@ -79,3 +90,4 @@
         tableData: {{ tableData | json_encode | raw }},
     });
 {% endjs %}
+{% endif %}

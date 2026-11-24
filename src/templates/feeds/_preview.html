@@ -1,1 +1,9 @@
-{% include 'social-feeds/_posts' %}
+{% if posts %}
+    {% include 'social-feeds/_posts' %}
+{% else %}
+    <pk-state-panel heading="{{ 'No posts to show' | t('social-feeds') }}">
+        {{ sources is defined and sources
+            ? 'The sources turned on for this feed haven’t returned any posts.' | t('social-feeds')
+            : 'Turn on a source in the Feed tab to preview its posts.' | t('social-feeds') }}
+    </pk-state-panel>
+{% endif %}

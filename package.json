@@ -2,14 +2,18 @@
     "name": "social-feeds",
     "private": true,
     "scripts": {
-        "build": "npm run build:cp-css && npm run build:cp-js && npm run build:frontend-css && npm run build:masonry-js",
+        "build": "npm run build:cp-css && npm run build:cp-js && npm run build:cp-plugin-kit && npm run build:frontend-css && npm run build:masonry-js",
         "build:cp-css": "vite build --mode cp-css",
         "build:cp-js": "vite build --mode cp-js",
+        "build:cp-plugin-kit": "vite build --mode cp-plugin-kit",
         "build:frontend-css": "vite build --mode frontend-css",
         "build:masonry-js": "vite build --mode masonry-js"
     },
     "devDependencies": {
         "esbuild": "^0.28.2",
         "vite": "^8.3.5"
+    },
+    "dependencies": {
+        "@verbb/plugin-kit-web": "file:../../../plugin-kit/plugin-kit/plugin-kit-web"
     }
 }

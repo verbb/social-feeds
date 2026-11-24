@@ -15,6 +15,11 @@ const builds = {
         root: resolve(assets, 'cp'),
         input: 'social-feeds-cp.js',
     },
+    // Plugin Kit's components and styles, kept apart so only the pages that use them load them.
+    'cp-plugin-kit': {
+        root: resolve(assets, 'cp'),
+        input: 'social-feeds-plugin-kit.js',
+    },
     'frontend-css': {
         root: resolve(assets, 'frontend'),
         input: {
@@ -44,6 +49,7 @@ export default defineConfig(({ mode }) => {
     const output = config.isCss ? {
         assetFileNames: '[name][extname]',
     } : {
+        assetFileNames: '[name][extname]',
         codeSplitting: false,
         entryFileNames: '[name].js',
         format: 'iife',
