@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 2.0.26 - 2026-11-24
 
 ### Added
 - Add a setup checklist to the Feeds page on new installs, which walks through adding and connecting a source and creating a feed, and stays until the first feed is created.
