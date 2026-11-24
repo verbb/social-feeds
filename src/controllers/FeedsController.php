@@ -14,6 +14,9 @@ use craft\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
+use DateTime;
+use DateTimeZone;
+
 class FeedsController extends Controller
 {
     // Public Methods
@@ -137,26 +140,40 @@ class FeedsController extends Controller
     // Private Methods
     // =========================================================================
 
-    private function _getSetup(array $feeds): array
+    private function _getSetup(array $feeds): ?array
     {
-        $sources = SocialFeeds::$plugin->getSources()->getAllSources();
-        $connectedSource = ArrayHelper::firstWhere($sources, fn(Source $source) => $source->isConnected());
+        // The checklist leaves at the first feed, which is what this page lists.
+        if ($feeds || !$this->_isSetupChecklistInstall()) {
+            return null;
+        }
 
-        // A feed only fetches from its enabled, connected sources, so one without any can't finish setup.
-        $readyFeed = ArrayHelper::firstWhere($feeds, fn(Feed $feed) => $feed->sources && $feed->getSources());
-
-        // Stored posts or a recorded fetch both mean posts have been fetched. Each survives one of the
-        // cache utilities, so clearing the cache doesn't bring setup back.
+        // Feeds are deleted outright, so stored posts or a recorded fetch also mean setup happened, and deleting
+        // the last feed afterwards doesn't bring the checklist back.
         $fetched = (new Query())->from(['{{%socialfeeds_posts}}'])->exists()
             || (new Query())->from(['{{%socialfeeds_sources}}'])->where(['not', ['dateLastFetch' => null]])->exists();
 
+        if ($fetched) {
+            return null;
+        }
+
+        $sources = SocialFeeds::$plugin->getSources()->getAllSources();
+
         return [
             'source' => $sources[0] ?? null,
-            'connectedSource' => $connectedSource,
-            'feed' => $readyFeed ?? $feeds[0] ?? null,
-            'readyFeed' => $readyFeed,
-            'fetched' => $fetched,
+            'connectedSource' => ArrayHelper::firstWhere($sources, fn(Source $source) => $source->isConnected()),
             'autoFetch' => SocialFeeds::$plugin->getSettings()->cacheDuration !== false,
         ];
+    }
+
+    private function _isSetupChecklistInstall(): bool
+    {
+        // Craft records when this environment installed the plugin. A missing date counts as an existing install.
+        $installDate = Craft::$app->getPlugins()->getStoredPluginInfo('social-feeds')['installDate'] ?? null;
+
+        if (!$installDate instanceof DateTime) {
+            return false;
+        }
+
+        return $installDate >= new DateTime(SocialFeeds::SETUP_CHECKLIST_SINCE, new DateTimeZone('UTC'));
     }
 }

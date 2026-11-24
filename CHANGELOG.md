@@ -3,7 +3,7 @@
 ## Unreleased
 
 ### Added
-- Add a setup checklist to the Feeds page, which walks through adding and connecting a source and creating a feed, and stays until the first posts are fetched.
+- Add a setup checklist to the Feeds page on new installs, which walks through adding and connecting a source and creating a feed, and stays until the first feed is created.
 - Add empty states for the Sources and Feeds lists, and for the feed preview before posts are loaded or when no posts come back.
 
 ### Changed

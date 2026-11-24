@@ -1,15 +1,12 @@
-{# The Feeds page until the first posts are fetched. Each step ticks from `setup`, built in the Feeds controller. #}
+{# The Feeds page on a new install until the first feed exists. Each step ticks from `setup`, built in the Feeds controller. #}
 {% set pluginName = craft.socialFeeds.getPluginName() %}
 {% set canManageSources = currentUser.can('socialFeeds-sources') %}
 {% set source = setup.connectedSource ?? setup.source %}
-{% set feed = setup.feed %}
 
 <pk-setup-checklist
     heading="{{ 'Start Showing Social Posts' | t('social-feeds') }}"
     count-label="{{ '{done} of {total} done' | t('social-feeds') }}"
     done-label="{{ '(done)' | t('social-feeds') }}"
-    copy-label="{{ 'Copy' | t('social-feeds') }}"
-    copied-label="{{ 'Copied' | t('social-feeds') }}"
 >
     <span slot="intro">
         {{ 'Your feeds will be listed here. Each step ticks itself off when {name} sees it done.' | t('social-feeds', { name: pluginName }) }}
@@ -42,36 +39,18 @@
         {% endif %}
     </pk-setup-step>
 
-    <pk-setup-step heading="{{ 'Create a feed' | t('social-feeds') }}"{{ setup.readyFeed ? ' done' }}>
-        {% if setup.readyFeed %}
-            {{ '{feed} shows posts from {sources}.' | t('social-feeds', { feed: feed.name, sources: feed.getSources() | map(s => s.name) | join(', ') }) }}
-        {% elseif feed %}
-            {# A feed with no enabled, connected source turned on has nothing to fetch. #}
-            {{ '{feed} has no connected source turned on.' | t('social-feeds', { feed: feed.name }) }}
-        {% else %}
-            {{ 'A feed shows posts from one or more sources together on your site.' | t('social-feeds') }}
-        {% endif %}
-
-        {% if feed %}
-            <a slot="action" class="btn" href="{{ cpUrl('social-feeds/feeds/' ~ feed.handle) }}">{{ 'Edit feed' | t('social-feeds') }}</a>
-            <a slot="change" href="{{ cpUrl('social-feeds/feeds/' ~ feed.handle) }}">{{ 'Change' | t('social-feeds') }}</a>
-        {% else %}
-            <a slot="action" class="btn" href="{{ cpUrl('social-feeds/feeds/new') }}">{{ 'Create feed' | t('social-feeds') }}</a>
-        {% endif %}
+    {# Creating the feed ends setup, so this step never shows as done. #}
+    <pk-setup-step heading="{{ 'Create a feed' | t('social-feeds') }}">
+        {{ 'A feed shows posts from one or more sources together on your site.' | t('social-feeds') }}
+        <a slot="action" class="btn" href="{{ cpUrl('social-feeds/feeds/new') }}">{{ 'Create feed' | t('social-feeds') }}</a>
     </pk-setup-step>
 
-    <pk-setup-step heading="{{ 'Fetch the first posts' | t('social-feeds') }}"{{ setup.fetched ? ' done' }}{% if feed %} snippet="{{ "{{ craft.socialFeeds.renderPosts('" ~ feed.handle ~ "') }}" }}"{% endif %}>
-        {% if not setup.autoFetch %}
+    <pk-setup-step heading="{{ 'Fetch the first posts' | t('social-feeds') }}">
+        {% if setup.autoFetch %}
+            {{ 'Posts are fetched the first time a feed shows on your site, or when you load its preview.' | t('social-feeds') }}
+        {% else %}
             {# With `cacheDuration` off, nothing fetches on render, so posts only arrive from the console. #}
             {{ 'Automatic fetching is off, so run the `social-feeds/posts/refresh-enabled-sources` console command to fetch posts.' | t('social-feeds') | md(inlineOnly=true) }}
-        {% elseif feed %}
-            {{ 'Paste this where the feed should show. Posts are fetched the first time it shows, or when you load its preview.' | t('social-feeds') }}
-        {% else %}
-            {{ 'Posts are fetched the first time a feed shows on your site, or when you load its preview.' | t('social-feeds') }}
-        {% endif %}
-
-        {% if setup.readyFeed and setup.autoFetch %}
-            <a slot="action" class="btn" href="{{ cpUrl('social-feeds/feeds/' ~ feed.handle) ~ '#preview' }}">{{ 'Preview feed' | t('social-feeds') }}</a>
         {% endif %}
     </pk-setup-step>
 </pk-setup-checklist>

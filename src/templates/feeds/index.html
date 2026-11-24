@@ -10,8 +10,8 @@
 {% set title = 'Feeds' | t('social-feeds') %}
 {% set selectedSubnavItem = 'feeds' %}
 
-{# Until the first posts are fetched, the page is a setup checklist in place of the feeds list. #}
-{% set showSetup = setup is defined and not setup.fetched %}
+{# On new installs, the page is a setup checklist until the first feed exists. #}
+{% set showSetup = setup ?? false %}
 
 {% if showSetup or not feeds %}
     {% do view.registerAssetBundle('verbb\\socialfeeds\\web\\assets\\cp\\SocialFeedsPluginKitAsset') %}

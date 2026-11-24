@@ -29,6 +29,13 @@ use yii\base\Event;
 
 class SocialFeeds extends Plugin
 {
+    // Constants
+    // =========================================================================
+
+    // The Feeds page's setup checklist only shows on installs from this date (UTC), so sites that update never see it.
+    public const SETUP_CHECKLIST_SINCE = '2026-11-23';
+
+
     // Properties
     // =========================================================================
 
