@@ -3,6 +3,7 @@ namespace verbb\socialfeeds\controllers;
 
 use verbb\socialfeeds\SocialFeeds;
 use verbb\socialfeeds\base\SourceInterface;
+use verbb\socialfeeds\records\Source as SourceRecord;
 
 use Craft;
 use craft\helpers\ArrayHelper;
@@ -12,6 +13,9 @@ use craft\web\Controller;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
+
+use verbb\base\helpers\EnvironmentSettings;
+use verbb\base\models\EnvironmentSettingsViolation;
 
 class SourcesController extends Controller
 {
@@ -108,14 +112,27 @@ class SourcesController extends Controller
             }
         }
 
+        $handle = $this->request->getParam('handle');
+        $settings = $this->request->getParam("types.$type");
+
         $source = $sourcesService->createSource([
             'id' => $sourceId,
             'type' => $type,
             'name' => $this->request->getParam('name'),
-            'handle' => $this->request->getParam('handle'),
+            'handle' => $handle,
             'enabled' => (bool)$this->request->getParam('enabled'),
-            'settings' => $this->request->getParam("types.$type"),
+            'settings' => $settings,
         ]);
+
+        if ($violation = $this->_getEnvironmentSettingsViolation($source, $settings, $handle)) {
+            $message = $violation->reason === EnvironmentSettingsViolation::REFERENCE
+                ? Craft::t('social-feeds', 'Only admins can use environment variables here.')
+                : Craft::t('social-feeds', 'Enter the credentials again after changing where this connects.');
+
+            $source->addError($violation->getAttribute() ?? 'settings', $message);
+
+            return $this->asModelFailure($source, Craft::t('social-feeds', 'Couldn’t save source.'), 'source');
+        }
 
         if (!$sourcesService->saveSource($source)) {
             return $this->asModelFailure($source, Craft::t('social-feeds', 'Couldn’t save source.'), 'source');
@@ -165,5 +182,42 @@ class SourcesController extends Controller
         }
 
         return $this->asJson($source->getSourceSettings($setting, false));
+    }
+
+
+    // Private Methods
+    // =========================================================================
+
+    /**
+     * Returns why the posted source settings can't be saved by the current user, or `null` when they can.
+     *
+     * The client ID is resolved with `App::parseEnv()` and sent to the provider in the authorisation URL the user's
+     * browser opens, so only admins can point source settings at environment variables. Changing the source type
+     * also means entering a variable-backed client ID or secret again, so it can't move to another provider.
+     */
+    private function _getEnvironmentSettingsViolation(SourceInterface $source, mixed $posted, mixed $handle): ?EnvironmentSettingsViolation
+    {
+        if (is_string($posted)) {
+            $posted = Json::decodeIfJson($posted);
+        }
+
+        $posted = is_array($posted) ? $posted : [];
+
+        // Config file overrides replace posted settings when the source is created, so those values never come from
+        // the request.
+        if (is_string($handle) && $handle !== '' && $posted) {
+            $posted = array_diff_key($posted, SocialFeeds::$plugin->getSources()->getSourceOverrides($handle));
+        }
+
+        // Compare against the saved row, because loaded sources have config file overrides merged into their settings.
+        // Use the created source's ID, as posted settings can also set it.
+        $record = $source->id ? SourceRecord::findOne(['id' => $source->id]) : null;
+        $stored = $record ? Json::decodeIfJson((string)$record->settings) : [];
+        $stored = is_array($stored) ? $stored : [];
+        $providerChanged = $record && $record->type !== get_class($source);
+
+        // No source setting decides which host the credentials go to. LinkedIn's company and profile URLs only
+        // identify the organisation, so they aren't destinations.
+        return EnvironmentSettings::violation($posted, $stored, ['clientId', 'clientSecret'], false, $providerChanged, []);
     }
 }
